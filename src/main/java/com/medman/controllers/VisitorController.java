@@ -19,7 +19,7 @@ public class VisitorController {
 
     @GetMapping
     public String splashPage() {
-        return "splash"; // need to direct to splash page
+        return "splash_page"; // need to direct to splash page
     }
 
     @GetMapping("/about")
