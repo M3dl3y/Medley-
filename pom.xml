@@ -6,7 +6,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>com_codeup</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>com.codeup</name>
 	<description>Demo project for Spring Boot</description>
@@ -38,12 +38,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--<dependency>-->
-		<!--<groupId>org.hibernate</groupId>-->
-		<!--<artifactId>hibernate-core</artifactId>-->
-		<!--<version>5.2.5.Final</version>-->
-		<!--</dependency>-->
-
+		<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>5.2.5.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
