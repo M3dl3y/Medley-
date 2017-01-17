@@ -21,4 +21,9 @@ public class UserController {
     public String showDash() {
         return null;
     }
+
+    @GetMapping("/my_doctors")
+    public String showMyDoctors(Model model) {
+        model.addAttribute()
+    }
 }
