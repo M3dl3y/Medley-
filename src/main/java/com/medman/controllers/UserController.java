@@ -27,6 +27,7 @@ public class UserController extends BaseController {
     public String showMyDoctors(Model model) {
         // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
         // current logged in user's connected users should be called here and it should show their info.
+        // it looks like you would b
         return null;
     }
 
@@ -34,6 +35,7 @@ public class UserController extends BaseController {
     public String showMessages(Model model) {
         //model.addAttribute("") are we making objects for all of these different tables? we must be? so a message instance is passed here?
         //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
+        // bring in the messages instance and use a setUser method to connect LoggedInUser to this messages instance.
         return null;
     }
 
