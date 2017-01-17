@@ -1,5 +1,7 @@
 package com.medman.controllers;
 
+import com.medman.models.AppointmentTime;
+import com.medman.models.Medication;
 import com.medman.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,10 @@ public class UserController extends BaseController {
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
+        model.addAttribute("meds", new Medication());
+        model.addAttribute("dates", new AppointmentTime());
         // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
+        // are alerts something that is calculated?
         return null;
     }
 
