@@ -218,6 +218,7 @@ public class User {
     private String npiNumber;
 
 //Do we want to add registration date and the ability to disable accounts
+    // this sounds like a "nice to have" feature
 
 
 }
