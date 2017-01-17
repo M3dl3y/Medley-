@@ -10,7 +10,7 @@ public class BaseController {
     public boolean isLoggedIn() {
         boolean isAnonymousUser =
                 SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken;
-        return ! isAnonymousUser;
+        return !isAnonymousUser;
     }
 
 //    public User loggedInUser() {

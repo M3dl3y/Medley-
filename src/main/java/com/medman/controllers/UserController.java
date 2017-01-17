@@ -25,7 +25,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
-       // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
+        // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
         // current logged in user's connected users should be called here and it should show their info.
         return null;
     }
@@ -56,7 +56,7 @@ public class UserController extends BaseController {
             return "posts/edit";
         }
 
-        //User existingUser =
+        //User existingUser = (use autowired dao to get this)
         // use dao to get current existingUser
         //        existingPost.setTitle(editedPost.getTitle()); (template code)
         return "redirect:/user/dashboard";
