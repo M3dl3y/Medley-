@@ -18,7 +18,7 @@ import javax.validation.Valid;
 public class VisitorController {
 
     @GetMapping
-    public String splashPage() {
+    public String index() {
         return "splash_page"; // need to direct to splash page
     }
 
