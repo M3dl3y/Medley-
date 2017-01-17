@@ -24,6 +24,8 @@ public class UserController {
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
-        model.addAttribute()
+       // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
+        // current logged in user's connected users should be called here and it should show their info.
+        return null;
     }
 }
