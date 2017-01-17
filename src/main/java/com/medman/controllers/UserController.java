@@ -15,25 +15,5 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
-    @GetMapping("/create")
-    public String showRegister(Model model) {
-        model.addAttribute("user", new User());
-        return null; // return to user register page.
-    }
 
-    @PostMapping("/create")
-    public String createUser(
-            @Valid User user,
-            Errors validation,
-            Model model
-    ) {
-        if (validation.hasErrors()) {
-            model.addAttribute("errors", validation);
-            model.addAttribute("user", user);
-            return "user/create";
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        usersDao.save(user);
-        return null; // redirect to splashpage
-    }
 }
