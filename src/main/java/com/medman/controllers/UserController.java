@@ -35,4 +35,30 @@ public class UserController extends BaseController {
         //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
         return null;
     }
+
+    @GetMapping("/edit")
+    public String editPage(Model model) {
+        model.addAttribute("user", new User()); // need to call logged in User
+        return null; // only a logged in user can go to user/edit
+
+    }
+
+    @PostMapping("/edit")
+    public String editUserInfo(
+            @Valid User user,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("user", user);
+            return "posts/edit";
+        }
+
+        //User existingUser =
+        // use dao to get current existingUser
+        //        existingPost.setTitle(editedPost.getTitle()); (template code)
+        return "redirect:/user/dashboard";
+
+    }
 }
