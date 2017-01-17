@@ -30,7 +30,7 @@ public class VisitorController {
     @GetMapping("/create")
     public String registerPage(Model model) {
         model.addAttribute("user", new User());
-        return null; // return to user register page.
+        return "register"; // return to user register page.
     }
 
     @PostMapping("/create")
@@ -42,7 +42,7 @@ public class VisitorController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
-            return "user/create";
+            return "user/create"; //should this be to the url or the file path?
         }
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
         //usersDao.save(user);
