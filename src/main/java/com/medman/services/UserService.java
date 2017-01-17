@@ -9,7 +9,7 @@ public interface UserService extends UserDetailsService{
 
     User findByEmail (String email);
 
-    User findByUsername(String, username);
+    User findByUsername(String username);
 
     boolean emailExists(String email);
 
@@ -23,7 +23,7 @@ public interface UserService extends UserDetailsService{
 
     void changeProfileInfo(User newProfileInfo);
 
-    void changeAvatar(UploadedAvatarInfo uploadedAvatarInfo);
+    void changeAvatar(String uploadedAvatarInfo); // should this be a string?
 
     void removeAvatar();
 
