@@ -15,7 +15,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController extends BaseController {
+public class UserController {
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {

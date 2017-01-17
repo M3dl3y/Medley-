@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RequestMapping("/")
 public class VisitorController {
 
-    @GetMapping
+    @GetMapping("/")
     public String splashPage() {
         return "splash_page"; // need to direct to splash page
     }
