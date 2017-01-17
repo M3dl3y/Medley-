@@ -19,6 +19,6 @@ public class UserController {
 
     @GetMapping("/dashboard")
     public String showDash() {
-
+        return null;
     }
 }
