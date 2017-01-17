@@ -15,7 +15,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 
     @GetMapping("/dashboard")
     public String showDash() {
@@ -26,6 +26,13 @@ public class UserController {
     public String showMyDoctors(Model model) {
        // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
         // current logged in user's connected users should be called here and it should show their info.
+        return null;
+    }
+
+    @GetMapping("/messages")
+    public String showMessages(Model model) {
+        //model.addAttribute("") are we making objects for all of these things? we must be? so a message instance is passed here?
+        //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
         return null;
     }
 }
