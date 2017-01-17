@@ -18,7 +18,8 @@ import javax.validation.Valid;
 public class UserController extends BaseController {
 
     @GetMapping("/dashboard")
-    public String showDash() {
+    public String showDash(Model model) {
+        // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
         return null;
     }
 
@@ -31,7 +32,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/messages")
     public String showMessages(Model model) {
-        //model.addAttribute("") are we making objects for all of these things? we must be? so a message instance is passed here?
+        //model.addAttribute("") are we making objects for all of these different tables? we must be? so a message instance is passed here?
         //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
         return null;
     }
