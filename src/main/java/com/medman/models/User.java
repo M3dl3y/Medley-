@@ -15,9 +15,17 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
+    public interface CreateValidationGroup {}
+    public interface ChangeEmailValidationGroup {}
+    public interface ChangePasswordValidationGroup {}
+    public interface ProfileInfoValidationGroup {}
 
-    private Long id;
+    @Id
+    @GeneratedValue
+    private Long Id;
 
+    @Column
+    @NotBlank(groups = {CreateValidationGroup.class})
     private String firstName;
 
     private String lastName;
@@ -37,6 +45,7 @@ public class User {
     private String username;
 
     private String password;
+
 
     private String email;
 
