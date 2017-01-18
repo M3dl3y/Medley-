@@ -1,66 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Medly - Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../static/CSS/stylesheet.css">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="/fragments/header :: header(${'Login Page'})">
 </head>
 <body>
 
 <!--Navbar-->
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
+<div th:replace="/fragments/navbar :: navbar"></div>
 
-        <!--On mobile display, icon appears in the right of the navbar to show dropdown menu-->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!--<a class="navbar-brand" href="#">Brand</a>-->
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <!--Dropdown-Menu -->
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars" aria-hidden="true"></i>Menu<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Sign-up</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!--Medly logo-->
-            <i class="nav navvar-nav navbar-center fa fa-medkit fa-3x" aria-hidden="true"></i>
-
-            <!--Login link-->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-
-<h1>Login</h1>
+<h1 class="text-center">Login</h1>
 
 <!--Login Form-->
 <form class="col-md-10 col-md-offset-1">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" />
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>
@@ -70,29 +28,9 @@
     <h5 class="text-center">Need an account? <a>Sign-up</a></h5>
 </div>
 
+<div th:replace="/fragments/footer :: footer"></div>
 
 
-<!--Footer-->
-<div id="footer">
-    <div class="col-md-10 col-md-offset-1">
-        <h6><a>About</a></h6>
-    </div>
-    <div class="horizontal_line col-md-10 col-md-offset-1"></div>
-    <div class="col-md-10 col-md-offset-1">
-        <i class="fa fa-facebook" aria-hidden="true"></i>
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-    </div>
-    <div class="horizontal_line col-md-10 col-md-offset-1"></div>
-    <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-10 col-md-offset-1">
-            <i class="fa fa-medkit col-md-2 col-md-offset-4" aria-hidden="true"></i>
-            <h6 class="col-md-3 col-md-offset-1">Medly LLC</h6>
-        </div>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://use.fontawesome.com/54bf161b9f.js"></script>
+<div th:replace="/fragments/javascript :: javascript"></div>
 </body>
 </html>

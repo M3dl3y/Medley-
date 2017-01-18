@@ -17,8 +17,8 @@ import javax.validation.Valid;
 @RequestMapping("/")
 public class VisitorController {
 
-    @GetMapping
-    public String index() {
+    @GetMapping("/")
+    public String splashPage() {
         return "splash_page"; // need to direct to splash page
     }
 
@@ -30,7 +30,7 @@ public class VisitorController {
     @GetMapping("/create")
     public String registerPage(Model model) {
         model.addAttribute("user", new User());
-        return "register"; // return to user register page.
+        return "register";
     }
 
     @PostMapping("/create")
@@ -42,10 +42,10 @@ public class VisitorController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
-            return "user/create"; //should this be to the url or the file path?
+            return "user/create";
         }
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
         //usersDao.save(user);
-        return null; // redirect to  dashboard
+        return "register"; // redirect to splash page
     }
 }
