@@ -1,16 +1,19 @@
 package com.medman.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "messages")
 public class Message {
 
-    private Long id;
+    @Id
+    @GeneratedValue
+    private Long Id;
 
+    @Column
     private String message;
 
+    @OneToOne(mappedBy = "messages")
     private Long relationship;
 }

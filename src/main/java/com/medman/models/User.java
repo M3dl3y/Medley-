@@ -70,10 +70,19 @@ public class User {
     @NotBlank(groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class})
     private String password;
 
+    @Column(nullable = false)
+    private boolean enabled;
+
     @Column(unique = true, nullable = false, length = 50)
     @Email(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     @NotBlank(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles = new ArrayList<>();
 
     @Column(nullable = true, length = 80)
     @Pattern(regexp = "^\\s*(https?:\\/\\/.+)?", groups = {ProfileInfoValidationGroup.class})
@@ -180,6 +189,18 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public String getProfileImgUrl() {

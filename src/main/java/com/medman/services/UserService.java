@@ -9,7 +9,7 @@ public interface UserService extends UserDetailsService{
 
     User findByEmail (String email);
 
-    User findByUsername(String, username);
+    User findByUsername(String username);
 
     boolean emailExists(String email);
 
@@ -17,15 +17,11 @@ public interface UserService extends UserDetailsService{
 
     void register(User user);
 
-    void changeEmail(String newEmail, String currentPassowrd) throws AuthException;
+    void changeEmail(String newEmail, String currentPassword) throws AuthException;
 
     void changePassword(String newPassword, String currentPassword) throws AuthException;
 
     void changeProfileInfo(User newProfileInfo);
-
-    void changeAvatar(UploadedAvatarInfo uploadedAvatarInfo);
-
-    void removeAvatar();
 
     void authenticate(User user);
 
