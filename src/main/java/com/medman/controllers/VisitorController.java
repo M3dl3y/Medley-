@@ -46,6 +46,6 @@ public class VisitorController {
         }
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
         //usersDao.save(user);
-        return "register"; // redirect to splash page
+        return "patient/dashboard"; // redirect to dashboard
     }
 }
