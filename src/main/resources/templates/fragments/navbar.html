@@ -1,65 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="/fragments/header :: header(${'Profile Page'})">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
 <body>
 
-<nav class="navbar navbar-default" th:fragment="navbar">
+<nav th:fragment="navbar" class="navbar navbar-default">
     <div class="container-fluid">
+
+        <!--On mobile display, icon appears in the right of the navbar to show dropdown menu-->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i class="nav navvar-nav navbar-center fa fa-medkit fa-3x" aria-hidden="true"></i>
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
             </button>
-            <a class="navbar-brand">Blog</a>
+            <!--<a class="navbar-brand" href="#">Brand</a>-->
         </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <!--Dropdown-Menu -->
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/posts}">Posts<span class="sr-only"></span></a></li>
-
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" />
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-
-                <li sec:authorize="!isAuthenticated()">
-                <li><a th:href="@{/login}"><i class="fa fa-sign-in" aria-hidden="true"></i>  Login</a></li>
-                <li><a th:href="@{/register}"><i class="fa fa-user-plus" aria-hidden="true"></i>  Sign-up</a></li>
-                </li>
-
-
-
-                <li class="dropdown" sec:authorize="isAuthenticated()">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" sec:authentication="principal.username">User<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a th:href="@{/post/create}">New Post</a></li>
-                        <li class="divider"></li>
-                        <li><a th:href="@{/logout}" id="logout_link">Logout</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars" aria-hidden="true"></i>   Menu</a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/create}">Sign-up</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/about}">About</a></li>
                     </ul>
                 </li>
-
             </ul>
 
-            <form name="logout_form" id="logout_form" method="post" th:action="@{/logout}">
-                <input type="hidden" name="perform_logout" value="1" />
-                <!--<li><a><input type="submit" value="Logout" id="perform_logout_button" />Logout</a></li>-->
-            </form>
+            <!--Medly logo-->
+            <a th:href="@{/}"><i class="nav navbar-brand fa fa-medkit fa-3x" aria-hidden="true"></i></a>
 
-        </div>
-    </div>
+            <!--Login link-->
+            <ul class="nav navbar-nav navbar-right"><!--sec:authorize="!isAuthenticated()"-->
+                <li><a th:href="@{/login}">Login</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right"><!--sec:authorize="isAuthenticated()"-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-smile-o" aria-hidden="true"></i>   User</a> <!--sec:authentication="principal.username"-->
+
+                    <ul class="dropdown-menu"><!--sec:authorize"hasRole('Patient')"-->
+                        <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/my_doctors}">Doctors</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/edit}">Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/logout}">Logout</a></li>
+                    </ul>
+
+                    <!--<ul class="dropdown-menu">&lt;!&ndash;sec:authorize"hasRole('Doctor')"&ndash;&gt;-->
+                        <!--<li><a th:href="@{/dashboard}">Dashboard</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a th:href="@{/my_doctors}">Patients</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a th:href="@{/edit}">Settings</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a th:href="@{/logout}">Logout</a></li>-->
+                    <!--</ul>-->
+                </li>
+            </ul>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
-
-
-
-
-<div th:replace="/fragments/javascript :: javascript"></div>
 
 
 </body>
