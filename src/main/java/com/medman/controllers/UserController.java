@@ -20,14 +20,14 @@ public class UserController {
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
-        return "patient/dashboard";
+        return "shared/dashboard";
     }
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
         // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
         // current logged in user's connected users should be called here and it should show their info.
-        return "patient/viewDoctors";
+        return "shared/viewLinkedUsers";
     }
 
     @GetMapping("/messages")
