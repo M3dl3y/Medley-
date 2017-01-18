@@ -28,7 +28,7 @@ public class UserController {
         // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
         model.addAttribute("medications", new Medication()); // most likely use a method to return all medications that match with user?
         model.addAttribute("appointments", new AppointmentTime()); // same here? definitely going to be returning more than one object
-        model.addAttribute("reminders" , new Reminder());
+        model.addAttribute("reminders" , new Reminder()); // these will all use Spring dao interface thing
         return "patient/dashboard";
     }
 
