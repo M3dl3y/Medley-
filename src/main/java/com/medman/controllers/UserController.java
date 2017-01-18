@@ -4,6 +4,7 @@ import com.medman.models.AppointmentTime;
 import com.medman.models.Medication;
 import com.medman.models.Reminder;
 import com.medman.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,12 +21,13 @@ import javax.validation.Valid;
 //@RequestMapping("/user")
 public class UserController {
 
+
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
         model.addAttribute("medications", new Medication()); // most likely use a method to return all medications that match with user?
         model.addAttribute("appointments", new AppointmentTime()); // same here? definitely going to be returning more than one object
-        model.addAttribute("reminders" , new Reminder()); // same
+        model.addAttribute("reminders" , new Reminder());
         return "patient/dashboard";
     }
 
