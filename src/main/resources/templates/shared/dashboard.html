@@ -11,6 +11,11 @@
 <h1 class="text-center spaceBelow" id="greeting">Welcome</h1>
 
 
+<!--If patient is logged in -->
+
+
+
+
 <!--Alerts Card -->
 <div id="alertsCard" class="col-md-4 card">
 
@@ -27,7 +32,7 @@
                     </a>
                 </div>
                 <div class="col-xs-6 col-sm-6">
-                    <a class="bootcards-summary-item" href="#">
+                    <a class="bootcards-summary-item" th:href="@{/messages}">
                         <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true"></i>
                         <h4>Messages<span class="label label-info">3</span></h4>
                     </a>
@@ -37,7 +42,6 @@
     </div>
 
 </div><!--contact card-->
-
 
 
 <!--Medication Checklist Card-->
@@ -125,7 +129,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!--Upcoming Card-->
@@ -220,6 +223,61 @@
     </div>
 </div>
 
+
+
+
+<!--If Doctor Logged in-->
+
+<div class="col-md-12"></div>
+
+<!--Alerts Card -->
+<div id="doctorAlertsCard" class="col-md-4 card">
+
+    <div class="panel panel-default bootcards-summary">
+        <div class="panel-heading">
+            <h3 class="panel-title text-center">Alerts</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                    <a class="bootcards-summary-item" href="#">
+                        <i class="fa fa-users fa-3x patientLogo" aria-hidden="true"></i>
+                        <h4>Patients<span class="label label-danger">1</span></h4>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <a class="bootcards-summary-item" th:href="@{/messages}">
+                        <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true"></i>
+                        <h4>Messages<span class="label label-info">3</span></h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!--contact card-->
+
+<!--Medication Checklist Card-->
+<div id="doctorAddMedication" class="col-md-4 card">
+
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title text-center">Add a Medication</h3>
+        </div>
+        <div class="list-group">
+
+            <!--This div would repeat for all medications the patient has.. runs through a list-->
+            <div class="list-group-item">
+                <h4 class="text-center">Add a medication for a pre-existing patient</h4>
+            </div>
+            <a class="list-group-item" data-toggle="modal" data-target="#addMedication" href="#">
+                <i class="fa fa-plus-circle fa-2x addMedicine" aria-hidden="true"></i>
+            </a>
+
+        </div>
+    </div>
+
+</div><!--contact card-->
 
 <div th:replace="/fragments/footer :: footer"></div>
 

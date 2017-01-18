@@ -57,6 +57,9 @@ nav {
     color: #afb3b0;
     padding: 1%;
 }
+.patientLogo{
+    color: #d6484a !important;
+}
 
 
 .card{
@@ -67,3 +70,7 @@ nav {
     color: black;
 }
 
+#messageHistory{
+    height:400px;
+    overflow: scroll;
+}
