@@ -30,7 +30,7 @@ public class VisitorController {
     @GetMapping("/create")
     public String registerPage(Model model) {
         model.addAttribute("user", new User());
-        return null; // return to user register page.
+        return "register"; // return to user register page.
     }
 
     @PostMapping("/create")
