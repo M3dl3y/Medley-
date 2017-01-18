@@ -15,7 +15,7 @@
 
         <!-- Database connection settings -->
         <property name="connection.url">
-            jdbc:mysql://localhost/blog_db?createDatabaseIfNotExist=true
+            jdbc:mysql://localhost/medly_db?createDatabaseIfNotExist=true
         </property>
         <property name="connection.username">root</property>
         <property name="connection.password">codeup</property>
@@ -29,8 +29,14 @@
         <property name="use_sql_comments">true</property>
 
         <!-- Add mapped classes here -->
-        <!--<mapping class="com.example.Models.Post"/>-->
-        <!--<mapping class="com.example.Models.User"/>-->
+        <mapping class="com.medman.models.User"/>
+        <mapping class="com.medman.models.Role"/>
+        <!--<mapping class="com.medman.models.Reminder"/>-->
+        <!--<mapping class="com.medman.models.Prescription"/>-->
+        <!--<mapping class="com.medman.models.NotificationSetting"/>-->
+        <!--<mapping class="com.medman.models.Message"/>-->
+        <!--<mapping class="com.medman.models.Medication"/>-->
+        <!--<mapping class="com.medman.models.AppointmentTime"/>-->
         <!-- ... -->
     </session-factory>
 </hibernate-configuration>
