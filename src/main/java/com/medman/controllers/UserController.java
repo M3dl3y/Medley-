@@ -1,228 +1,65 @@
 package com.medman.controllers;
 
 import com.medman.models.User;
-import com.medman.services.*;
-import com.medman.utils.JsonUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import javax.validation.Valid;
 
+/**
+ * Created by jessedavila on 1/17/17.
+ */
 @Controller
+//@RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private AvatarService avatarService;
-
-    @Autowired
-    private Validator userValidator;
-
-    @GetMapping("/")
-    public String splashPage() {
-        return "splash_page"; // need to direct to splash page
+    @GetMapping("/dashboard")
+    public String showDash(Model model) {
+        // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
+        return "shared/dashboard";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String showRegistrationForm(ModelMap model, HttpServletRequest request, HttpSession session) {
-        model.addAttribute("user", new User());
-
-//        if (userService.isAuthenticated()) {
-//            return "redirect:posts";
-//        }
-
-        String ref = request.getHeader("referer");
-
-        if (ref != null && !ref.contains("/register"))
-            session.setAttribute("regRef", ref);
-
-        return "registration";
+    @GetMapping("/my_doctors")
+    public String showMyDoctors(Model model) {
+        // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
+        // current logged in user's connected users should be called here and it should show their info.
+        return "shared/viewLinkedUsers";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@Validated({User.CreateValidationGroup.class}) @ModelAttribute(value = "user") User user, BindingResult result, HttpSession session) {
-        user.setUsername(StringUtils.trimWhitespace(user.getUsername()));
-        user.setEmail(StringUtils.trimWhitespace(user.getEmail()));
-
-        userValidator.validate(user, result);
-
-        if (result.hasErrors())
-        {
-            return "registration";
-        }
-
-        userService.register(user);
-
-        userService.authenticate(user);
-
-        Object regRef = session.getAttribute("regRef");
-
-        return "redirect:" + (StringUtils.isEmpty(regRef) ? "posts" : regRef.toString());
+    @GetMapping("/messages")
+    public String showMessages(Model model) {
+        //model.addAttribute("") are we making objects for all of these different tables? we must be? so a message instance is passed here?
+        //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
+        return "shared/messages";
     }
 
-    @RequestMapping(value = "/check_email", method = RequestMethod.GET)
-    public @ResponseBody String checkEmail(@RequestParam("email") String email) {
-        return userService.emailExists(email) ? "false" : "true";
+    @GetMapping("/edit")
+    public String editPage(Model model) {
+        model.addAttribute("user", new User()); // need to call logged in User
+        return "shared/profile"; // only a logged in user can go to user/edit
+
     }
 
-    @RequestMapping(value = "/check_username", method = RequestMethod.GET)
-    public @ResponseBody String checkUsername(@RequestParam("username") String username) {
-        return userService.usernameExists(username) ? "false" : "true";
-    }
-
-    @RequestMapping(value = "/settings", method = RequestMethod.GET)
-    public String showEditSettingsPage(ModelMap model) {
-        if (!model.containsAttribute("user")) {
-            User user = userService.currentUser();
-
-            if (user == null) {
-                return "redirect:posts";
-            }
-
+    @PostMapping("/edit")
+    public String editUserInfo(
+            @Valid User user,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
             model.addAttribute("user", user);
+            return "posts/edit";
         }
 
-        return "settings";
-    }
+        //User existingUser = (use autowired dao to get this)
+        // use dao to get current existingUser
+        //        existingPost.setTitle(editedPost.getTitle()); (template code)
+        return "redirect:/user/dashboard";
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/change_email", method = RequestMethod.POST)
-    public String changeEmail(@Validated({User.ChangeEmailValidationGroup.class}) @ModelAttribute(value = "user") User user, BindingResult result,
-                              @RequestParam("currentPassword") String currentPassword, RedirectAttributes redirectAttributes, ModelMap model) {
-        model.addAttribute("isEmailForm", true);
-
-        user.setEmail(StringUtils.trimWhitespace(user.getEmail()));
-
-        userValidator.validate(user, result);
-
-        if (!result.hasErrors()) {
-            try {
-                userService.changeEmail(user.getEmail(), currentPassword);
-            } catch (AuthException e) {
-                result.rejectValue("password", "NotMatchCurrent");
-            }
-        }
-
-        if (result.hasErrors()) {
-            return "settings";
-        }
-
-        redirectAttributes.addFlashAttribute("success", true);
-        redirectAttributes.addFlashAttribute("isEmailForm", true);
-
-        return "redirect:/settings";
-    }
-
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/change_password", method = RequestMethod.POST)
-    public String changePassword(@Validated({User.ChangePasswordValidationGroup.class}) @ModelAttribute(value = "user") User user, BindingResult result,
-                                 @RequestParam("currentPassword") String currentPassword, RedirectAttributes redirectAttributes, ModelMap model) {
-        model.addAttribute("isPasswordForm", true);
-
-        if (!result.hasErrors()) {
-            try {
-                userService.changePassword(user.getPassword(), currentPassword);
-            } catch (AuthException e) {
-                result.rejectValue("password", "NotMatchCurrent");
-            }
-        }
-
-        user.setEmail(userService.currentUser().getEmail()); // quick workaround to show e-mail in the e-mail form
-
-        if (result.hasErrors()) {
-            return "settings";
-        }
-
-        redirectAttributes.addFlashAttribute("success", true);
-        redirectAttributes.addFlashAttribute("isPasswordForm", true);
-
-        return "redirect:/settings";
-    }
-
-    @RequestMapping(value = "/edit_profile", method = RequestMethod.GET)
-    public String showEditProfilePage(ModelMap model) {
-        if (!model.containsAttribute("user")) {
-            User user = userService.currentUser();
-
-            if (user == null) {
-                return "redirect:posts";
-            }
-
-            model.addAttribute("user", user);
-        }
-
-        return "editprofile";
-    }
-
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/edit_profile", method = RequestMethod.POST)
-    public String editProfile(@Validated({User.ProfileInfoValidationGroup.class}) @ModelAttribute(value = "user") User user, BindingResult result,
-                              RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            // quick workaround to show avatar
-            User currentUser = userService.currentUser();
-            user.setBigAvatarLink(currentUser.getBigAvatarLink());
-
-            return "editprofile";
-        }
-
-        userService.changeProfileInfo(user);
-
-        redirectAttributes.addFlashAttribute("success", true);
-
-        return "redirect:/edit_profile";
-    }
-
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/upload_avatar", method = RequestMethod.POST)
-    public @ResponseBody String uploadAvatar(@RequestParam("avatarFile") MultipartFile file) throws IOException {
-        try {
-            UploadedAvatarInfo result = avatarService.upload(file);
-
-            userService.changeAvatar(result);
-
-            return makeAvatarUploadResponse("ok", result);
-        } catch (UnsupportedFormatException e) {
-            return makeAvatarUploadResponse("invalid_format", null);
-        }
-    }
-
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/remove_avatar", method = RequestMethod.POST)
-    public @ResponseBody String removeAvatar() throws IOException {
-        userService.removeAvatar();
-
-        return "ok";
-    }
-
-    @RequestMapping(value = "/users/{username}", method = RequestMethod.GET)
-    public String showProfile(@PathVariable("username") String username, ModelMap model) {
-        User user = userService.findByUsername(username);
-
-        if (user == null)
-            throw new ResourceNotFoundException();
-
-        model.addAttribute("user", user);
-
-        return "profile";
-    }
-
-    private String makeAvatarUploadResponse(String status, UploadedAvatarInfo uploadedAvatarInfo) {
-        return "{" + JsonUtils.toJsonField("status", status) +
-                (uploadedAvatarInfo == null ? "" : (", " + JsonUtils.toJsonField("link", uploadedAvatarInfo.bigImageLink))) +
-                "}";
     }
 }

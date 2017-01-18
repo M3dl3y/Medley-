@@ -14,4 +14,5 @@ if (hourNow > 18) {
 } else {
     greeting = "Welcome!"
 }
+
 document.getElementById("greeting").innerHTML = greeting;
