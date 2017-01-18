@@ -14,33 +14,33 @@ import javax.validation.Valid;
  * Created by jessedavila on 1/17/17.
  */
 @Controller
-@RequestMapping("/user")
-public class UserController extends BaseController {
+//@RequestMapping("/user")
+public class UserController {
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
-        return null;
+        return "patient/dashboard";
     }
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
         // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
         // current logged in user's connected users should be called here and it should show their info.
-        return null;
+        return "patient/viewDoctors";
     }
 
     @GetMapping("/messages")
     public String showMessages(Model model) {
         //model.addAttribute("") are we making objects for all of these different tables? we must be? so a message instance is passed here?
         //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
-        return null;
+        return "shared/messages";
     }
 
     @GetMapping("/edit")
     public String editPage(Model model) {
         model.addAttribute("user", new User()); // need to call logged in User
-        return null; // only a logged in user can go to user/edit
+        return "shared/profile"; // only a logged in user can go to user/edit
 
     }
 

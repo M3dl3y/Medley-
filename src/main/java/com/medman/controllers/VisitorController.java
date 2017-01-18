@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RequestMapping("/")
 public class VisitorController {
 
-    @GetMapping
+    @GetMapping("/")
     public String splashPage() {
         return "splash_page"; // need to direct to splash page
     }
@@ -30,7 +30,7 @@ public class VisitorController {
     @GetMapping("/create")
     public String registerPage(Model model) {
         model.addAttribute("user", new User());
-        return null; // return to user register page.
+        return "register"; // return to user register page.
     }
 
     @PostMapping("/create")
