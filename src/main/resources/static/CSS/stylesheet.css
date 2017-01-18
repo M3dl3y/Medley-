@@ -30,6 +30,10 @@ nav {
     margin-bottom: 5px;
 }
 
+.trashIcon{
+    color: #e7474a !important;
+}
+
 .messageIcon{
     color: #4db3d6 !important;
 }
@@ -53,6 +57,7 @@ nav {
     color: #afb3b0;
     padding: 1%;
 }
+
 
 .card{
     box-shadow: #dadad7 5px 5px 5px;

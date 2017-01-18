@@ -8,6 +8,102 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
+<h1 class="text-center">My Doctors</h1>
+
+<div class="doctorDisplay">
+    <div class="doctorImg col-md-2 col-md-offset-1">
+        <h1>IMG</h1>
+    </div>
+
+    <div class="doctorName col-md-3">
+        <h3>Doctor Name</h3>
+        <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true" data-toggle="modal" data-target="#messageDoctor"></i>
+        <i class="fa fa-trash fa-3x trashIcon" aria-hidden="true" data-toggle="modal" data-target="#deleteDoctor"></i>
+    </div>
+
+    <div class="doctorAddress col-md-3">
+        <h4>Street Address</h4>
+        <h4>City, State</h4>
+        <h4>Zip code</h4>
+    </div>
+    <div class="doctorPhone col-md-2">
+        <h4>(210)-000-0000</h4>
+    </div>
+</div>
+
+<div class="col-md-10 col-md-offset-1">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#addDoctor">Add a new doctor</button>
+</div>
+
+<!--Add a doctor form-->
+<div class="modal fade" id="addDoctor" tabindex="-1" role="dialog" aria-labelledby="addDoctorLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addDoctorLabel">Add a doctor</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="addDoctorForm"> <!--th:action="" method="post" th:object=""-->
+                    <div class="form-group">
+                        <label for="addADoctor">What's your doctors key code:</label>
+                        <input type="text" class="form-control" id="addADoctor" placeholder="Key code"   />
+                        <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add doctor</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Delete Doctor-->
+<div class="modal fade" id="deleteDoctor" tabindex="-1" role="dialog" aria-labelledby="deleteDoctorLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="deleteDoctorLabel">Delete a doctor</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Removing a doctor from your medical team could have serious consequences. How about messaging your doctor first.</h3>
+                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" >Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Message Doctor-->
+<div class="modal fade" id="messageDoctor" tabindex="-1" role="dialog" aria-labelledby="messageDoctorLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="messageDoctorLabel">Message</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="messageDoctorForm"> <!--th:action="" method="post" th:object=""-->
+                    <div class="form-group">
+                        <label for="messageForDoctor">What would you like to say?</label>
+                        <textarea type="text" class="form-control" id="messageForDoctor" placeholder="Today I was experiencing..."></textarea>
+                        <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
