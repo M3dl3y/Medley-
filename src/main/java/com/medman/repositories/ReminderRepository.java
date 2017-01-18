@@ -1,4 +1,7 @@
 package com.medman.repositories;
 
-public class ReminderRepository {
+import com.medman.models.Reminder;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ReminderRepository extends JpaRepository<Reminder, Long> {
 }

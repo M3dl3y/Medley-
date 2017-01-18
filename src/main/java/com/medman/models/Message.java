@@ -14,6 +14,6 @@ public class Message {
     @Column
     private String message;
 
-    @OneToOne(mappedBy = "messages")
-    private Long relationship;
+//    @OneToOne(mappedBy = "messages")
+//    private Long relationship;
 }

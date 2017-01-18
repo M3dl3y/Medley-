@@ -3,8 +3,6 @@ package com.medman.services;
 import com.medman.models.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import javax.security.auth.message.AuthException;
-
 public interface UserService extends UserDetailsService{
 
     User findByEmail (String email);
@@ -27,9 +25,13 @@ public interface UserService extends UserDetailsService{
 
     boolean isAuthenticated();
 
-    boolean isAdmin();
+    void changeAvatar(UploadedAvatarInfo uploadedAvatarInfo);
 
-    boolean isDoctor();
+    void removeAvatar();
+
+//    boolean isAdmin();
+//
+//    boolean isDoctor();
 
     User currentUser();
 

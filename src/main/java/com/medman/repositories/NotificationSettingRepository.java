@@ -1,4 +1,8 @@
 package com.medman.repositories;
 
-public interface NotificationSettingRepository {
+import com.medman.models.NotificationSetting;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface NotificationSettingRepository extends JpaRepository<NotificationSetting, Long> {
+
 }

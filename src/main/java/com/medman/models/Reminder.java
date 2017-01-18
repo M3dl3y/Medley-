@@ -21,8 +21,8 @@ public class Reminder {
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime reminderDate;
 
-    @ManyToMany(mappedBy = "roles")
-    private Long userId;
+//    @ManyToMany(mappedBy = "roles")
+//    private Long userId;
 
 
 
@@ -50,12 +50,12 @@ public class Reminder {
         this.reminderDate = reminderDate;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
 
 }
