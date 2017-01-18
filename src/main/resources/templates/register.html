@@ -16,27 +16,8 @@
 </div>
 
 
-<!--Footer-->
-<div id="footer">
-    <div class="col-md-10 col-md-offset-1">
-        <h6><a>About</a></h6>
-    </div>
-    <div class="horizontal_line col-md-10 col-md-offset-1"></div>
-    <div class="col-md-10 col-md-offset-1">
-        <i class="fa fa-facebook" aria-hidden="true"></i>
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-    </div>
-    <div class="horizontal_line col-md-10 col-md-offset-1"></div>
-    <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-10 col-md-offset-1">
-            <i class="fa fa-medkit col-md-2 col-md-offset-4" aria-hidden="true"></i>
-            <h6 class="col-md-3 col-md-offset-1">Medly LLC</h6>
-        </div>
-    </div>
-</div>
+<div th:replace="/fragments/footer :: footer"></div>
 
-<script src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://use.fontawesome.com/54bf161b9f.js"></script>
+<div th:replace="/fragments/javascript :: javascript"></div>
 </body>
 </html>
