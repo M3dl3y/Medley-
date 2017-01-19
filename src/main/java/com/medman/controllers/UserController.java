@@ -43,14 +43,14 @@ public class UserController {
 
     @GetMapping("/messages")
     public String showMessages(Model model) {
-        //model.addAttribute("") are we making objects for all of these different tables? we must be? so a message instance is passed here?
-        //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
+        model.addAttribute("user", userService.currentUser());
         return "shared/messages";
     }
 
     @GetMapping("/edit")
     public String editPage(Model model) {
-        model.addAttribute("user", new User()); // need to call logged in User
+        model.addAttribute("user", userService.currentUser());
+
         return "shared/profile"; // only a logged in user can go to user/edit
 
     }
@@ -66,10 +66,7 @@ public class UserController {
             model.addAttribute("user", user);
             return "posts/edit";
         }
-
-        //User existingUser = (use autowired dao to get this)
-        // use dao to get current existingUser
-        //        existingPost.setTitle(editedPost.getTitle()); (template code)
+        userService.changeProfileInfo(user);
         return "redirect:/user/dashboard";
 
     }
