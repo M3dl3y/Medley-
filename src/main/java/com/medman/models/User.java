@@ -70,21 +70,34 @@ public class User {
     @NotBlank(groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class})
     private String password;
 
+    @Column(nullable = false)
+    private boolean enabled;
+
     @Column(unique = true, nullable = false, length = 50)
     @Email(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     @NotBlank(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     private String email;
 
-    @Column(nullable = true, length = 80)
-    @Pattern(regexp = "^\\s*(https?:\\/\\/.+)?", groups = {ProfileInfoValidationGroup.class})
-    @Size(max = 80, groups = {ProfileInfoValidationGroup.class})
-    private String profileImgUrl;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles = new ArrayList<>();
+
+    @Column(nullable = true)
+    private String smallAvatarLink;
+
+    @Column(nullable = true)
+    private String bigAvatarLink;
 
     @Column
     private Long generated_identifier;
 
     @Column(nullable = false)
     private boolean accountVerified;
+
+    @Column(nullable = true)
+    private String npiNumber;
 
     public Long getId() {
         return Id;
@@ -182,13 +195,39 @@ public class User {
         this.email = email;
     }
 
-    public String getProfileImgUrl() {
-        return profileImgUrl;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setProfileImgUrl(String profileImgUrl) {
-        this.profileImgUrl = profileImgUrl;
+    public boolean isEnabled() {
+        return enabled;
     }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getSmallAvatarLink() {
+        return smallAvatarLink;
+    }
+
+    public void setSmallAvatarLink(String smallAvatarLink) {
+        this.smallAvatarLink = smallAvatarLink;
+    }
+
+    public String getBigAvatarLink() {
+        return bigAvatarLink;
+    }
+
+    public void setBigAvatarLink(String bigAvatarLink) {
+        this.bigAvatarLink = bigAvatarLink;
+    }
+
 
     public Long getGenerated_identifier() {
         return generated_identifier;
@@ -214,11 +253,25 @@ public class User {
         this.npiNumber = npiNumber;
     }
 
-    @Column(nullable = true)
-    private String npiNumber;
+    public boolean hasRole(String role) {
+        role = role.toUpperCase();
 
-//Do we want to add registration date and the ability to disable accounts
-    // this sounds like a "nice to have" feature
+        if (!role.startsWith("ROLE_"))
+            role = "ROLE_" + role;
 
+        final String finalRole = role;
+        return getRoles().stream().anyMatch(r -> r.getRole().equals(finalRole));
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "Id=" + Id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                '}';
+    }
 
 }

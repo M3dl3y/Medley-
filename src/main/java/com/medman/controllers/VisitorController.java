@@ -1,12 +1,16 @@
 package com.medman.controllers;
 
 import com.medman.models.User;
+import com.medman.services.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.medman.services.UserService;
 
 import javax.validation.Valid;
 
@@ -16,6 +20,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/")
 public class VisitorController {
+
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String splashPage() {
@@ -44,8 +52,10 @@ public class VisitorController {
             model.addAttribute("user", user);
             return "user/create";
         }
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
-        //usersDao.save(user);
-        return "patient/dashboard"; // redirect to dashboard
+        user.setUsername(StringUtils.trimWhitespace(user.getUsername()));
+        user.setEmail(StringUtils.trimWhitespace(user.getEmail()));
+        userService.register(user);
+        userService.authenticate(user);
+        return "shared/dashboard"; // return to dashboard
     }
 }

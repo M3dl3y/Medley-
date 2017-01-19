@@ -11,7 +11,6 @@ public class NotificationSetting {
     private Long id;
 
     @Column
-    @OneToOne(mappedBy = "notification_settings")
     private Long userId;
 
     @Column

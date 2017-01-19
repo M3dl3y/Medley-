@@ -1,10 +1,6 @@
 package com.medman.controllers;
 
-import com.medman.models.AppointmentTime;
-import com.medman.models.Medication;
-import com.medman.models.Reminder;
 import com.medman.models.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * Created by jessedavila on 1/17/17.
@@ -22,22 +17,17 @@ import java.util.List;
 //@RequestMapping("/user")
 public class UserController {
 
-
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
-        model.addAttribute("medications", new Medication()); // most likely use a method to return all medications that match with user?
-        model.addAttribute("appointments", new AppointmentTime()); // same here? definitely going to be returning more than one object
-        model.addAttribute("reminders" , new Reminder()); // these will all use Spring dao interface thing
-        return "patient/dashboard";
+        return "shared/dashboard";
     }
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
         // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
         // current logged in user's connected users should be called here and it should show their info.
-        model.addAttribute("user", new User());
-        return "patient/viewDoctors";
+        return "shared/viewLinkedUsers";
     }
 
     @GetMapping("/messages")
