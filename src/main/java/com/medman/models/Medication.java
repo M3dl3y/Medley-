@@ -15,4 +15,12 @@ public class Medication {
 
     @Column
     private String genericName;
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
 }
