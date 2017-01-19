@@ -13,7 +13,7 @@
         <!--On mobile display, icon appears in the right of the navbar to show dropdown menu-->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <i class="nav navbar-nav navbar-center fa fa-medkit fa-3x" aria-hidden="true"></i>
+                <i class="nav navvar-nav navbar-center fa fa-medkit fa-3x logoIcon" aria-hidden="true"></i>
                 <!--<span class="sr-only">Toggle navigation</span>-->
                 <!--<span class="icon-bar"></span>-->
                 <!--<span class="icon-bar"></span>-->
@@ -40,10 +40,15 @@
             <!--Medly logo-->
             <a th:href="@{/}"><i class="nav navbar-brand fa fa-medkit fa-2x" aria-hidden="true"></i></a>
 
-            <!--Login link-->
-            <ul class="nav navbar-nav navbar-right"><!--sec:authorize="!isAuthenticated()"-->
-                <li><a th:href="@{/login}">Login</a></li>
-            </ul>
+
+            <!--Login link. Only shows to users not logged in-->
+            <!--<div sec:authorize=" !isAuthenticated() ">-->
+                <ul class="nav navbar-nav navbar-right"><!--sec:authorize="!isAuthenticated()"-->
+                    <li><a th:href="@{/login}">Login</a></li>
+                </ul>
+            <!--</div>-->
+
+
 
             <ul class="nav navbar-nav navbar-right"><!--sec:authorize="isAuthenticated()"-->
                 <li class="dropdown">
@@ -54,20 +59,24 @@
                         <li role="separator" class="divider"></li>
                         <li><a th:href="@{/my_doctors}">Doctors</a></li>
                         <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/messages}">Messages</a></li>
+                        <li role="separator" class="divider"></li>
                         <li><a th:href="@{/edit}">Settings</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a th:href="@{/logout}">Logout</a></li>
                     </ul>
 
-                    <!--<ul class="dropdown-menu">&lt;!&ndash;sec:authorize"hasRole('Doctor')"&ndash;&gt;-->
-                        <!--<li><a th:href="@{/dashboard}">Dashboard</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a th:href="@{/my_doctors}">Patients</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a th:href="@{/edit}">Settings</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a th:href="@{/logout}">Logout</a></li>-->
-                    <!--</ul>-->
+                    <ul class="dropdown-menu"><!--sec:authorize"hasRole('Doctor')"-->
+                        <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/my_doctors}">Patients</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/messages}">Messages</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/edit}">Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/logout}">Logout</a></li>
+                    </ul>
                 </li>
             </ul>
 
