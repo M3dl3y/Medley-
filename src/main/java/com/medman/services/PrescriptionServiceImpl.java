@@ -2,21 +2,18 @@ package com.medman.services;
 
 import com.medman.models.Prescription;
 
-import java.util.List;
-
 public class PrescriptionServiceImpl implements PrescriptionService{
 
 
-
-
-    @Override
-    public List<Prescription> listAllPrescription() {
-        return null;
-    }
-
     @Override
     public Prescription getPrescription(Long id) {
-        return null;
+
+        Prescription prescription = getPrescription(id);
+
+        if (prescription == null)
+            return null;
+
+        return Prescription;
     }
 
     @Override
@@ -25,12 +22,12 @@ public class PrescriptionServiceImpl implements PrescriptionService{
     }
 
     @Override
-    public Prescription updatePrescription() {
+    public Prescription updatePrescription(String newPrescription) {
         return null;
     }
 
     @Override
-    public void deletPrescription(Long prescriptionId) {
+    public void deletePrescription(Long prescriptionId) {
 
     }
 }

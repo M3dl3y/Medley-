@@ -6,13 +6,11 @@ import java.util.List;
 
 public interface PrescriptionService {
 
-    List<Prescription> listAllPrescription();
-
     Prescription getPrescription(Long id);
 
     Prescription saveNewPrescription();
 
-    Prescription updatePrescription();
+    Prescription updatePrescription(String newPrescription);
 
-    void deletPrescription(Long prescriptionId);
+    void deletePrescription(Long prescriptionId);
 }
