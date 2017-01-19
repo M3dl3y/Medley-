@@ -13,7 +13,7 @@ public class PrescriptionServiceImpl implements PrescriptionService{
         if (prescription == null)
             return null;
 
-        return Prescription;
+        return prescription ;
     }
 
     @Override
