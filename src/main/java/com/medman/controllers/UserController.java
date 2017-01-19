@@ -4,6 +4,7 @@ import com.medman.models.Medication;
 import com.medman.models.User;
 import com.medman.repositories.MedicationRepository;
 import com.medman.services.UserService;
+import com.medman.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +23,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    MedicationRepository medsDAO;
-
-    @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {

@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserServiceImpl userDetails;
+    private UserServiceImpl userDetails; // what is happening here?
 
     @Bean(name = "passwordEncoder")
     public PasswordEncoder passwordEncoder() {
@@ -34,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/profile") // user's home page, it can be any URL
+                .defaultSuccessUrl("/dashboard") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
                 .and()
                 .authorizeRequests()
@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout") // append a query string value
                 .and()
                 .authorizeRequests()
-                .antMatchers("/post/create ", "/profile" , "/posts/{id}/edit" , "/posts/{id}/delete", "/fileupload") // only authenticated users can create ads
+                .antMatchers("/dashboard", "/connections" , "/messages" , "/edit", "/fileupload") // only authenticated users can create ads
                 .authenticated()
 
         ;
