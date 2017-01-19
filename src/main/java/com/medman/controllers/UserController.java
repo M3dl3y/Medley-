@@ -25,10 +25,29 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    MedicationRepository medsDAO;
+
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         model.addAttribute("user", userService.currentUser());
+        model.addAttribute("medication", new Medication()); // when med plus button is used to add med
         return "shared/dashboard";
+    }
+
+    @PostMapping("/dashboard")
+    public String addMedication(
+            @Valid Medication med,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("medication", med);
+            return "/dashboard";
+        }
+        medsDAO.save(med);
+        return "/dashboard";
     }
 
     @GetMapping("/connections") // we can probably come up with a better uri than this.
