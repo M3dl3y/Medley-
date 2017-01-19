@@ -14,8 +14,31 @@ import javax.validation.Valid;
  * Created by jessedavila on 1/17/17.
  */
 @Controller
-//@RequestMapping("/user")
 public class UserController {
+
+    @GetMapping("/")
+    public String splashPage() {
+        return "splash_page"; // need to direct to splash page
+    }
+
+    @GetMapping("/create")
+    public String registerPage(Model model) {
+        model.addAttribute("user", new User());
+        return "register"; // return to user register page.
+    }
+    @PostMapping("/create")
+    public String createUser(
+            @Valid User user,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("user", user);
+            return "user/create";
+        }
+        return null; // redirect to splash page
+    }
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
