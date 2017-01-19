@@ -17,5 +17,4 @@ public interface MedicationService {
     void updateMedication(Medication newMedicationData, Long medicationId) throws ActionExpiredException;
 
 
-
 }

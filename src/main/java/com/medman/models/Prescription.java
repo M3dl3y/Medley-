@@ -17,8 +17,9 @@ public class Prescription {
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime prescribedDate;
 
+    @Column
 //    @ManyToMany(mappedBy = "prescriptions")
-//    private Long medicationId;
+    private Long medicationId;
 
     @Column(nullable = false)
     private String strength;
@@ -47,9 +48,9 @@ public class Prescription {
     @Column(nullable = false)
     private Long prescribedQuantity;
 
-//    @Column
+    @Column
 //    @OneToMany(mappedBy = "prescriptions")
-//    private Long userId;
+    private Long userId;
 
     public Long getId() {
         return Id;
@@ -67,13 +68,13 @@ public class Prescription {
         this.prescribedDate = prescribedDate;
     }
 
-//    public Long getMedicationId() {
-//        return medicationId;
-//    }
-//
-//    public void setMedicationId(Long medicationId) {
-//        this.medicationId = medicationId;
-//    }
+    public Long getMedicationId() {
+        return medicationId;
+    }
+
+    public void setMedicationId(Long medicationId) {
+        this.medicationId = medicationId;
+    }
 
     public String getStrength() {
         return strength;
@@ -147,11 +148,11 @@ public class Prescription {
         this.prescribedQuantity = prescribedQuantity;
     }
 
-//    public Long getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Long userId) {
-//        this.userId = userId;
-//    }
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }
