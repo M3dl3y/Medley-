@@ -3,13 +3,16 @@ package com.medman.models;
 import com.medman.utils.LocalDateTimePersistenceConverter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,30 +29,35 @@ public class User {
     private Long Id;
 
     @Column(nullable = false, length = 50)
-    @NotBlank(groups = {CreateValidationGroup.class})
+    @NotBlank(groups = {CreateValidationGroup.class}, message = "Please enter your first name.")
     private String firstName;
 
     @Column(nullable = false, length = 50)
-    @NotBlank(groups = {CreateValidationGroup.class})
+    @NotBlank(groups = {CreateValidationGroup.class}, message = "Please enter your last name.")
     private String lastName;
 
     @Column(nullable = false)
-    @Convert(converter = LocalDateTimePersistenceConverter.class)
-    private LocalDateTime dateOfBirth;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
 
     @Column(nullable = false)
+    @Size(min = 10, message = "Please enter your 10 digit phone number")
     private String phoneNumber;
 
     @Column(nullable = false)
+    @NotBlank(message = "Please enter your street address.")
     private String streetAddress;
 
     @Column(nullable = false)
+    @NotBlank(message = "Please enter your city.")
     private String city;
 
     @Column(nullable = false)
+    @NotBlank(message = "Please enter your state.")
     private String state;
 
     @Column(nullable = false)
+    @NotNull(message = "Please enter a zip code.")
     private Long zipCode;
 
     @Column(unique = true, nullable = false, length = 50)
@@ -78,26 +86,42 @@ public class User {
     @NotBlank(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles = new ArrayList<>();
-
     @Column(nullable = true)
     private String smallAvatarLink;
 
     @Column(nullable = true)
     private String bigAvatarLink;
 
-    @Column
+    @Column(nullable = true)
     private Long generated_identifier;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean accountVerified;
 
     @Column(nullable = true)
     private String npiNumber;
+
+    @OneToOne
+    private Role role = new Role(3);
+
+    public User(){}
+
+    public User(User user) {
+        Id = user.Id;
+        firstName = user.firstName;
+        lastName = user.lastName;
+        dateOfBirth = user.dateOfBirth;
+        phoneNumber = user.phoneNumber;
+        streetAddress = user.streetAddress;
+        city = user.city;
+        state = user.state;
+        zipCode = user.zipCode;
+        username = user.username;
+        password = user.password;
+        email = user.email;
+
+    }
+
 
     public Long getId() {
         return Id;
@@ -123,11 +147,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -195,9 +219,6 @@ public class User {
         this.email = email;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
 
     public boolean isEnabled() {
         return enabled;
@@ -207,10 +228,6 @@ public class User {
         this.enabled = enabled;
     }
 
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 
     public String getSmallAvatarLink() {
         return smallAvatarLink;
@@ -227,7 +244,6 @@ public class User {
     public void setBigAvatarLink(String bigAvatarLink) {
         this.bigAvatarLink = bigAvatarLink;
     }
-
 
     public Long getGenerated_identifier() {
         return generated_identifier;
@@ -253,25 +269,27 @@ public class User {
         this.npiNumber = npiNumber;
     }
 
-    public boolean hasRole(String role) {
-        role = role.toUpperCase();
 
-        if (!role.startsWith("ROLE_"))
-            role = "ROLE_" + role;
 
-        final String finalRole = role;
-        return getRoles().stream().anyMatch(r -> r.getRole().equals(finalRole));
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "Id=" + Id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", enabled=" + enabled +
-                ", roles=" + roles +
-                '}';
-    }
+//    public boolean hasRole(String role) {
+//        role = role.toUpperCase();
+//
+//        if (!role.startsWith("ROLE_"))
+//            role = "ROLE_" + role;
+//
+//        final String finalRole = role;
+//        return getRoles().stream().anyMatch(r -> r.getRole().equals(finalRole));
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "Id=" + Id +
+//                ", username='" + username + '\'' +
+//                ", email='" + email + '\'' +
+//                ", enabled=" + enabled +
+//                ", roles=" + roles +
+//                '}';
+//    }
 
 }
