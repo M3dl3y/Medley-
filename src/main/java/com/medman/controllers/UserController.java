@@ -2,9 +2,11 @@ package com.medman.controllers;
 
 import com.medman.models.AppointmentTime;
 import com.medman.models.Medication;
+import com.medman.models.Message;
 import com.medman.models.User;
 import com.medman.repositories.AppointmentTimeRepository;
 import com.medman.repositories.MedicationRepository;
+import com.medman.repositories.MessageRepository;
 import com.medman.services.UserService;
 import com.medman.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class UserController {
 
     @Autowired
     AppointmentTimeRepository apptDAO;
+
+    @Autowired
+    MessageRepository messageDAO;
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
@@ -81,7 +86,22 @@ public class UserController {
     @GetMapping("/messages")
     public String showMessages(Model model) {
         model.addAttribute("user", userService.currentUser());
+        model.addAttribute("message", new Message()); // this is to make a message to be sent in post
         return "shared/messages";
+    }
+
+    @PostMapping("/messages")
+    public String sendMessage(@Valid Message message,
+                              Errors validation,
+                              Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("appointment", message);
+            return "/dashboard";
+        }
+        message.setId(userService.currentUser().getId()); // this seems like the right thing to do.
+        return "/messages";
     }
 
     @GetMapping("/edit")
