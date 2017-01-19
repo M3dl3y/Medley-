@@ -1,6 +1,10 @@
 package com.medman.controllers;
 
+import com.medman.models.Medication;
 import com.medman.models.User;
+import com.medman.repositories.MedicationRepository;
+import com.medman.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,16 +21,23 @@ import javax.validation.Valid;
 //@RequestMapping("/user")
 public class UserController {
 
+    @Autowired
+    MedicationRepository medsDAO;
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/dashboard")
     public String showDash(Model model) {
-        // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
+        model.addAttribute("user", userService.currentUser());
         return "shared/dashboard";
     }
 
-    @GetMapping("/my_doctors")
+    @GetMapping("/connections") // we can probably come up with a better uri than this.
     public String showMyDoctors(Model model) {
-        // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
-        // current logged in user's connected users should be called here and it should show their info.
+        model.addAttribute("user", userService.currentUser());
+        // right now there is no table that connects patients to doctors so this is something we need to figure out to show
+        // doctors on page.
         return "shared/viewLinkedUsers";
     }
 
