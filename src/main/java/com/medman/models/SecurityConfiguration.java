@@ -2,7 +2,6 @@
 package com.medman.models;
 
 import com.medman.services.UserService;
-import com.medman.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -22,7 +21,7 @@ import org.springframework.context.annotation.Bean;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserServiceImpl userDetails;
+    private UserDetailsLoader userDetails;
 
     @Bean(name = "passwordEncoder")
     public PasswordEncoder passwordEncoder() {

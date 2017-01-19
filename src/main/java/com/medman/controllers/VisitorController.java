@@ -26,13 +26,13 @@ public class VisitorController {
     public String aboutPage() {
         return "about"; // direct to about page
     }
-//
+
     @GetMapping("/create")
-public String registerPage(Model model) {
+    public String registerPage(Model model) {
         model.addAttribute("user", new User());
         return "register"; // return to user register page.
-        }
-//
+    }
+
     @PostMapping("/create")
     public String createUser(
             @Valid User user,
@@ -44,6 +44,8 @@ public String registerPage(Model model) {
             model.addAttribute("user", user);
             return "user/create";
         }
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //usersDao.save(user);
         return null; // redirect to splash page
     }
 }

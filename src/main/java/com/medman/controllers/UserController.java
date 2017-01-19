@@ -1,6 +1,12 @@
 package com.medman.controllers;
 
+import com.medman.models.Role;
+import com.medman.models.Roles;
 import com.medman.models.User;
+import com.medman.models.Users;
+import com.medman.repositories.RoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -9,36 +15,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by jessedavila on 1/17/17.
  */
 @Controller
+//@RequestMapping("/user")
 public class UserController {
 
-    @GetMapping("/")
-    public String splashPage() {
-        return "splash_page"; // need to direct to splash page
-    }
 
-    @GetMapping("/create")
-    public String registerPage(Model model) {
-        model.addAttribute("user", new User());
-        return "register"; // return to user register page.
-    }
-    @PostMapping("/create")
-    public String createUser(
-            @Valid User user,
-            Errors validation,
-            Model model
-    ) {
-        if (validation.hasErrors()) {
-            model.addAttribute("errors", validation);
-            model.addAttribute("user", user);
-            return "user/create";
-        }
-        return null; // redirect to splash page
-    }
+    @Autowired
+    Users usersDao;
+
+    @Autowired
+    Roles roles;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
@@ -85,4 +81,20 @@ public class UserController {
         return "redirect:/user/dashboard";
 
     }
+
+    @PostMapping("/register")
+    public String registerUser(@Valid User user, Errors validation, Model model){
+        if(validation.hasErrors()){
+            model.addAttribute("errors", validation);
+            model.addAttribute("user", user);
+            return "register";
+        }
+        usersDao.save(user);
+        return "redirect:/about";
+
+    }
+
+
+
+
 }
