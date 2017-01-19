@@ -1,7 +1,9 @@
 package com.medman.controllers;
 
+import com.medman.models.AppointmentTime;
 import com.medman.models.Medication;
 import com.medman.models.User;
+import com.medman.repositories.AppointmentTimeRepository;
 import com.medman.repositories.MedicationRepository;
 import com.medman.services.UserService;
 import com.medman.services.UserServiceImpl;
@@ -28,6 +30,9 @@ public class UserController {
     @Autowired
     MedicationRepository medsDAO;
 
+    @Autowired
+    AppointmentTimeRepository apptDAO;
+
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         model.addAttribute("user", userService.currentUser());
@@ -47,6 +52,21 @@ public class UserController {
             return "/dashboard";
         }
         medsDAO.save(med);
+        return "/dashboard";
+    }
+
+    @PostMapping("/dashboard")
+    public String addAppointment(
+            @Valid AppointmentTime appt,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("appointment", appt);
+            return "/dashboard";
+        }
+        apptDAO.save(appt);
         return "/dashboard";
     }
 
