@@ -40,7 +40,7 @@
 //            throw new UsernameNotFoundException("no such user");
 //
 //        List<GrantedAuthority> authorities = new ArrayList<>();
-//        for (Role role : user.getRoles()) {
+//        for (Role role : user.getRole()) {
 //            authorities.add(new SimpleGrantedAuthority(role.getRole()));
 //        }
 //

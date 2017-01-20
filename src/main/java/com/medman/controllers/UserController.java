@@ -1,10 +1,13 @@
 package com.medman.controllers;
 
-import com.medman.models.Role;
-import com.medman.models.Roles;
-import com.medman.models.User;
-import com.medman.models.Users;
+import com.medman.models.*;
+import com.medman.repositories.MedicationRepository;
+import com.medman.repositories.PrescriptionRepository;
+import com.medman.repositories.RoleRepository;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,9 +39,33 @@ public class UserController extends BaseController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    MedicationRepository medsDAO;
+
+    @Autowired
+    PrescriptionRepository prescriptonDAO;
+
+
     @GetMapping("/dashboard")
     public String showDash(Model model) {
-        // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
+        model.addAttribute("user", loggedInUser());
+        model.addAttribute("medication", new Medication()); // when med plus button is used to add med
+        model.addAttribute("prescription", new Prescription());
+        return "shared/dashboard";
+    }
+
+    @PostMapping("/addPrescription")
+    public String addMedication(
+            @Valid Prescription prescription,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("prescription", prescription);
+            return "shared/dashboard";
+        }
+        prescriptonDAO.save(prescription);
         return "shared/dashboard";
     }
 
@@ -58,11 +85,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/edit")
     public String editPage(Model model) {
-        User user = usersDao.findOne(loggedInUser().getId());
-        if(user.getId() != loggedInUser().getId()){
-            return "/";
-        }
-        model.addAttribute("user", user); // need to call logged in User
+        model.addAttribute("user", new User()); // need to call logged in User
         return "shared/profile"; // only a logged in user can go to user/edit
 
     }
@@ -76,36 +99,27 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
-            return "shared/profile";
+            return "posts/edit";
         }
 
-        User newUser = usersDao.findByUsername(loggedInUser().getUsername());
-        newUser.setFirstName(user.getFirstName());
-        newUser.setLastName(user.getLastName());
-        newUser.setDateOfBirth(user.getDateOfBirth());
-        newUser.setPhoneNumber(user.getPhoneNumber());
-        newUser.setStreetAddress(user.getStreetAddress());
-        newUser.setCity(user.getCity());
-        newUser.setState(user.getState());
-        newUser.setZipCode(user.getZipCode());
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        newUser.setEmail(user.getEmail());
-
-
-        usersDao.save(newUser);
-        return "shared/dashboard";
+        //User existingUser = (use autowired dao to get this)
+        // use dao to get current existingUser
+        //        existingPost.setTitle(editedPost.getTitle()); (template code)
+        return "redirect:/user/dashboard";
 
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid User user, Errors validation, Model model){
-        if(validation.hasErrors()){
+    public String registerUser(
+            @Valid User user,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
             return "register";
         }
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
         return "redirect:/about";
@@ -113,8 +127,9 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/login?logout")
-    public String logout(){return "redirect:/";}
-
+    public String logout() {
+        return "redirect:/";
+    }
 
 
 }

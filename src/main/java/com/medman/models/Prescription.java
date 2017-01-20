@@ -1,9 +1,11 @@
 package com.medman.models;
 
 import com.medman.utils.LocalDateTimePersistenceConverter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "prescriptions")
@@ -14,8 +16,8 @@ public class Prescription {
     private Long Id;
 
     @Column(nullable = false)
-    @Convert(converter = LocalDateTimePersistenceConverter.class)
-    private LocalDateTime prescribedDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date prescribedDate;
 
 
     @ManyToOne
@@ -27,22 +29,22 @@ public class Prescription {
     @Column(nullable = false)
     private String sig;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long dosageAmount;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String dosageForm;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String dosageRoute;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long dosageFrequency;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String dosageInterval;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long daySupply;
 
     @Column(nullable = false)
@@ -82,11 +84,11 @@ public class Prescription {
         Id = id;
     }
 
-    public LocalDateTime getPrescribedDate() {
+    public Date getPrescribedDate() {
         return prescribedDate;
     }
 
-    public void setPrescribedDate(LocalDateTime prescribedDate) {
+    public void setPrescribedDate(Date prescribedDate) {
         this.prescribedDate = prescribedDate;
     }
 
