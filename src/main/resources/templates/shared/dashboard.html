@@ -12,7 +12,7 @@
 
 
 <!--If patient is logged in -->
-<!--<div sec:authorize="hasRole('Patient')">-->
+<div sec:authorize="hasRole('Patient')">
 
     <!--Alerts Card -->
     <div id="alertsCard" class="col-md-4 card">
@@ -90,7 +90,7 @@
                 <form id="addMedicationForm"> <!--th:action="@{/addMedication}" method="post" th:object=${medications}-->
 
 
-                    <div class="form-group"><!--sec:authorize="hasRole('Doctor')" -->
+                    <div class="form-group" sec:authorize="hasRole('Doctor')">
                         <label for="patientName">Patient:</label>
                         <select class="form-control" id="patientName"><!-- th:each"user : ${user}" th:object="{user}"  -->
 
@@ -237,13 +237,12 @@
     </div>
 </div>
 
-<!--</div>-->
+</div>
 
 
 <!--If Doctor Logged in-->
 
-<!--<div sec:authorize="hasRole('Doctor')">-->
-    <div class="col-md-12"></div> <!--We won't need this div once we implement user roles. It's here to help break up patient/doctor stuff in the view-->
+<div sec:authorize="hasRole('Doctor')">
 
     <!--Alerts Card -->
     <div id="doctorAlertsCard" class="col-md-4 card">
@@ -292,7 +291,7 @@
         </div>
 
     </div><!--contact card-->
-<!--</div>-->
+</div>
 
 
 

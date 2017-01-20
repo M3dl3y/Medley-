@@ -119,6 +119,7 @@ public class User {
         username = user.username;
         password = user.password;
         email = user.email;
+        role = user.role;
 
     }
 
