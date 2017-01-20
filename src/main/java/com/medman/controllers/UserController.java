@@ -1,9 +1,7 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
-import com.medman.repositories.MedicationRepository;
 import com.medman.repositories.PrescriptionRepository;
-import com.medman.repositories.RoleRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
@@ -39,8 +37,8 @@ public class UserController extends BaseController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    MedicationRepository medsDAO;
+//    @Autowired
+//    MedicationRepository medsDAO;
 
     @Autowired
     PrescriptionRepository prescriptonDAO;

@@ -50,6 +50,9 @@ public class Prescription {
     @Column(nullable = false)
     private Long prescribedQuantity;
 
+    @ManyToOne
+    private User user;
+
     public Prescription (){}
 
     public Prescription (Prescription prescription){
@@ -162,6 +165,14 @@ public class Prescription {
 
     public void setPrescribedQuantity(Long prescribedQuantity) {
         this.prescribedQuantity = prescribedQuantity;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }
