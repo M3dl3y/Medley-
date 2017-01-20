@@ -67,6 +67,7 @@ public class Prescription {
         dosageInterval = prescription.dosageInterval;
         daySupply = prescription.daySupply;
         prescribedQuantity = prescription.prescribedQuantity;
+        
 
     }
 

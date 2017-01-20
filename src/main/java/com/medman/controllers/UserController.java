@@ -63,6 +63,7 @@ public class UserController extends BaseController {
             model.addAttribute("prescription", prescription);
             return "shared/dashboard";
         }
+        prescription.setUser(loggedInUser());
         prescriptonDAO.save(prescription);
         return "shared/dashboard";
     }
