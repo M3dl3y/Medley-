@@ -1,4 +1,4 @@
-package com.medman.repositories;
-
-public interface MessageRepository {
-}
+//package com.medman.repositories;
+//
+//public interface MessageRepository {
+//}

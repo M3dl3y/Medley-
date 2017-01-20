@@ -1,4 +1,8 @@
+DROP DATABASE medly_db;
+CREATE DATABASE medly_db;
 
-INSERT INTO medly_db.roles (role) VALUES ('ROLE_ADMIN');
-INSERT INTO medly_db.roles (role) VALUES ('ROLE_DOCTOR');
-INSERT INTO medly_db.roles (role) VALUES ('ROLE_PATIENT');
+use medly_db;
+
+INSERT INTO medly_db.roles (role) VALUES ('Admin');
+INSERT INTO medly_db.roles (role) VALUES ('Doctor');
+INSERT INTO medly_db.roles (role) VALUES ('Patient');
