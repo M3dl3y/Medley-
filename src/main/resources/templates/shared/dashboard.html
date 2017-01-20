@@ -177,7 +177,7 @@
             </div>
             <div class="modal-body">
 
-                <form id="addAppointmentForm"> <!--th:action="@{/addAppointment}" method="post" th:object="@{appointments}"-->
+                <form id="addAppointmentForm" th:action="@{/addAppointment}" method="post" th:object="${appointments}"> <!--th:action="@{/addAppointment}" method="post" th:object="@{appointments}"-->
                     <div class="form-group">
                         <label for="appointmentName">Name this appointment:</label>
                         <input type="text" class="form-control" id="appointmentName"  /><!--th:field="*{appointmentName}"-->
@@ -246,7 +246,7 @@
 <div sec:authorize="hasRole('DOCTOR')">
 
     <!--Alerts Card -->
-    <div id="doctorAlertsCard" class="col-md-4 card">
+    <div id="doctorAlertsCard" class="col-md-4 card col-md-offset-2">
 
         <div class="panel panel-default bootcards-summary">
             <div class="panel-heading">

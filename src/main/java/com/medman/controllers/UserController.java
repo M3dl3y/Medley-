@@ -1,9 +1,6 @@
 package com.medman.controllers;
 
-import com.medman.models.Role;
-import com.medman.models.Roles;
-import com.medman.models.User;
-import com.medman.models.Users;
+import com.medman.models.*;
 import com.medman.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +30,10 @@ public class UserController extends BaseController {
 
     @Autowired
     Roles roles;
+
+    @Autowired
+    Appointments appointmentsDao;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -115,6 +116,21 @@ public class UserController extends BaseController {
 
     @GetMapping("/login?logout")
     public String logout(){return "redirect:/";}
+
+    @PostMapping("/addAppointment")
+    public String addAppointment(@Valid AppointmentTime appointmentTime, Errors validation, Model model){
+        if(validation.hasErrors()){
+            model.addAttribute("errors", validation);
+            model.addAttribute("appointments", appointmentTime);
+            return "shared/dashboard";
+        }
+
+        appointmentTime.setUser(loggedInUser());
+        appointmentsDao.save(appointmentTime);
+        return "redirect:shared/dashboard";
+
+
+    }
 
 
 

@@ -1,6 +1,7 @@
 package com.medman.models;
 
 import com.medman.utils.LocalDateTimePersistenceConverter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class Prescription {
     private Long Id;
 
     @Column(nullable = false)
-    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime prescribedDate;
 
 //    @ManyToMany(mappedBy = "prescriptions")
