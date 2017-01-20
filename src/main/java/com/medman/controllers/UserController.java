@@ -4,7 +4,6 @@ import com.medman.models.Role;
 import com.medman.models.Roles;
 import com.medman.models.User;
 import com.medman.models.Users;
-import com.medman.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
