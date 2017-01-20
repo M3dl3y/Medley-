@@ -57,8 +57,8 @@
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/dashboard}">Dashboard</a></li>
                         <li role="separator" class="divider"></li>
-                        <li sec:authorize="hasRole('Patient')"><a th:href="@{/my_doctors}">Doctors</a></li>
-                        <li sec:authorize="hasRole('Doctor')"><a th:href="@{/my_doctors}" >Patients</a></li>
+                        <li sec:authorize="hasRole('PATIENT')"><a th:href="@{/my_doctors}">Doctors</a></li>
+                        <li sec:authorize="hasRole('DOCTOR')"><a th:href="@{/my_doctors}" >Patients</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a th:href="@{/messages}">Messages</a></li>
                         <li role="separator" class="divider"></li>
