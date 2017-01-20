@@ -1,7 +1,6 @@
 package com.medman.models;
 
 import com.medman.utils.LocalDateTimePersistenceConverter;
-import org.springframework.security.access.method.P;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,6 +16,7 @@ public class Prescription {
     @Column(nullable = false)
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime prescribedDate;
+
 
     @ManyToOne
     private Medication medication;
@@ -64,6 +64,15 @@ public class Prescription {
         prescribedQuantity = prescription.prescribedQuantity;
 
     }
+
+    public Medication getMedication() {
+        return medication;
+    }
+
+    public void setMedication(Medication medication) {
+        this.medication = medication;
+    }
+
 
     public Long getId() {
         return Id;
@@ -152,4 +161,5 @@ public class Prescription {
     public void setPrescribedQuantity(Long prescribedQuantity) {
         this.prescribedQuantity = prescribedQuantity;
     }
+
 }

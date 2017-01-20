@@ -19,10 +19,10 @@ public class Medication {
     private String genericName;
 
 
-    @OneToMany(mappedBy = "medications")
+    @OneToMany(mappedBy = "medication")
     private List<Prescription> prescriptions;
 
-    public Medication(){};
+    public Medication(){}
 
     public Medication(Medication medication){
         Id = medication.Id;
