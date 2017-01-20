@@ -60,7 +60,7 @@ public class UserController extends BaseController {
             return "/dashboard";
         }
         medsDAO.save(med);
-        return "/dashboard";
+        return "shared/dashboard";
     }
 
     @GetMapping("/my_doctors")

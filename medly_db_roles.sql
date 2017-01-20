@@ -1,3 +1,4 @@
-INSERT INTO medly_db.roles (role) VALUES ('Admin');
-INSERT INTO medly_db.roles (role) VALUES ('Doctor');
-INSERT INTO medly_db.roles (role) VALUES ('Patient');
+
+INSERT INTO medly_db.roles (role) VALUES ('ROLE_ADMIN');
+INSERT INTO medly_db.roles (role) VALUES ('ROLE_DOCTOR');
+INSERT INTO medly_db.roles (role) VALUES ('ROLE_PATIENT');
