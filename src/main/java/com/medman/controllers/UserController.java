@@ -2,6 +2,7 @@ package com.medman.controllers;
 
 import com.medman.models.*;
 import com.medman.repositories.MedicationRepository;
+import com.medman.repositories.PrescriptionRepository;
 import com.medman.repositories.RoleRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,25 +42,30 @@ public class UserController extends BaseController {
     @Autowired
     MedicationRepository medsDAO;
 
+    @Autowired
+    PrescriptionRepository prescriptonDAO;
+
+
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         model.addAttribute("user", loggedInUser());
         model.addAttribute("medication", new Medication()); // when med plus button is used to add med
+        model.addAttribute("prescription", new Prescription());
         return "shared/dashboard";
     }
 
-    @PostMapping("/dashboard")
+    @PostMapping("/addPrescription")
     public String addMedication(
-            @Valid Medication med,
+            @Valid Prescription prescription,
             Errors validation,
             Model model
     ) {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
-            model.addAttribute("medication", med);
-            return "/dashboard";
+            model.addAttribute("prescription", prescription);
+            return "shared/dashboard";
         }
-        medsDAO.save(med);
+        prescriptonDAO.save(prescription);
         return "shared/dashboard";
     }
 
