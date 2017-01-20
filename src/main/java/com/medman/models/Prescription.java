@@ -17,8 +17,8 @@ public class Prescription {
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime prescribedDate;
 
-//    @ManyToMany(mappedBy = "prescriptions")
-//    private Long medicationId;
+    @ManyToOne
+    private Medication medication;
 
     @Column(nullable = false)
     private String strength;
