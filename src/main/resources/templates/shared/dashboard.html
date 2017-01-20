@@ -9,10 +9,12 @@
 <div th:replace="/fragments/navbar :: navbar"></div>
 
 <h1 class="text-center spaceBelow" id="greeting"></h1>
+Roles: <span sec:authentication="principal.authorities"></span>
+
 
 
 <!--If patient is logged in -->
-<div sec:authorize="hasRole('Patient')">
+<div sec:authorize="hasRole('PATIENT')">
 
     <!--Alerts Card -->
     <div id="alertsCard" class="col-md-4 card">
@@ -242,7 +244,7 @@
 
 <!--If Doctor Logged in-->
 
-<div sec:authorize="hasRole('Doctor')">
+<div sec:authorize="hasRole('DOCTOR')">
 
     <!--Alerts Card -->
     <div id="doctorAlertsCard" class="col-md-4 card">
