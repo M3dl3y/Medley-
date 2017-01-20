@@ -1,6 +1,5 @@
 package com.medman.models;
 
-import com.medman.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,9 +8,7 @@ import org.springframework.util.StringUtils;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Nick on 1/10/17.
- */
+
 public class UserWithRoles extends User implements UserDetails {
     private List<String> userRoles;
 

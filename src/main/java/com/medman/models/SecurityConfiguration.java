@@ -53,10 +53,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("-----------------------------");
-        System.out.println("configuring authentication!");
-        System.out.println(userDetails.getClass());
-        System.out.println("-----------------------------");
         auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder());
     }
 

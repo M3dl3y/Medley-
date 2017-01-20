@@ -15,67 +15,67 @@
 
 
 
-    <form id="registerForm" class="col-md-7 col-md-offset-1"> <!--th:action="" method="post" th:object=""-->
+    <form id="registerForm" class="col-md-7 col-md-offset-1" th:action="@{/edit}" method="post" th:object="${user}">
         <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" id="firstName" placeholder="First Name"  />
-            <!--<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>-->
+            <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}"  />
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
         </div>
         <div class="form-group">
             <label for="lastName">Last Name:</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Last Name"  />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name" th:field="*{lastName}" />
+            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
         </div>
         <div class="form-group">
             <label for="dateOfBirth">Date of Birth:</label>
-            <input type="date" class="form-control" id="dateOfBirth" />
-            <!--<p th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>-->
+            <input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}" />
+            <p th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
         </div>
         <div class="form-group">
             <label for="phoneNumber">Phone Number:</label>
-            <input type="text" class="form-control" id="phoneNumber"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}"  />
+            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
         </div>
         <div class="form-group">
             <label for="streetAddress">Street Address:</label>
-            <input type="text" class="form-control" id="streetAddress" placeholder="100 Awesome Ave"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="text" class="form-control" id="streetAddress" placeholder="100 Awesome Ave" th:field="*{streetAddress}"  />
+            <p th:if="${#fields.hasErrors('streetAddress')}" th:errors="*{streetAddress}"></p>
         </div>
         <div class="form-group">
             <label for="city">City:</label>
-            <input type="text" class="form-control" id="city" placeholder="San Antonio"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="text" class="form-control" id="city" placeholder="San Antonio" th:field="*{city}"  />
+            <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
         </div>
         <div class="form-group">
             <label for="state">State:</label>
-            <input type="text" class="form-control" id="state"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="text" class="form-control" id="state"  th:field="*{state}" />
+            <p th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></p>
         </div>
         <div class="form-group">
             <label for="zipCode">Zip Code:</label>
-            <input type="text" class="form-control" id="zipCode"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="text" class="form-control" id="zipCode" th:field="*{zipCode}" />
+            <p th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></p>
         </div>
         <div class="form-group">
             <label for="username">Desired Username:</label>
-            <input type="text" class="form-control" id="username"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="text" class="form-control" id="username" th:field="*{username}"  />
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="password" class="form-control" id="password" th:field="*{password}"  />
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
+            <input type="email" class="form-control" id="email" th:field="*{email}"  />
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
         </div>
-        <div class="form-group">
-            <label for="profileImgUrl">Profile Picture:</label>
-            <input type="file" class="form-control" id="profileImgUrl"   />
-            <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
-        </div>
+        <!--<div class="form-group">-->
+            <!--<label for="profileImgUrl">Profile Picture:</label>-->
+            <!--<input type="file" class="form-control" id="profileImgUrl" th:field="*{profileImgUrl}"  />-->
+            <!--<p th:if="${#fields.hasErrors('profileImgUrl')}" th:errors="*{profileImgUrl}"></p>-->
+        <!--</div>-->
         <div class="form-group">
             <label for="npiNumber">NPI</label>
             <input type="text" class="form-control" id="npiNumber" disabled="disabled"/>

@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by Nick on 1/19/17.
- */
+
 @Service("customUserDetailsService")
 public class UserDetailsLoader implements UserDetailsService {
     private final Users users;

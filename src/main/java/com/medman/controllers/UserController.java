@@ -4,7 +4,6 @@ import com.medman.models.Role;
 import com.medman.models.Roles;
 import com.medman.models.User;
 import com.medman.models.Users;
-import com.medman.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -59,7 +58,11 @@ public class UserController extends BaseController {
 
     @GetMapping("/edit")
     public String editPage(Model model) {
-        model.addAttribute("user", new User()); // need to call logged in User
+        User user = usersDao.findOne(loggedInUser().getId());
+        if(user.getId() != loggedInUser().getId()){
+            return "/";
+        }
+        model.addAttribute("user", user); // need to call logged in User
         return "shared/profile"; // only a logged in user can go to user/edit
 
     }
@@ -73,13 +76,25 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
-            return "posts/edit";
+            return "shared/profile";
         }
 
-        //User existingUser = (use autowired dao to get this)
-        // use dao to get current existingUser
-        //        existingPost.setTitle(editedPost.getTitle()); (template code)
-        return "redirect:/user/dashboard";
+        User newUser = usersDao.findByUsername(loggedInUser().getUsername());
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setDateOfBirth(user.getDateOfBirth());
+        newUser.setPhoneNumber(user.getPhoneNumber());
+        newUser.setStreetAddress(user.getStreetAddress());
+        newUser.setCity(user.getCity());
+        newUser.setState(user.getState());
+        newUser.setZipCode(user.getZipCode());
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setEmail(user.getEmail());
+
+
+        usersDao.save(newUser);
+        return "shared/dashboard";
 
     }
 
