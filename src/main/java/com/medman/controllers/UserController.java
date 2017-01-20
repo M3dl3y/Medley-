@@ -1,11 +1,12 @@
 package com.medman.controllers;
 
-import com.medman.models.Role;
-import com.medman.models.Roles;
-import com.medman.models.User;
-import com.medman.models.Users;
+import com.medman.models.*;
+import com.medman.repositories.MedicationRepository;
 import com.medman.repositories.RoleRepository;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,11 +38,30 @@ public class UserController extends BaseController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    MedicationRepository medsDAO;
+
     @GetMapping("/dashboard")
     public String showDash(Model model) {
-        // need to add objects for alerts, meds, and dates, so 3 model.addAttribute?
+//        model.addAttribute("user", loggedInUser());
+//        model.addAttribute("medication", new Medication()); // when med plus button is used to add med
         return "shared/dashboard";
     }
+
+//    @PostMapping("/dashboard")
+//    public String addMedication(
+//            @Valid Medication med,
+//            Errors validation,
+//            Model model
+//    ) {
+//        if (validation.hasErrors()) {
+//            model.addAttribute("errors", validation);
+//            model.addAttribute("medication", med);
+//            return "/dashboard";
+//        }
+//        medsDAO.save(med);
+//        return "/dashboard";
+//    }
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
@@ -84,8 +104,8 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid User user, Errors validation, Model model){
-        if(validation.hasErrors()){
+    public String registerUser(@Valid User user, Errors validation, Model model) {
+        if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
             return "register";
@@ -98,8 +118,9 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/login?logout")
-    public String logout(){return "redirect:/";}
-
+    public String logout() {
+        return "redirect:/";
+    }
 
 
 }

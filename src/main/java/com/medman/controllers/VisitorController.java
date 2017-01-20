@@ -42,10 +42,10 @@ public class VisitorController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
-            return "user/create";
+            return "/create";
         }
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
         //usersDao.save(user);
-        return null; // redirect to splash page
+        return "/dashboard"; // redirect to splash page
     }
 }
