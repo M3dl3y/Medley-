@@ -104,6 +104,9 @@ public class User {
     @OneToOne
     private Role role = new Role(3);
 
+    @OneToMany(mappedBy = "users")
+    private List<Prescription> prescriptions;
+
     public User(){}
 
     public User(User user) {

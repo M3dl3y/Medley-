@@ -19,8 +19,8 @@ public class Medication {
     private String genericName;
 
 
-    @OneToMany(mappedBy = "medication")
-    private List<Prescription> prescriptions;
+//    @OneToMany(mappedBy = "medication")
+//    private List<Prescription> prescriptions;
 
     public Medication(){}
 
@@ -28,7 +28,7 @@ public class Medication {
         Id = medication.Id;
         brandName = medication.brandName;
         genericName = medication.genericName;
-        prescriptions = new ArrayList<>();
+//        prescriptions = new ArrayList<>();
     }
 
     public Long getId() {
@@ -55,12 +55,12 @@ public class Medication {
         this.genericName = genericName;
     }
 
-    public List<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void setPrescriptions(List<Prescription> prescriptions) {
-        this.prescriptions = prescriptions;
-    }
+//    public List<Prescription> getPrescriptions() {
+//        return prescriptions;
+//    }
+//
+//    public void setPrescriptions(List<Prescription> prescriptions) {
+//        this.prescriptions = prescriptions;
+//    }
 
 }

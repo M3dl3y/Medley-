@@ -19,9 +19,19 @@ public class Prescription {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date prescribedDate;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @ManyToOne
-    private Medication medication;
+    private User user;
+
+//    @ManyToOne
+//    private Medication medication;
 
     @Column(nullable = false)
     private String strength;
@@ -67,13 +77,13 @@ public class Prescription {
 
     }
 
-    public Medication getMedication() {
-        return medication;
-    }
-
-    public void setMedication(Medication medication) {
-        this.medication = medication;
-    }
+//    public Medication getMedication() {
+//        return medication;
+//    }
+//
+//    public void setMedication(Medication medication) {
+//        this.medication = medication;
+//    }
 
 
     public Long getId() {
