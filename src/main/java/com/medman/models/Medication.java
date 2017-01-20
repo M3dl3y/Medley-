@@ -1,6 +1,7 @@
 package com.medman.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,15 @@ public class Medication {
 
     @OneToMany(mappedBy = "medications")
     private List<Prescription> prescriptions;
+
+    public Medication(){};
+
+    public Medication(Medication medication){
+        Id = medication.Id;
+        brandName = medication.brandName;
+        genericName = medication.genericName;
+        prescriptions = new ArrayList<>();
+    }
 
     public Long getId() {
         return Id;
