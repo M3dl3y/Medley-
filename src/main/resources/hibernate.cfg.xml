@@ -36,7 +36,7 @@
         <!--<mapping class="com.medman.models.Prescription"/>-->
         <!--<mapping class="com.medman.models.NotificationSetting"/>-->
         <!--<mapping class="com.medman.models.Message"/>-->
-        <!--<mapping class="com.medman.models.Medication"/>-->
+        <mapping class="com.medman.models.Medication"/>
         <!--<mapping class="com.medman.models.AppointmentTime"/>-->
         <!-- ... -->
     </session-factory>

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "prescriptions")
@@ -16,10 +17,11 @@ public class Prescription {
 
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime prescribedDate;
+    private Date prescribedDate;
 
-//    @ManyToMany(mappedBy = "prescriptions")
-//    private Long medicationId;
+
+    @ManyToOne
+    private Medication medication;
 
     @Column(nullable = false)
     private String strength;
@@ -27,30 +29,52 @@ public class Prescription {
     @Column(nullable = false)
     private String sig;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long dosageAmount;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String dosageForm;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String dosageRoute;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long dosageFrequency;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String dosageInterval;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long daySupply;
 
     @Column(nullable = false)
     private Long prescribedQuantity;
 
-//    @Column
-//    @OneToMany(mappedBy = "prescriptions")
-//    private Long userId;
+    public Prescription (){}
+
+    public Prescription (Prescription prescription){
+        Id = prescription.Id;
+        prescribedDate = prescription.prescribedDate;
+        strength = prescription.strength;
+        sig = prescription.sig;
+        dosageAmount = prescription.dosageAmount;
+        dosageForm = prescription.dosageForm;
+        dosageRoute = prescription.dosageRoute;
+        dosageFrequency = prescription.dosageFrequency;
+        dosageInterval = prescription.dosageInterval;
+        daySupply = prescription.daySupply;
+        prescribedQuantity = prescription.prescribedQuantity;
+
+    }
+
+    public Medication getMedication() {
+        return medication;
+    }
+
+    public void setMedication(Medication medication) {
+        this.medication = medication;
+    }
+
 
     public Long getId() {
         return Id;
@@ -60,21 +84,13 @@ public class Prescription {
         Id = id;
     }
 
-    public LocalDateTime getPrescribedDate() {
+    public Date getPrescribedDate() {
         return prescribedDate;
     }
 
-    public void setPrescribedDate(LocalDateTime prescribedDate) {
+    public void setPrescribedDate(Date prescribedDate) {
         this.prescribedDate = prescribedDate;
     }
-
-//    public Long getMedicationId() {
-//        return medicationId;
-//    }
-//
-//    public void setMedicationId(Long medicationId) {
-//        this.medicationId = medicationId;
-//    }
 
     public String getStrength() {
         return strength;
@@ -148,11 +164,4 @@ public class Prescription {
         this.prescribedQuantity = prescribedQuantity;
     }
 
-//    public Long getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Long userId) {
-//        this.userId = userId;
-//    }
 }
