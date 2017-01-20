@@ -42,22 +42,23 @@
 
 
             <!--Login link. Only shows to users not logged in-->
-            <!--<div sec:authorize=" !isAuthenticated() ">-->
-                <ul class="nav navbar-nav navbar-right"><!--sec:authorize="!isAuthenticated()"-->
+            <div sec:authorize="!isAuthenticated()">
+                <ul class="nav navbar-nav navbar-right">
                     <li><a th:href="@{/login}">Login</a></li>
                 </ul>
-            <!--</div>-->
+            </div>
 
 
 
-            <ul class="nav navbar-nav navbar-right"><!--sec:authorize="isAuthenticated()"-->
+            <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-smile-o" aria-hidden="true"></i>   User</a> <!--sec:authentication="principal.username"-->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" sec:authentication="principal.firstName"><i class="fa fa-smile-o" aria-hidden="true"></i>   User</a>
 
-                    <ul class="dropdown-menu"><!--sec:authorize"hasRole('Patient')"-->
+                    <ul class="dropdown-menu">
                         <li><a th:href="@{/dashboard}">Dashboard</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a th:href="@{/my_doctors}">Doctors</a></li>
+                        <li sec:authorize="hasRole('Patient')"><a th:href="@{/my_doctors}">Doctors</a></li>
+                        <li sec:authorize="hasRole('Doctor')"><a th:href="@{/my_doctors}" >Patients</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a th:href="@{/messages}">Messages</a></li>
                         <li role="separator" class="divider"></li>
@@ -66,17 +67,6 @@
                         <li><a th:href="@{/logout}">Logout</a></li>
                     </ul>
 
-                    <ul class="dropdown-menu"><!--sec:authorize"hasRole('Doctor')"-->
-                        <li><a th:href="@{/dashboard}">Dashboard</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a th:href="@{/my_doctors}">Patients</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a th:href="@{/messages}">Messages</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a th:href="@{/edit}">Settings</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a th:href="@{/logout}">Logout</a></li>
-                    </ul>
                 </li>
             </ul>
 

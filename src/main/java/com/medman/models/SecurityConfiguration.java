@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 
 @Configuration
 @EnableWebSecurity
+@ComponentScan(basePackageClasses = UserWithRoles.class)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -33,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/profile") // user's home page, it can be any URL
+                .defaultSuccessUrl("/dashboard") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
                 .and()
                 .authorizeRequests()
@@ -44,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout") // append a query string value
                 .and()
                 .authorizeRequests()
-                .antMatchers("/post/create ", "/profile" , "/posts/{id}/edit" , "/posts/{id}/delete", "/fileupload") // only authenticated users can create ads
+                .antMatchers("/dashboard", "/messages" , "/edit" , "/my_doctors") // only authenticated users can create ads
                 .authenticated()
 
         ;
@@ -52,6 +53,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        System.out.println("-----------------------------");
+        System.out.println("configuring authentication!");
+        System.out.println(userDetails.getClass());
+        System.out.println("-----------------------------");
         auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder());
     }
 
