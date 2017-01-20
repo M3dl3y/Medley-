@@ -33,19 +33,5 @@ public class VisitorController {
         return "register"; // return to user register page.
     }
 
-    @PostMapping("/create")
-    public String createUser(
-            @Valid User user,
-            Errors validation,
-            Model model
-    ) {
-        if (validation.hasErrors()) {
-            model.addAttribute("errors", validation);
-            model.addAttribute("user", user);
-            return "/create";
-        }
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
-        //usersDao.save(user);
-        return "/dashboard"; // redirect to splash page
-    }
+
 }

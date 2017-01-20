@@ -43,25 +43,25 @@ public class UserController extends BaseController {
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
-//        model.addAttribute("user", loggedInUser());
-//        model.addAttribute("medication", new Medication()); // when med plus button is used to add med
+        model.addAttribute("user", loggedInUser());
+        model.addAttribute("medication", new Medication()); // when med plus button is used to add med
         return "shared/dashboard";
     }
 
-//    @PostMapping("/dashboard")
-//    public String addMedication(
-//            @Valid Medication med,
-//            Errors validation,
-//            Model model
-//    ) {
-//        if (validation.hasErrors()) {
-//            model.addAttribute("errors", validation);
-//            model.addAttribute("medication", med);
-//            return "/dashboard";
-//        }
-//        medsDAO.save(med);
-//        return "/dashboard";
-//    }
+    @PostMapping("/dashboard")
+    public String addMedication(
+            @Valid Medication med,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("medication", med);
+            return "/dashboard";
+        }
+        medsDAO.save(med);
+        return "/dashboard";
+    }
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
@@ -104,13 +104,16 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid User user, Errors validation, Model model) {
+    public String registerUser(
+            @Valid User user,
+            Errors validation,
+            Model model
+    ) {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
             return "register";
         }
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
         return "redirect:/about";
