@@ -1,24 +1,26 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
+import com.medman.repositories.MedicationRepository;
 import com.medman.repositories.PrescriptionRepository;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by jessedavila on 1/17/17.
@@ -41,8 +43,8 @@ public class UserController extends BaseController {
     @Autowired
     PrescriptionRepository prescriptionsDao;
 
-//    @Autowired
-//    MedicationRepository medsDAO;
+    @Autowired
+    MedicationRepository medsDAO;
 
     @Autowired
     Appointments appointmentsDao;
@@ -74,6 +76,23 @@ public class UserController extends BaseController {
         return "redirect:/dashboard";
 
         
+    }
+    @GetMapping("/posts")
+    public String showAllPrescriptions(Model model){
+        List<Prescription> prescriptions = new ArrayList<>((Collection) prescriptionsDao.findAll());
+
+        Collections.reverse(prescriptions);
+        model.addAttribute("cuurentUser", loggedInUser());
+        model.addAttribute("prescriptions", prescriptions);
+        return "shared/dashboard";
+    }
+
+
+    @GetMapping("/myPrescriptions")
+    public String showSinglePrescription(Model model, @PathVariable Long id) {
+        model.addAttribute("meds", medsDAO.findOne(id));
+
+        return "shared/dashboard";
     }
 
     @GetMapping("/my_doctors")
