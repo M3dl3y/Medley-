@@ -60,8 +60,9 @@
                             <th>MEDICATION</th>
                             <th>Prescribed Date</th>
                         </tr>
-                        <tr th:each="med : ${meds}">
-                            <td th:text="${med.}"
+                        <tr th:each="prescription : ${prescriptions}">
+                            <td th:text="${prescription.id}"></td>
+                            <td th:text="${prescription.sig}"></td>
                         </tr>
                     </table>
 

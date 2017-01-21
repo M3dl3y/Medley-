@@ -2,8 +2,8 @@
 //
 //import com.medman.models.Role;
 //import com.medman.models.User;
-//import com.medman.repositories.RoleRepository;
-//import com.medman.repositories.UserRepository;
+//import com.medman.models.RoleRepository;
+//import com.medman.models.UserWithRoles.UserRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.authentication.AnonymousAuthenticationToken;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

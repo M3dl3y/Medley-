@@ -1,8 +1,6 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
-import com.medman.repositories.MedicationRepository;
-import com.medman.repositories.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,10 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Collection;
 import java.util.Collections;
@@ -41,10 +36,10 @@ public class UserController extends BaseController {
 
 
     @Autowired
-    PrescriptionRepository prescriptionsDao;
+    UserWithRoles.PrescriptionRepository prescriptionsDao;
 
     @Autowired
-    MedicationRepository medsDAO;
+    UserWithRoles.MedicationRepository medsDAO;
 
     @Autowired
     Appointments appointmentsDao;
@@ -82,7 +77,7 @@ public class UserController extends BaseController {
         List<Prescription> prescriptions = new ArrayList<>((Collection) prescriptionsDao.findAll());
 
         Collections.reverse(prescriptions);
-        model.addAttribute("cuurentUser", loggedInUser());
+        model.addAttribute("currentUser", loggedInUser());
         model.addAttribute("prescriptions", prescriptions);
         return "shared/dashboard";
     }
@@ -90,7 +85,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/myPrescriptions")
     public String showSinglePrescription(Model model, @PathVariable Long id) {
-        model.addAttribute("meds", medsDAO.findOne(id));
+        model.addAttribute("prescription", prescriptionsDao.findOne(id));
 
         return "shared/dashboard";
     }
