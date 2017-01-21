@@ -38,7 +38,7 @@ public class UserController extends BaseController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    PrescriptionRepository prescriptonDAO;
+    PrescriptionRepository prescriptionsDao;
 
     @Autowired
     Appointments appointmentsDao;
@@ -47,7 +47,6 @@ public class UserController extends BaseController {
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         model.addAttribute("user", loggedInUser());
-        model.addAttribute("medication", new Medication()); // when med plus button is used to add med
         model.addAttribute("prescription", new Prescription());
         model.addAttribute("appointment", new AppointmentTime());
         return "shared/dashboard";
@@ -64,8 +63,10 @@ public class UserController extends BaseController {
             model.addAttribute("prescription", prescription);
             return "shared/dashboard";
         }
-        prescriptonDAO.save(prescription);
-        return "shared/dashboard";
+        prescription.setUser(loggedInUser());
+        prescriptionsDao.save(prescription);
+        model.addAttribute("prescription", new Prescription());
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/my_doctors")
@@ -140,7 +141,7 @@ public class UserController extends BaseController {
 
         appointmentTime.setUser(loggedInUser());
         appointmentsDao.save(appointmentTime);
-
+        model.addAttribute("appointment", new AppointmentTime());
         return "redirect:/dashboard";
     }
 }
