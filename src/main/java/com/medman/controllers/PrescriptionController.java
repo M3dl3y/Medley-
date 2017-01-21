@@ -1,6 +1,7 @@
 package com.medman.controllers;
 
 import com.medman.models.Prescription;
+import com.medman.models.Users;
 import com.medman.services.
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,13 @@ import java.util.stream.Collectors;
 
 public class PrescriptionController {
 
-    private Prescription
+    @Autowired
+    private PrescriptionService prescriptionService;
+
+    @Autowired
+    private Users users;
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping("/prescriptions")
+    public String showPrescriptionList(@RequestParam())
 }
