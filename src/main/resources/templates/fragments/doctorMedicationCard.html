@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="/fragments/header :: header(${'Dashboard'})">
+</head>
+<body>
+
+<!--Medication Checklist Card-->
+<div id="doctorAddMedication" class="col-md-4 card" th:fragment="doctorMedicationCard">
+
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title text-center">Add a Medication</h3>
+        </div>
+        <div class="list-group">
+
+            <div class="list-group-item">
+                <h4 class="text-center">Add a medication for a pre-existing patient</h4>
+            </div>
+            <a class="list-group-item" data-toggle="modal" data-target="#addMedication" href="#">
+                <i class="fa fa-plus-circle fa-2x addMedicine" aria-hidden="true"></i>
+            </a>
+
+        </div>
+    </div>
+</div><!--contact card-->
+
+</body>
+</html>

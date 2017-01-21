@@ -13,300 +13,33 @@
 <!--If patient is logged in -->
 <div sec:authorize="hasRole('PATIENT')">
 
-    <!--Alerts Card -->
-    <div id="alertsCard" class="col-md-4 card">
+    <div th:replace="/fragments/alertsCard :: alertsCard"></div>
 
-        <div class="panel panel-default bootcards-summary">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">Alerts</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6">
-                        <a class="bootcards-summary-item" href="#">
-                            <i class="fa fa-exclamation-circle fa-3x alertIcon" aria-hidden="true"></i>
-                            <h4>Medication<span class="label label-danger">1</span></h4>
-                            <!--By assigning an id to the span, we can input a number here that will reflect how many medications need a patients attention-->
-                        </a>
-                    </div>
-                    <div class="col-xs-6 col-sm-6">
-                        <a class="bootcards-summary-item" th:href="@{/messages}">
-                            <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true"></i>
-                            <h4>Messages<span class="label label-info">3</span></h4>
-                            <!--By assigning an id to the span, we can input a number here that will reflect how many messages need a patients attention-->
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div th:replace="/fragments/medicationCard :: medicationCard"></div>
 
-    </div><!--contact card-->
+    <div th:replace="/fragments/medicationForms :: medicationForms"></div>
+
+    <div th:replace="/fragments/upcomingCard :: upcomingCard"></div>
+
+    <div th:replace="/fragments/appointmentForms :: appointmentForms"></div>
+
+    <div th:replace="/fragments/reminderForms :: reminderForms"></div>
+
+</div>
 
 
-    <!--Medication Checklist Card-->
-    <div id="medicationCard" class="col-md-4 card">
+<!--If Doctor Logged in-->
+<div sec:authorize="hasRole('DOCTOR')">
 
-        <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <h3 class="panel-title text-center">Medication</h3>
-            </div>
-            <div class="list-group">
+    <div th:replace="/fragments/doctorAlertsCard :: doctorAlertsCard"></div>
 
-
-                <!-- Same idea for displaying list of medications to patients when adding ne prescription-->
-                <!--<div  th:each="medications : ${medications}" th:object="${medications}">-->
-                    <!--<div class="list-group-item">-->
-                        <!--&lt;!&ndash;<div th:each="medications : ${medications}" th:object="${medications}">&ndash;&gt;-->
-                            <!--<input type="checkbox" /><h4  th:text="*{genericName}" >Medication</h4>-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <div  th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
-                    <div class="list-group-item checkbox">
-                        <label>
-                            <input type="checkbox" th:text="*{name}" />
-                        </label>
-                    </div>
-                </div>
+    <div th:replace="/fragments/doctorMedicationCard :: doctorMedicationCard"></div>
+</div>
 
 
-                    <!--This progress bar would be a visual representation of how the patient is progressing with their daily medications.-->
-                    <div class="list-group-item">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                <span class="sr-only">20% Complete</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Patient gets to add a medication here-->
-                    <a class="list-group-item" data-toggle="modal" data-target="#addMedication" href="#">
-                        <i class="fa fa-plus-circle fa-2x addMedicine" aria-hidden="true"></i>
-                    </a>
-
-                </div>
-            </div>
-
-        </div><!--contact card-->
-    <!--Add Medication Form/Modal-->
-    <div class="modal fade" id="addMedication" tabindex="-1" role="dialog" aria-labelledby="medicationCardLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="medicationCardLabel">Add a medication</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="addPrescriptionForm" th:action="@{/addPrescription}" method="post"
-                              th:object="${prescription}">
-                            <div class="form-group">
-                                <label for="prescriptionName">Name of Medication:</label>
-                                <input type="text" class="form-control" id="prescriptionName"
-                                       th:field="*{name}"/>
-                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label for="prescribedDate">Prescribed Date:</label>
-                                <input type="date" class="form-control" id="prescribedDate"
-                                       th:field="*{prescribedDate}"/>
-                                <p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label for="strength">Strength:</label>
-                                <input type="text" class="form-control" id="strength" th:field="*{strength}"/>
-                                <p th:if="${#fields.hasErrors('strength')}" th:errors="*{strength}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label for="sig">Directions:</label>
-                                <input type="text" class="form-control" id="sig"
-                                       placeholder="Take 1 tablet by mouth twice a day for thirty days."
-                                       th:field="*{sig}"/>
-                                <p th:if="${#fields.hasErrors('sig')}" th:errors="*{sig}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label for="daySupply">Day Supply:</label>
-                                <input type="text" class="form-control" id="daySupply" placeholder="30"
-                                       th:field="*{daySupply}"/>
-                                <p th:if="${#fields.hasErrors('daySupply')}" th:errors="*{daySupply}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label for="prescribedQuantity">Prescribed Quantity:</label>
-                                <input type="text" class="form-control" id="prescribedQuantity" th:field="*{prescribedQuantity}"/>
-                                <p th:if="${#fields.hasErrors('prescribedQuantity')}" th:errors="*{prescribedQuantity}"></p>
-                            </div>
-                        <button type="submit" class="btn btn-primary" id="submitFullMedicationForm">Save changes</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
-    <!--Upcoming Card-->
-    <div id="contactCard" class="col-md-4 card">
-
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
-                    <h3 class="panel-title text-center" id="todaysDate">Date</h3>
-                </div>
-                <div class="list-group">
-
-                    <a class="list-group-item" data-toggle="modal" data-target="#addAppointment" href="#">
-                        <h4 class="list-group-item-heading"><i class="fa fa-calendar-o appointmentIcon"
-                                                               aria-hidden="true"></i>Appointments</h4>
-                    </a>
-
-                    <a class="list-group-item" data-toggle="modal" data-target="#addReminder" href="#">
-                        <h4 class="list-group-item-heading"><i class="fa fa-clock-o remindersIcon"
-                                                               aria-hidden="true"></i>Reminders</h4>
-                    </a>
-
-                </div>
-            </div>
-
-        </div><!--contact card-->
-    <!--Add Appointment-->
-    <div class="modal fade" id="addAppointment" tabindex="-1" role="dialog" aria-labelledby="addReminderLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="addAppointmentLabel">Add an appointment</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form id="addAppointmentForm" th:action="@{/addAppointment}" th:method="POST" th:object="${appointment}">
-                            <div class="form-group">
-                                <label for="name">Name this appointment:</label>
-                                <input type="text" class="form-control" id="name" th:field="*{name}" />
-                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label for="appointmentDate">Appointment date and time:</label>
-                                <input type="datetime-local" class="form-control" id="appointmentDate" th:field="*{appointmentDate}" />
-                                <p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label for="notes">Notes:</label>
-                                <input type="text" class="form-control" id="notes" th:field="*{notes}" />
-                                <p th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></p>
-                            </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="submit"  class="btn btn-primary">Save appointment</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!--Add Reminder-->
-    <div class="modal fade" id="addReminder" tabindex="-1" role="dialog" aria-labelledby="addAppointmentLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="addReminderLabel">Add a reminder</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form id="addReminderForm">
-                            <!--th:action="@{/addReminder}" method="post" th:object="@{reminders}"-->
-                            <div class="form-group">
-                                <label for="reminderName">Name this reminder:</label>
-                                <input type="text" class="form-control" id="reminderName"/>
-                                <!--th:field="*{reminderName}"-->
-                                <!--<p th:if="${#fields.hasErrors('reminderName')}" th:errors="*{reminderName}"></p>-->
-                            </div>
-                            <div class="form-group">
-                                <label for="reminderDate">Reminder date and time:</label>
-                                <input type="datetime-local" class="form-control" id="reminderDate"/>
-                                <!--th:field="*{reminderDate}"-->
-                                <!--<p th:if="${#fields.hasErrors('reminderDate')}" th:errors="*{reminderDate}"></p>-->
-                            </div>
-                            <div class="form-group">
-                                <label for="reminderNotes">Notes:</label>
-                                <input type="text" class="form-control" id="reminderNotes"/>
-                                <!--th:field="*{reminderNotes}"-->
-                                <!--<p th:if="${#fields.hasErrors('reminderNotes')}" th:errors="*{reminderNotes}"></p>-->
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Save reminder</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!--If Doctor Logged in-->
-
-    <div sec:authorize="hasRole('DOCTOR')">
-
-        <!--Alerts Card -->
-        <div id="doctorAlertsCard" class="col-md-4 card">
-
-            <div class="panel panel-default bootcards-summary">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-center">Alerts</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6">
-                            <a class="bootcards-summary-item" href="#">
-                                <i class="fa fa-users fa-3x patientLogo" aria-hidden="true"></i>
-                                <h4>Patients<span class="label label-danger">1</span></h4>
-                            </a>
-                        </div>
-                        <div class="col-xs-6 col-sm-6">
-                            <a class="bootcards-summary-item" th:href="@{/messages}">
-                                <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true"></i>
-                                <h4>Messages<span class="label label-info">3</span></h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div><!--contact card-->
-
-        <!--Medication Checklist Card-->
-        <div id="doctorAddMedication" class="col-md-4 card">
-
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
-                    <h3 class="panel-title text-center">Add a Medication</h3>
-                </div>
-                <div class="list-group">
-
-                    <div class="list-group-item">
-                        <h4 class="text-center">Add a medication for a pre-existing patient</h4>
-                    </div>
-                    <a class="list-group-item" data-toggle="modal" data-target="#addMedication" href="#">
-                        <i class="fa fa-plus-circle fa-2x addMedicine" aria-hidden="true"></i>
-                    </a>
-
-                </div>
-            </div>
-
-        </div><!--contact card-->
-    </div>
-
-
-    <div th:replace="/fragments/footer :: footer"></div>
-    <div th:replace="/fragments/javascript :: javascript"></div>
+<div th:replace="/fragments/footer :: footer"></div>
+<div th:replace="/fragments/javascript :: javascript"></div>
 </body>
 </html>

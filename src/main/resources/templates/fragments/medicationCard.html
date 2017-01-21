@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="/fragments/header :: header(${'Dashboard'})">
+</head>
+<body>
+
+<!--Medication Checklist Card-->
+<div id="medicationCard" class="col-md-4 card" th:fragment="medicationCard">
+
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title text-center">Medication</h3>
+        </div>
+        <div class="list-group">
+
+
+            <div  th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
+                <div class="list-group">
+                    <div class="list-group-item checkbox">
+                        <label>
+                            <input type="checkbox" th:text="*{name}" checked="checked" />
+                        </label>
+                        <a>
+                            <i class="fa fa-sort-desc pull-right fa-2x" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--This progress bar would be a visual representation of how the patient is progressing with their daily medications.-->
+            <div class="list-group-item">
+                <div class="progress">
+                    <div id="progressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">20% Complete</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--Patient gets to add a medication here-->
+            <a class="list-group-item" data-toggle="modal" data-target="#addMedication" href="#">
+                <i class="fa fa-plus-circle fa-2x addMedicine" aria-hidden="true"></i>
+            </a>
+
+        </div>
+    </div>
+
+</div><!--contact card-->
+
+
+</body>
+</html>
