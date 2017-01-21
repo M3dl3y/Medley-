@@ -33,7 +33,7 @@
         <mapping class="com.medman.models.Role"/>
 
         <!--<mapping class="com.medman.models.Reminder"/>-->
-        <!--<mapping class="com.medman.models.Prescription"/>-->
+        <mapping class="com.medman.models.Prescription"/>
         <!--<mapping class="com.medman.models.NotificationSetting"/>-->
         <!--<mapping class="com.medman.models.Message"/>-->
         <mapping class="com.medman.models.Medication"/>

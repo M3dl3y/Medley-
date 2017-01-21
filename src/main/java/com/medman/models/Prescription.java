@@ -19,9 +19,8 @@ public class Prescription {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date prescribedDate;
 
-
-    @ManyToOne
-    private Medication medication;
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false)
     private String strength;
@@ -53,6 +52,10 @@ public class Prescription {
     @ManyToOne
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "medication_id")
+    private Medication medication;
+
     public Prescription (){}
 
     public Prescription (Prescription prescription){
@@ -67,17 +70,8 @@ public class Prescription {
         dosageInterval = prescription.dosageInterval;
         daySupply = prescription.daySupply;
         prescribedQuantity = prescription.prescribedQuantity;
-        
-
     }
 
-    public Medication getMedication() {
-        return medication;
-    }
-
-    public void setMedication(Medication medication) {
-        this.medication = medication;
-    }
 
 
     public Long getId() {
@@ -168,10 +162,6 @@ public class Prescription {
         this.prescribedQuantity = prescribedQuantity;
     }
 
-
-
-
-
     public User getUser() {
         return user;
     }
@@ -181,5 +171,11 @@ public class Prescription {
     }
 
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

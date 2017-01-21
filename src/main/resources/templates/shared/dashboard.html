@@ -52,13 +52,23 @@
             </div>
             <div class="list-group">
 
-                This div would repeat for all medications the patient has.. runs through a list
-                <div th:object="${prescriptions}">
-                    <div class="list-group-item" th:text="*{prescribedDate}">
-                        <input type="checkbox"/><h4>Medication</h4>
-                         th:text="*{brandName}" Do we want to ask the patient if they prefer the brand or generic name of the medication to display?
+
+                <!-- Same idea for displaying list of medications to patients when adding ne prescription-->
+                <!--<div  th:each="medications : ${medications}" th:object="${medications}">-->
+                    <!--<div class="list-group-item">-->
+                        <!--&lt;!&ndash;<div th:each="medications : ${medications}" th:object="${medications}">&ndash;&gt;-->
+                            <!--<input type="checkbox" /><h4  th:text="*{genericName}" >Medication</h4>-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div  th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
+                    <div class="list-group-item checkbox">
+                        <label>
+                            <input type="checkbox" th:text="*{name}" />
+                        </label>
                     </div>
-                    </div>
+                </div>
 
 
                     <!--This progress bar would be a visual representation of how the patient is progressing with their daily medications.-->
@@ -80,8 +90,8 @@
             </div>
 
         </div><!--contact card-->
-        <!--Add Medication Form/Modal-->
-        <div class="modal fade" id="addMedication" tabindex="-1" role="dialog" aria-labelledby="medicationCardLabel">
+    <!--Add Medication Form/Modal-->
+    <div class="modal fade" id="addMedication" tabindex="-1" role="dialog" aria-labelledby="medicationCardLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -90,35 +100,14 @@
                         <h4 class="modal-title" id="medicationCardLabel">Add a medication</h4>
                     </div>
                     <div class="modal-body">
-
-                        <!--<form id="addMedicationForm" th:action="@{/addPrescription}" method="post" th:object="${prescription}">-->
-
-
-                            <!--<div class="form-group" sec:authorize="hasRole('Doctor')">-->
-                                <!--<label for="patientName">Patient:</label>-->
-                                <!--<select class="form-control" id="patientName">-->
-                                    <!--&lt;!&ndash; th:each"user : ${user}" th:object="{user}"  &ndash;&gt;-->
-
-                                    <!--<option>Name</option> &lt;!&ndash;th:text="*{firstName + ' ' + lastName}" &ndash;&gt;-->
-
-                                <!--</select>-->
-                            <!--</div>-->
-
-                            <!--<div class="form-group">-->
-                                <!--<label for="brandName">Brand Name:</label>-->
-                                <!--<input type="text" class="form-control" id="brandName" name="brandName"-->
-                                       <!--th:field="*{brandName}"/>-->
-                                <!--<p th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"></p>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="genericName">Generic Name:</label>-->
-                                <!--<input type="text" class="form-control" id="genericName" name="genericName"-->
-                                       <!--th:field="*{genericName}"/>-->
-                                <!--<p th:if="${#fields.hasErrors('genericName')}" th:errors="*{genericName}"></p>-->
-                            <!--</div>-->
-                        <!--</form>-->
                         <form id="addPrescriptionForm" th:action="@{/addPrescription}" method="post"
                               th:object="${prescription}">
+                            <div class="form-group">
+                                <label for="prescriptionName">Name of Medication:</label>
+                                <input type="text" class="form-control" id="prescriptionName"
+                                       th:field="*{name}"/>
+                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                            </div>
                             <div class="form-group">
                                 <label for="prescribedDate">Prescribed Date:</label>
                                 <input type="date" class="form-control" id="prescribedDate"
@@ -159,8 +148,8 @@
         </div>
 
 
-        <!--Upcoming Card-->
-        <div id="contactCard" class="col-md-4 card">
+    <!--Upcoming Card-->
+    <div id="contactCard" class="col-md-4 card">
 
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
@@ -182,8 +171,8 @@
             </div>
 
         </div><!--contact card-->
-        <!--Add Appointment-->
-        <div class="modal fade" id="addAppointment" tabindex="-1" role="dialog" aria-labelledby="addReminderLabel">
+    <!--Add Appointment-->
+    <div class="modal fade" id="addAppointment" tabindex="-1" role="dialog" aria-labelledby="addReminderLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -219,8 +208,8 @@
                 </div>
             </div>
         </div>
-        <!--Add Reminder-->
-        <div class="modal fade" id="addReminder" tabindex="-1" role="dialog" aria-labelledby="addAppointmentLabel">
+    <!--Add Reminder-->
+    <div class="modal fade" id="addReminder" tabindex="-1" role="dialog" aria-labelledby="addAppointmentLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
