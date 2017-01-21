@@ -168,6 +168,10 @@ public class Prescription {
         this.prescribedQuantity = prescribedQuantity;
     }
 
+
+
+
+
     public User getUser() {
         return user;
     }
@@ -175,5 +179,7 @@ public class Prescription {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 
 }
