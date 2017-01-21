@@ -1,5 +1,7 @@
 package com.medman.models;
 
+import com.sun.istack.internal.Nullable;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,10 +17,11 @@ public class AppointmentTime {
     private Long Id;
 
     @Column
+    @NotBlank(message = "Please name this appointment")
     private String name;
 
     @Column
-//    @DateTimeFormat()
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date appointmentDate;
 
     @Column
@@ -26,6 +29,17 @@ public class AppointmentTime {
 
     @ManyToOne
     private User user;
+
+    public AppointmentTime(){
+
+    }
+
+    public AppointmentTime(long Id, String name, Date appointmentDate, String notes){
+        this.Id = Id;
+        this.name = name;
+        this.appointmentDate = appointmentDate;
+        this.notes = notes;
+    }
 
 
     public String getName() {

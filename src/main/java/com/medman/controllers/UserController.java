@@ -1,9 +1,7 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
-import com.medman.repositories.MedicationRepository;
 import com.medman.repositories.PrescriptionRepository;
-import com.medman.repositories.RoleRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
@@ -40,10 +38,10 @@ public class UserController extends BaseController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    MedicationRepository medsDAO;
+    PrescriptionRepository prescriptonDAO;
 
     @Autowired
-    PrescriptionRepository prescriptonDAO;
+    Appointments appointmentsDao;
 
 
     @GetMapping("/dashboard")
@@ -51,6 +49,7 @@ public class UserController extends BaseController {
         model.addAttribute("user", loggedInUser());
         model.addAttribute("medication", new Medication()); // when med plus button is used to add med
         model.addAttribute("prescription", new Prescription());
+        model.addAttribute("appointment", new AppointmentTime());
         return "shared/dashboard";
     }
 
@@ -131,5 +130,20 @@ public class UserController extends BaseController {
         return "redirect:/";
     }
 
+    @PostMapping("/addAppointment")
+    public String addAppointment(@Valid AppointmentTime appointmentTime, Errors validation, Model model) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("appointment", appointmentTime);
+            return "shared/dashboard";
+        }
 
+        appointmentTime.setUser(loggedInUser());
+        appointmentsDao.save(appointmentTime);
+
+        return "redirect:/dashboard";
+    }
 }
+
+
+

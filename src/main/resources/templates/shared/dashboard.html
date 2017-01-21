@@ -9,7 +9,6 @@
 <div th:replace="/fragments/navbar :: navbar"></div>
 
 <h1 class="text-center spaceBelow" id="greeting"></h1>
-Roles: <span sec:authentication="principal.authorities"></span>
 
 
 <!--If patient is logged in -->
@@ -82,83 +81,83 @@ Roles: <span sec:authentication="principal.authorities"></span>
             </div>
 
         </div><!--contact card-->
-        <!--Add Medication Form/Modal-->
-        <div class="modal fade" id="addMedication" tabindex="-1" role="dialog" aria-labelledby="medicationCardLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="medicationCardLabel">Add a medication</h4>
-                    </div>
-                    <div class="modal-body">
+        <!--&lt;!&ndash;Add Medication Form/Modal&ndash;&gt;-->
+        <!--<div class="modal fade" id="addMedication" tabindex="-1" role="dialog" aria-labelledby="medicationCardLabel">-->
+            <!--<div class="modal-dialog" role="document">-->
+                <!--<div class="modal-content">-->
+                    <!--<div class="modal-header">-->
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
+                                <!--aria-hidden="true">&times;</span></button>-->
+                        <!--<h4 class="modal-title" id="medicationCardLabel">Add a medication</h4>-->
+                    <!--</div>-->
+                    <!--<div class="modal-body">-->
 
-                        <!--<form id="addMedicationForm" th:action="@{/dashboard}" method="post" th:object="${medication}">-->
+                        <!--&lt;!&ndash;<form id="addMedicationForm" th:action="@{/dashboard}" method="post" th:object="${medication}">&ndash;&gt;-->
 
 
-                            <!--<div class="form-group" sec:authorize="hasRole('Doctor')">-->
-                                <!--<label for="patientName">Patient:</label>-->
-                                <!--<select class="form-control" id="patientName">-->
-                                    <!--&lt;!&ndash; th:each"user : ${user}" th:object="{user}"  &ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="form-group" sec:authorize="hasRole('Doctor')">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="patientName">Patient:</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<select class="form-control" id="patientName">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;&lt;!&ndash; th:each"user : ${user}" th:object="{user}"  &ndash;&gt;&ndash;&gt;-->
 
-                                    <!--<option>Name</option> &lt;!&ndash;th:text="*{firstName + ' ' + lastName}" &ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option>Name</option> &lt;!&ndash;th:text="*{firstName + ' ' + lastName}" &ndash;&gt;&ndash;&gt;-->
 
-                                <!--</select>-->
-                            <!--</div>-->
+                                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
 
-                            <!--<div class="form-group">-->
-                                <!--<label for="brandName">Brand Name:</label>-->
-                                <!--<input type="text" class="form-control" id="brandName" name="brandName"-->
-                                       <!--th:field="*{brandName}"/>-->
-                                <!--<p th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"/>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="genericName">Generic Name:</label>-->
-                                <!--<input type="text" class="form-control" id="genericName" name="genericName"-->
-                                       <!--th:field="*{genericName}"/>-->
-                                <!--<p th:if="${#fields.hasErrors('genericName')}" th:errors="*{genericName}"/>-->
-                            <!--</div>-->
-                        <!--</form>-->
-                        <form id="addPrescriptionForm" th:action="@{/addPrescription}" method="post"
-                              th:object="${prescription}">
-                            <div class="form-group">
-                                <label for="prescribedDate">Prescribed Date:</label>
-                                <input type="date" class="form-control" id="prescribedDate"
-                                       th:field="*{prescribedDate}"/>
-                                <p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="strength">Strength:</label>
-                                <input type="text" class="form-control" id="strength" th:field="*{strength}"/>
-                                <p th:if="${#fields.hasErrors('strength')}" th:errors="*{strength}"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="sig">Directions:</label>
-                                <input type="text" class="form-control" id="sig"
-                                       placeholder="Take 1 tablet by mouth twice a day for thirty days."
-                                       th:field="*{sig}"/>
-                                <p th:if="${#fields.hasErrors('sig')}" th:errors="*{sig}"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="daySupply">Day Supply:</label>
-                                <input type="text" class="form-control" id="daySupply" placeholder="30"
-                                       th:field="*{daySupply}"/>
-                                <p th:if="${#fields.hasErrors('daySupply')}" th:errors="*{daySupply}"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="prescribedQuantity">Prescribed Quantity:</label>
-                                <input type="text" class="form-control" id="prescribedQuantity" th:field="*{prescribedQuantity}"/>
-                                <p th:if="${#fields.hasErrors('prescribedQuantity')}" th:errors="*{prescribedQuantity}"/>
-                            </div>
-                        <button type="submit" class="btn btn-primary" id="submitFullMedicationForm">Save changes</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="brandName">Brand Name:</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="text" class="form-control" id="brandName" name="brandName"&ndash;&gt;-->
+                                       <!--&lt;!&ndash;th:field="*{brandName}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="genericName">Generic Name:</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="text" class="form-control" id="genericName" name="genericName"&ndash;&gt;-->
+                                       <!--&lt;!&ndash;th:field="*{genericName}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p th:if="${#fields.hasErrors('genericName')}" th:errors="*{genericName}"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</form>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<form id="addPrescriptionForm" th:action="@{/addPrescription}" method="post"&ndash;&gt;-->
+                              <!--&lt;!&ndash;th:object="${prescription}">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="prescribedDate">Prescribed Date:</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="date" class="form-control" id="prescribedDate"&ndash;&gt;-->
+                                       <!--&lt;!&ndash;th:field="*{prescribedDate}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"></p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="strength">Strength:</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="text" class="form-control" id="strength" th:field="*{strength}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p th:if="${#fields.hasErrors('strength')}" th:errors="*{strength}"></p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="sig">Directions:</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="text" class="form-control" id="sig"&ndash;&gt;-->
+                                       <!--&lt;!&ndash;placeholder="Take 1 tablet by mouth twice a day for thirty days."&ndash;&gt;-->
+                                       <!--&lt;!&ndash;th:field="*{sig}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p th:if="${#fields.hasErrors('sig')}" th:errors="*{sig}"></p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="daySupply">Day Supply:</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="text" class="form-control" id="daySupply" placeholder="30"&ndash;&gt;-->
+                                       <!--&lt;!&ndash;th:field="*{daySupply}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p th:if="${#fields.hasErrors('daySupply')}" th:errors="*{daySupply}"></p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="prescribedQuantity">Prescribed Quantity:</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="text" class="form-control" id="prescribedQuantity" th:field="*{prescribedQuantity}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p th:if="${#fields.hasErrors('prescribedQuantity')}" th:errors="*{prescribedQuantity}"></p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button type="submit" class="btn btn-primary" id="submitFullMedicationForm">Save changes</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</form>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
         <!--Upcoming Card-->
@@ -195,30 +194,28 @@ Roles: <span sec:authentication="principal.authorities"></span>
                     </div>
                     <div class="modal-body">
 
-                        <form id="addAppointmentForm">
-                            <!--th:action="@{/addAppointment}" method="post" th:object="@{appointments}"-->
+                        <form id="addAppointmentForm" th:action="@{/addAppointment}" th:method="POST" th:object="${appointment}">
                             <div class="form-group">
-                                <label for="appointmentName">Name this appointment:</label>
-                                <input type="text" class="form-control" id="appointmentName"/>
-                                <!--th:field="*{appointmentName}"-->
-                                <!--<p th:if="${#fields.hasErrors('appointmentName')}" th:errors="*{appointmentName}"></p>-->
+                                <label for="name">Name this appointment:</label>
+                                <input type="text" class="form-control" id="name" th:field="*{name}" />
+                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                             </div>
                             <div class="form-group">
                                 <label for="appointmentDate">Appointment date and time:</label>
-                                <input type="datetime-local" class="form-control" id="appointmentDate"/>
-                                <!--th:field="*{appointmentDate}"-->
-                                <!--<p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>-->
+                                <input type="datetime-local" class="form-control" id="appointmentDate" th:field="*{appointmentDate}" />
+                                <p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>
                             </div>
                             <div class="form-group">
                                 <label for="notes">Notes:</label>
-                                <input type="text" class="form-control" id="notes"/><!--th:field="*{notes}"-->
-                                <!--<p th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></p>-->
+                                <input type="text" class="form-control" id="notes" th:field="*{notes}" />
+                                <p th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></p>
                             </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit"  class="btn btn-primary">Save appointment</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Save appointment</button>
+
                     </div>
                 </div>
             </div>
