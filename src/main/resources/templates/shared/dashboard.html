@@ -52,13 +52,13 @@
             </div>
             <div class="list-group">
 
-                <!--This div would repeat for all medications the patient has.. runs through a list-->
-                <!--<div th:each="medications :: ${medications}" th:object="${medication}">-->
-                    <!--<div class="list-group-item">-->
-                        <!--<input type="checkbox"/><h4>Medication</h4>-->
-                        <!-- th:text="*{brandName}" Do we want to ask the patient if they prefer the brand or generic name of the medication to display?-->
-                    <!--</div>-->
-                    <!--</div>-->
+                This div would repeat for all medications the patient has.. runs through a list
+                <div th:object="${prescriptions}">
+                    <div class="list-group-item" th:text="*{prescribedDate}">
+                        <input type="checkbox"/><h4>Medication</h4>
+                         th:text="*{brandName}" Do we want to ask the patient if they prefer the brand or generic name of the medication to display?
+                    </div>
+                    </div>
 
 
                     <!--This progress bar would be a visual representation of how the patient is progressing with their daily medications.-->

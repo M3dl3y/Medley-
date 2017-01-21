@@ -104,6 +104,10 @@ public class User {
     @OneToOne
     private Role role = new Role(3);
 
+
+    @OneToMany(mappedBy = "user")
+    private List<Prescription> prescriptions;
+
     public User(){}
 
     public User(User user) {
@@ -120,6 +124,7 @@ public class User {
         password = user.password;
         email = user.email;
         role = user.role;
+        prescriptions = user.prescriptions;
 
     }
 
@@ -267,6 +272,22 @@ public class User {
 
     public void setNpiNumber(String npiNumber) {
         this.npiNumber = npiNumber;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(List<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
     }
 
 

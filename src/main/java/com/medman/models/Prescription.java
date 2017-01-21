@@ -67,6 +67,7 @@ public class Prescription {
         dosageInterval = prescription.dosageInterval;
         daySupply = prescription.daySupply;
         prescribedQuantity = prescription.prescribedQuantity;
+        
 
     }
 
@@ -168,6 +169,9 @@ public class Prescription {
     }
 
 
+
+
+
     public User getUser() {
         return user;
     }
@@ -175,4 +179,7 @@ public class Prescription {
     public void setUser(User user) {
         this.user = user;
     }
+
+
+
 }

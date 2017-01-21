@@ -37,8 +37,12 @@ public class UserController extends BaseController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @Autowired
     PrescriptionRepository prescriptionsDao;
+
+//    @Autowired
+//    MedicationRepository medsDAO;
 
     @Autowired
     Appointments appointmentsDao;
@@ -64,9 +68,12 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
+
         prescriptionsDao.save(prescription);
         model.addAttribute("prescription", new Prescription());
         return "redirect:/dashboard";
+
+        
     }
 
     @GetMapping("/my_doctors")
