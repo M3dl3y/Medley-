@@ -5,3 +5,4 @@ $('#logout_link').click(function(){
     document.logout_form.submit();
     return false;
 }).show();
+

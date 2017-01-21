@@ -37,18 +37,22 @@ public class UserController extends BaseController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+    @Autowired
+    PrescriptionRepository prescriptionsDao;
+
 //    @Autowired
 //    MedicationRepository medsDAO;
 
     @Autowired
-    PrescriptionRepository prescriptonDAO;
+    Appointments appointmentsDao;
 
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
         model.addAttribute("user", loggedInUser());
-        model.addAttribute("medication", new Medication()); // when med plus button is used to add med
         model.addAttribute("prescription", new Prescription());
+        model.addAttribute("appointment", new AppointmentTime());
         return "shared/dashboard";
     }
 
@@ -64,8 +68,12 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
-        prescriptonDAO.save(prescription);
-        return "shared/dashboard";
+
+        prescriptionsDao.save(prescription);
+        model.addAttribute("prescription", new Prescription());
+        return "redirect:/dashboard";
+
+        
     }
 
     @GetMapping("/my_doctors")
@@ -130,5 +138,20 @@ public class UserController extends BaseController {
         return "redirect:/";
     }
 
+    @PostMapping("/addAppointment")
+    public String addAppointment(@Valid AppointmentTime appointmentTime, Errors validation, Model model) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("appointment", appointmentTime);
+            return "shared/dashboard";
+        }
 
+        appointmentTime.setUser(loggedInUser());
+        appointmentsDao.save(appointmentTime);
+        model.addAttribute("appointment", new AppointmentTime());
+        return "redirect:/dashboard";
+    }
 }
+
+
+
