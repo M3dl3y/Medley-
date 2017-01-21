@@ -55,12 +55,20 @@ Roles: <span sec:authentication="principal.authorities"></span>
             <div class="list-group">
 
                 This div would repeat for all medications the patient has.. runs through a list
-                <div th:object="${prescriptions}">
-                    <div class="list-group-item" th:text="*{prescribedDate}">
-                        <input type="checkbox"/><h4>Medication</h4>
-                         th:text="*{brandName}" Do we want to ask the patient if they prefer the brand or generic name of the medication to display?
-                    </div>
-                    </div>
+                <div>
+                    <!--<table>-->
+                        <!--<tr>-->
+                            <!--<th>NAME</th>-->
+                            <!--<th>PRICE</th>-->
+                            <!--<th>IN STOCK</th>-->
+                        <!--</tr>-->
+                        <!--<tr th:each="prescription : ${p}" th:class="${prescriptionStat}? 'odd'">-->
+                            <!--<td th:text="${p.get}">Onions</td>-->
+                            <!--<td th:text="${p.prescribedQuantity}">2.41</td>-->
+                            <!--<td th:text="${p.strength}">yes</td>-->
+                        <!--</tr>-->
+                    <!--</table>-->
+
 
 
                     <!--This progress bar would be a visual representation of how the patient is progressing with their daily medications.-->
@@ -268,57 +276,58 @@ Roles: <span sec:authentication="principal.authorities"></span>
 
 
     <!--If Doctor Logged in-->
+</div>
 
-    <div sec:authorize="hasRole('DOCTOR')">
+<div sec:authorize="hasRole('DOCTOR')">
 
-        <!--Alerts Card -->
-        <div id="doctorAlertsCard" class="col-md-4 card">
+    <!--Alerts Card -->
+    <div id="doctorAlertsCard" class="col-md-4 card">
 
-            <div class="panel panel-default bootcards-summary">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-center">Alerts</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6">
-                            <a class="bootcards-summary-item" href="#">
-                                <i class="fa fa-users fa-3x patientLogo" aria-hidden="true"></i>
-                                <h4>Patients<span class="label label-danger">1</span></h4>
-                            </a>
-                        </div>
-                        <div class="col-xs-6 col-sm-6">
-                            <a class="bootcards-summary-item" th:href="@{/messages}">
-                                <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true"></i>
-                                <h4>Messages<span class="label label-info">3</span></h4>
-                            </a>
-                        </div>
+        <div class="panel panel-default bootcards-summary">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Alerts</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6">
+                        <a class="bootcards-summary-item" href="#">
+                            <i class="fa fa-users fa-3x patientLogo" aria-hidden="true"></i>
+                            <h4>Patients<span class="label label-danger">1</span></h4>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <a class="bootcards-summary-item" th:href="@{/messages}">
+                            <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true"></i>
+                            <h4>Messages<span class="label label-info">3</span></h4>
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
 
-        </div><!--contact card-->
+    </div><!--contact card-->
 
-        <!--Medication Checklist Card-->
-        <div id="doctorAddMedication" class="col-md-4 card">
+    <!--Medication Checklist Card-->
+    <div id="doctorAddMedication" class="col-md-4 card">
 
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
-                    <h3 class="panel-title text-center">Add a Medication</h3>
-                </div>
-                <div class="list-group">
-
-                    <div class="list-group-item">
-                        <h4 class="text-center">Add a medication for a pre-existing patient</h4>
-                    </div>
-                    <a class="list-group-item" data-toggle="modal" data-target="#addMedication" href="#">
-                        <i class="fa fa-plus-circle fa-2x addMedicine" aria-hidden="true"></i>
-                    </a>
-
-                </div>
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title text-center">Add a Medication</h3>
             </div>
+            <div class="list-group">
 
-        </div><!--contact card-->
-    </div>
+                <div class="list-group-item">
+                    <h4 class="text-center">Add a medication for a pre-existing patient</h4>
+                </div>
+                <a class="list-group-item" data-toggle="modal" data-target="#addMedication" href="#">
+                    <i class="fa fa-plus-circle fa-2x addMedicine" aria-hidden="true"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div><!--contact card-->
+</div>
 
 
     <div th:replace="/fragments/footer :: footer"></div>
