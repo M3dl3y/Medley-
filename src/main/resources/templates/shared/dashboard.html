@@ -54,18 +54,16 @@
 
                 This div would repeat for all medications the patient has.. runs through a list
                 <div>
-                    <!--<table>-->
-                        <!--<tr>-->
-                            <!--<th>NAME</th>-->
-                            <!--<th>PRICE</th>-->
-                            <!--<th>IN STOCK</th>-->
-                        <!--</tr>-->
-                        <!--<tr th:each="prescription : ${p}" th:class="${prescriptionStat}? 'odd'">-->
-                            <!--<td th:text="${p.get}">Onions</td>-->
-                            <!--<td th:text="${p.prescribedQuantity}">2.41</td>-->
-                            <!--<td th:text="${p.strength}">yes</td>-->
-                        <!--</tr>-->
-                    <!--</table>-->
+
+                    <table>
+                        <tr>
+                            <th>MEDICATION</th>
+                            <th>Prescribed Date</th>
+                        </tr>
+                        <tr th:each="med : ${meds}">
+                            <td th:text="${med.}"
+                        </tr>
+                    </table>
 
 
 
