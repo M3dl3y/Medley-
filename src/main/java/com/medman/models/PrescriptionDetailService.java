@@ -1,4 +1,6 @@
 package com.medman.models;
 
-public class PrescriptionDetailService {
+import org.springframework.data.repository.CrudRepository;
+
+public interface PrescriptionDetailService extends CrudRepository<Prescription, Long> {
 }
