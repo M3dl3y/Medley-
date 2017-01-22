@@ -41,8 +41,8 @@ public class UserController extends BaseController {
     @Autowired
     PrescriptionRepository prescriptionsDao;
 
-//    @Autowired
-//    MedicationRepository medsDAO;
+    @Autowired
+    Messages messageDao;
 
     @Autowired
     Appointments appointmentsDao;
@@ -68,7 +68,6 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
-
         prescriptionsDao.save(prescription);
         model.addAttribute("prescription", new Prescription());
         return "redirect:/dashboard";
@@ -85,9 +84,23 @@ public class UserController extends BaseController {
 
     @GetMapping("/messages")
     public String showMessages(Model model) {
-        //model.addAttribute("") are we making objects for all of these different tables? we must be? so a message instance is passed here?
-        //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
+        model.addAttribute("message", new Message());
         return "shared/messages";
+    }
+
+    @PostMapping("/messages")
+    public String sendMessage(
+            @Valid Message message,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("message", message);
+            return "shared/dashboard";
+        }
+//        message.setRelationship(); how do we save the relationship id to the doctor/patient relationship id?
+
     }
 
     @GetMapping("/edit")
