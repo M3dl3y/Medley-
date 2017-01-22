@@ -7,22 +7,13 @@
 </head>
 <body>
 
-<div id="footer" th:fragment="footer">
-    <div class="horizontal_line col-md-10 col-md-offset-1"></div>
-    <div class="col-md-10 col-md-offset-1">
-        <i class="fa fa-facebook fa-2x facebookIcon" aria-hidden="true"></i>
-        <i class="fa fa-twitter fa-2x twitterIcon" aria-hidden="true"></i>
-        <div class="col-md-1 col-md-offset-7">
-            <h6><a id="aboutLink" th:href="@{/about}">About</a></h6>
-        </div>
+<div id="footer" th:fragment="footer" class="col-md-10 col-md-offset-1">
+    <div class="horizontal_line col-md-12"></div>
+
+    <div class="row col-md-offset-1">
+        <h5><a id="aboutLink" th:href="@{/about}">About</a></h5>
     </div>
-    <div class="horizontal_line col-md-10 col-md-offset-1"></div>
-    <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-10 col-md-offset-1">
-            <i class="fa fa-medkit col-md-2 col-md-offset-4" aria-hidden="true"></i>
-            <h6 class="col-md-3 col-md-offset-1">Medly LLC</h6>
-        </div>
-    </div>
+
 </div>
 
 

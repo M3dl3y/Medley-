@@ -1,31 +1,98 @@
+html,body
+{
+    width: 100%;
+    margin-top: 3% !important;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: white;
+
+}
+
 nav {
     margin-bottom: 0 !important;
 }
 
-#splashImageContainer{
-    height: 20%;
+.brand{
+    position: absolute;
+    left:48%;
+    margin-left: -48px;
+    display: block;
+}
+
+#splashTopImage{
+    display: block;
+    position: relative;
     width: 100%;
+    height: 0;
+    padding-bottom: 30%;
+    background-size: 100%;
+    background-image: url("../img/splash-top.jpg");
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    box-shadow: 5px 5px 5px #e0dad1;
+}
+#splashBottomImage{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%;
+    background-size: 100%;
+    background-image: url("../img/splash-bottom.jpg");
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    box-shadow: 5px 5px 5px #e0dad1;
+}
+
+.circleFeature{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    line-height: 90px;
+    background-color:white;
+    box-shadow: 5px 5px 5px #e0dad1;
+}
+.centerIcon {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+[class^="fa-"], [class*=" fa-"] {
+    display: inline-block;
+    width: 100%;
+}
+
+#additionalFeatures{
+    padding-top: 5%;
+}
+
+.spaceBelow{
+    margin-bottom: 20px !important;
 }
 
 #testimonyContainer{
     width: 100%;
     height: 25%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#signupContainer {
+    width: 100%;
+    height: 25%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .horizontal_line{
-    border-bottom: #646464 1px solid;
+    border-bottom: #cad3ca 1px solid;
 }
 
-#footer{
-    background-color: #f6f6f6;
-    height: 100%;
-}
 
-#pictureDiv{
-    height: 200px;
-    border: gray 1px;
-    background-color: ghostwhite;
-}
 .spaceBelow{
     margin-bottom: 5px;
 }
@@ -49,14 +116,6 @@ nav {
 .remindersIcon{
     color: #a997da !important;
 }
-.facebookIcon{
-    color: #afb3b0;
-    padding: 1%;
-}
-.twitterIcon{
-    color: #afb3b0;
-    padding: 1%;
-}
 .patientLogo{
     color: #d6484a !important;
 }
@@ -64,6 +123,23 @@ nav {
     color: #afb3b0;
 }
 
+#heartDiv:hover i{
+    color: #f68c82;
+}
+
+#calendarDiv:hover i{
+    color: #f3b689;
+}
+
+#reminderDiv:hover i{
+    color: #ecdc8b;
+}
+
+#moreInfo{
+    margin-top: 10%;
+    box-shadow: 5px 5px 5px #e0dad1;
+    display: none;
+}
 
 .card{
     box-shadow: #dadad7 5px 5px 5px;
@@ -71,9 +147,45 @@ nav {
 
 #aboutLink{
     color: black;
+    margin-top:2%;
 }
 
 #messageHistory{
     height:400px;
     overflow: scroll;
 }
+
+#footer{
+    margin-top: 3%;
+    margin-bottom: 5%;
+}
+
+#alertMessage{
+    display: hidden;
+}
+
+@media screen and (max-width: 992px) {
+    #moreInfo, #heartDiv, #calendarDiv, #reminderDiv {
+        display: none !important;
+
+    }
+}
+@media screen and (max-width: 768px){
+    body{
+        margin-top: 10% !important;
+    }
+}
+@media screen and (max-width: 482px){
+    body{
+        margin-top: 15% !important;
+    }
+}
+@media screen and (max-width: 992px) {
+    #aboutLink {
+        margin-left: 5%;
+
+    }
+}
+
+
+
