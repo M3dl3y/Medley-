@@ -1,21 +1,28 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
+import com.medman.repositories.PrescriptionRepository;
+import org.apache.tomcat.util.http.parser.MediaType;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Created by jessedavila on 1/17/17.
@@ -34,12 +41,8 @@ public class UserController extends BaseController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     @Autowired
-    UserWithRoles.PrescriptionRepository prescriptionsDao;
-
-    @Autowired
-    UserWithRoles.MedicationRepository medsDAO;
+    PrescriptionRepository prescriptionsDao;
 
     @Autowired
     Appointments appointmentsDao;
@@ -47,9 +50,12 @@ public class UserController extends BaseController {
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
+
         model.addAttribute("user", loggedInUser());
         model.addAttribute("prescription", new Prescription());
         model.addAttribute("appointment", new AppointmentTime());
+        model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
+
         return "shared/dashboard";
     }
 
@@ -65,29 +71,11 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
-
         prescriptionsDao.save(prescription);
         model.addAttribute("prescription", new Prescription());
         return "redirect:/dashboard";
 
         
-    }
-    @GetMapping("/posts")
-    public String showAllPrescriptions(Model model){
-        List<Prescription> prescriptions = new ArrayList<>((Collection) prescriptionsDao.findAll());
-
-        Collections.reverse(prescriptions);
-        model.addAttribute("currentUser", loggedInUser());
-        model.addAttribute("prescriptions", prescriptions);
-        return "shared/dashboard";
-    }
-
-
-    @GetMapping("/myPrescriptions")
-    public String showSinglePrescription(Model model, @PathVariable Long id) {
-        model.addAttribute("prescription", prescriptionsDao.findOne(id));
-
-        return "shared/dashboard";
     }
 
     @GetMapping("/my_doctors")
@@ -106,7 +94,11 @@ public class UserController extends BaseController {
 
     @GetMapping("/edit")
     public String editPage(Model model) {
-        model.addAttribute("user", new User()); // need to call logged in User
+        User user = usersDao.findOne(loggedInUser().getId());
+        if(user.getId() != loggedInUser().getId()){
+            return "/login";
+        }
+        model.addAttribute("user", user);
         return "shared/profile"; // only a logged in user can go to user/edit
 
     }
@@ -123,10 +115,22 @@ public class UserController extends BaseController {
             return "posts/edit";
         }
 
-        //User existingUser = (use autowired dao to get this)
-        // use dao to get current existingUser
-        //        existingPost.setTitle(editedPost.getTitle()); (template code)
-        return "redirect:/user/dashboard";
+        User newUser = usersDao.findByUsername(loggedInUser().getUsername());
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setDateOfBirth(user.getDateOfBirth());
+        newUser.setPhoneNumber(user.getPhoneNumber());
+        newUser.setStreetAddress(user.getStreetAddress());
+        newUser.setCity(user.getCity());
+        newUser.setState(user.getState());
+        newUser.setZipCode(user.getZipCode());
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setEmail(user.getEmail());
+
+
+        usersDao.save(newUser);
+        return "redirect:/dashboard";
 
     }
 

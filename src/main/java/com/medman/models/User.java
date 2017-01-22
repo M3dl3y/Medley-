@@ -124,7 +124,6 @@ public class User {
         password = user.password;
         email = user.email;
         role = user.role;
-        prescriptions = user.prescriptions;
 
     }
 
