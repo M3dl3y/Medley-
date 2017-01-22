@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="/fragments/header :: header(${'Dashboard'})">
+</head>
+<body>
+
+
+<!--Add Medication Form/Modal-->
+<div class="modal fade" id="addMedication" tabindex="-1" role="dialog" aria-labelledby="medicationCardLabel" th:fragment="medicationForms">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="medicationCardLabel">Add a medication</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addPrescriptionForm" th:action="@{/addPrescription}" method="post"
+                      th:object="${prescription}">
+                    <div class="form-group">
+                        <label for="prescriptionName">Name of Medication:</label>
+                        <input type="text" class="form-control" id="prescriptionName"
+                               th:field="*{name}"/>
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="prescribedDate">Prescribed Date:</label>
+                        <input type="date" class="form-control" id="prescribedDate"
+                               th:field="*{prescribedDate}"/>
+                        <p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="strength">Strength:</label>
+                        <input type="text" class="form-control" id="strength" th:field="*{strength}"/>
+                        <p th:if="${#fields.hasErrors('strength')}" th:errors="*{strength}"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="sig">Directions:</label>
+                        <input type="text" class="form-control" id="sig"
+                               placeholder="Take 1 tablet by mouth twice a day for thirty days."
+                               th:field="*{sig}"/>
+                        <p th:if="${#fields.hasErrors('sig')}" th:errors="*{sig}"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="daySupply">Day Supply:</label>
+                        <input type="text" class="form-control" id="daySupply" placeholder="30"
+                               th:field="*{daySupply}"/>
+                        <p th:if="${#fields.hasErrors('daySupply')}" th:errors="*{daySupply}"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="prescribedQuantity">Prescribed Quantity:</label>
+                        <input type="text" class="form-control" id="prescribedQuantity" th:field="*{prescribedQuantity}"/>
+                        <p th:if="${#fields.hasErrors('prescribedQuantity')}" th:errors="*{prescribedQuantity}"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitFullMedicationForm">Save changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
