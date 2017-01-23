@@ -110,7 +110,7 @@ public class UserController extends BaseController {
             model.addAttribute("message", message);
             return "shared/dashboard";
         }
-//        message.setUser(loggedInUser()); work this is somehow
+//        message.setUser(loggedInUser()); work this in somehow
         messageDao.save(message);
         return "redirect:/dashboard";
 
