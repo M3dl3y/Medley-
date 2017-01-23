@@ -196,7 +196,6 @@ public class Prescription {
                 " dosage_frequency: " + dosageFrequency +
                 " dosage interval: " + dosageInterval +
                 " dosage route: " + dosageRoute +
-                " name: " + name +
                 " pills taken: " + pillsTaken +
                 " prescribed date: " + prescribedDate +
                 " prescribed quantity: " + prescribedQuantity +
