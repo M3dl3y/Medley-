@@ -50,6 +50,9 @@ public class UserController extends BaseController {
     @Autowired
     Appointments appointmentsDao;
 
+    @Autowired
+    Messages messageDao;
+
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
@@ -91,9 +94,26 @@ public class UserController extends BaseController {
 
     @GetMapping("/messages")
     public String showMessages(Model model) {
-        //model.addAttribute("") are we making objects for all of these different tables? we must be? so a message instance is passed here?
-        //model.addAttribute() and also a user object, this will be fairly complicated to show many message streams and select one to show more messages
+        model.addAttribute("message", new Message());
         return "shared/messages";
+    }
+
+    @PostMapping("/messages")
+    public String sendMessage(
+            @Valid Message message,
+            Errors validation,
+            Model model
+    ) {
+        if (validation.hasErrors()) {
+            System.out.println(message.getMessageContent());
+            model.addAttribute("errors", validation);
+            model.addAttribute("message", message);
+            return "shared/dashboard";
+        }
+//        message.setUser(loggedInUser()); work this in somehow
+        messageDao.save(message);
+        return "redirect:/dashboard";
+
     }
 
     @GetMapping("/edit")

@@ -11,25 +11,51 @@ public class Message {
     @GeneratedValue
     private Long Id;
 
-    @Column
-    private String message;
+    @ManyToOne
+    private User user;
 
-    @Column
-    private Long relationship;
+    @Column (nullable = false)
+    private String messageContent;
 
-    public String getMessage() {
-        return message;
+//    @Column
+//    private Long relationship;
+
+    public Message() {}
+
+    public Message (Message message) {
+        Id = message.Id;
+        messageContent = message.messageContent;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public Long getId() {
+        return Id;
     }
 
-    public Long getRelationship() {
-        return relationship;
+    public void setId(Long id) {
+        Id = id;
     }
 
-    public void setRelationship(Long relationship) {
-        this.relationship = relationship;
+    public User getUser() {
+        return user;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getMessageContent() {
+        return messageContent;
+    }
+
+    public void setMessageContent(String messageContent) {
+        this.messageContent = messageContent;
+    }
+
+    //    public long getRelationship() {
+//        return relationship;
+//    }
+//
+//    public void setRelationship(long relationship) {
+//        this.relationship = relationship;
+//    }
 }
