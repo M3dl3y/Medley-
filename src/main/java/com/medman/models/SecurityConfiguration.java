@@ -1,7 +1,6 @@
 
 package com.medman.models;
 
-import com.medman.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.ComponentScan;

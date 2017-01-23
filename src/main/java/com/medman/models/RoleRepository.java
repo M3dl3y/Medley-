@@ -1,4 +1,4 @@
-//package com.medman.repositories;
+//package com.medman.models;
 //
 //import com.medman.models.Role;
 //import org.springframework.data.jpa.repository.JpaRepository;
