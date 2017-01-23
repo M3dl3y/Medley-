@@ -15,8 +15,12 @@
         <div class="list-group">
 
 
-            <div  th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
+            <div  th:each="prescription : ${prescriptions}" th:object="${prescription}">
                 <div class="list-group">
+
+                    <h5 th:text="${prescription.prescribedDate}">"</h5>
+                    <h5 th:text="${prescription.strength}"></h5>
+                    <h5 th:text="${prescription.medication.brandName}"></h5>
                     <div class="list-group-item checkbox">
                         <label>
                             <input type="checkbox" th:text="*{name}" checked="checked" />

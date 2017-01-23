@@ -1,5 +1,7 @@
 package com.medman.models;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,5 +44,21 @@ public class UserWithRoles extends User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public static interface UserRepository extends JpaRepository<User, Long> {
+
+        User findByUsernameIgnoreCase(String username);
+
+        User findByEmailIgnoreCase(String email);
+
+        User findByUsernameOrEmail(String username, String email);
+    }
+
+    public static interface PrescriptionRepository extends CrudRepository<Prescription, Long> {
+    }
+
+    public static interface MedicationRepository extends CrudRepository<Medication, Long> {
+
     }
 }

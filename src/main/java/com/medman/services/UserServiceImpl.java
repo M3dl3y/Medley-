@@ -2,8 +2,8 @@
 //
 //import com.medman.models.Role;
 //import com.medman.models.User;
-//import com.medman.repositories.RoleRepository;
-//import com.medman.repositories.UserRepository;
+//import com.medman.models.RoleRepository;
+//import com.medman.models.UserWithRoles.UserRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.authentication.AnonymousAuthenticationToken;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -72,7 +72,7 @@
 //    public void register(User user) {
 //        user.setPassword(passwordEncoder.encode(user.getPassword()));
 //
-////        user.getRoles().add(roleRepository.findByName("ROLE_USER"));
+//        user.getRoles().add(roleRepository.findByName("ROLE_USER"));
 //
 //        user.setEnabled(true);
 //
@@ -163,19 +163,19 @@
 //        return auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated();
 //    }
 //
-////    @Override
-////    public boolean isAdmin() {
-////        User user = currentUser();
-////
-////        return user != null && user.hasRole("ROLE_ADMIN");
-////    }
-////
-////    @Override
-////    public boolean isDoctor(){
-////        User user = currentUser();
-////
-////        return user != null && user.hasRole("ROLE_DOCTOR");
-////    }
+//    @Override
+//    public boolean isAdmin() {
+//        User user = currentUser();
+//
+//        return user != null && user.hasRole("ROLE_ADMIN");
+//    }
+//
+//    @Override
+//    public boolean isDoctor(){
+//        User user = currentUser();
+//
+//        return user != null && user.hasRole("ROLE_DOCTOR");
+//    }
 //
 //    @Override
 //    public User currentUser() {

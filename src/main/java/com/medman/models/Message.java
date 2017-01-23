@@ -14,6 +14,22 @@ public class Message {
     @Column
     private String message;
 
-//    @OneToOne(mappedBy = "messages")
-//    private Long relationship;
+    @Column
+    private Long relationship;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Long getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(Long relationship) {
+        this.relationship = relationship;
+    }
 }
