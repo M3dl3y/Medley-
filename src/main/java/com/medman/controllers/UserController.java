@@ -67,12 +67,12 @@ public class UserController extends BaseController {
     ) {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
-            model.addAttribute("prescription", prescription);
+            model.addAttribute("prescriptions", prescription);
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
         prescriptionsDao.save(prescription);
-        model.addAttribute("prescription", new Prescription());
+        model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
 
         
