@@ -15,17 +15,27 @@
         <div class="list-group">
 
 
-            <div  th:each="prescription : ${prescriptions}" th:object="${prescription}">
+            <div  th:each="prescription : ${prescriptions}">
                 <div class="list-group">
-
-                    <h5 th:text="${prescription.prescribedDate}">"</h5>
-                    <h5 th:text="${prescription.strength}"></h5>
+                    <form th:action="@{/dashboard/medTaken}" th:method="post" th:object="${prescription}">
+                    <h5 th:text="*{prescribedDate}">"</h5>
+                    <h5 th:text="*{strength}"></h5>
                     <h5 th:text="${prescription.medication.brandName}"></h5>
+                    <h5 class="prescriptionDaySupply" th:text="*{daySupply}"></h5> <!--// needed for alerts-->
+                    <h5 class="prescriptionQuantity" th:text="*{prescribedQuantity}"></h5>
+                        <input type="hidden" th:value="*{id}" name="id" />
                     <div class="list-group-item checkbox">
-                        <a>
+                        <label>
+                            <input id="prescriptionCheckbox" type="checkbox" th:text="*{name}" checked="checked" />
+                                <button type="submit" class="btn btn-primary" id="medTaken">taken</button>
+                        </label>
+
+                    <a>
                             <i class="fa fa-sort-desc pull-right fa-2x" aria-hidden="true"></i>
                         </a>
                     </div>
+                    </form>
+
                 </div>
             </div>
 

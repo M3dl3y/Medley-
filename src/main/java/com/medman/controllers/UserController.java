@@ -63,7 +63,7 @@ public class UserController extends BaseController {
         return "shared/dashboard";
     }
 
-    @PostMapping("/addPrescription")
+    @PostMapping("/dashboard")
     public String addMedication(
             @Valid Prescription prescription,
             @RequestParam (name = "medicationId") Long medicationId,
@@ -80,8 +80,23 @@ public class UserController extends BaseController {
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
+    }
 
-        
+    @PostMapping("/dashboard/medTaken")
+    public String takenMed(@RequestParam("id") Long id  ) {
+        Prescription currentPr = prescriptionsDao.findOne(id);
+        long ppd;
+        ppd = currentPr.getPrescribedQuantity()/currentPr.getDaySupply();
+        if (currentPr.getPillsTaken() >= ppd) {
+            currentPr.setPillsTaken((long) 0);
+            currentPr.setDaySupply(currentPr.getDaySupply()-1);
+        } else {
+            currentPr.setPillsTaken(currentPr.getPrescribedQuantity()+1);
+        }
+
+        prescriptionsDao.save(currentPr);
+
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/my_doctors")
