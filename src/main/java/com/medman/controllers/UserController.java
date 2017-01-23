@@ -63,7 +63,7 @@ public class UserController extends BaseController {
         return "shared/dashboard";
     }
 
-    @PostMapping("/dashboard")
+    @PostMapping("/addPrescription")
     public String addMedication(
             @Valid Prescription prescription,
             @RequestParam(name = "medicationId") Long medicationId,
