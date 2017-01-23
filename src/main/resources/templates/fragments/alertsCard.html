@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="/fragments/header :: header(${'Dashboard'})">
+</head>
+<body>
+
+
+<!--Alerts Card -->
+<div id="alertsCard" class="col-md-4 card" th:fragment="alertsCard">
+
+    <div class="panel panel-default bootcards-summary">
+        <div class="panel-heading">
+            <h3 class="panel-title text-center">Alerts</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                    <a class="bootcards-summary-item" href="#">
+                        <i class="fa fa-exclamation-circle fa-3x alertIcon" aria-hidden="true"></i>
+                        <h4>Medication<span class="label label-danger">1</span></h4>
+                        <!--By assigning an id to the span, we can input a number here that will reflect how many medications need a patients attention-->
+                    </a>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <a class="bootcards-summary-item" th:href="@{/messages}">
+                        <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true"></i>
+                        <h4>Messages<span class="label label-info">3</span></h4>
+                        <!--By assigning an id to the span, we can input a number here that will reflect how many messages need a patients attention-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!--contact card-->
+
+
+
+</body>
+</html>
