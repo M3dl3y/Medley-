@@ -81,9 +81,8 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/dashboard/medTaken")
-    public String takenMed(@Valid Prescription prescription, @RequestParam("id") Long id  ) {
+    public String takenMed(@RequestParam("id") Long id  ) {
         Prescription currentPr = prescriptionsDao.findOne(id);
-        System.out.print(currentPr);
         long ppd;
         ppd = currentPr.getPrescribedQuantity()/currentPr.getDaySupply();
         if (currentPr.getPillsTaken() >= ppd) {
