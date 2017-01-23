@@ -21,10 +21,11 @@
                     <h5 th:text="${prescription.prescribedDate}">"</h5>
                     <h5 th:text="${prescription.strength}"></h5>
                     <h5 th:text="${prescription.medication.brandName}"></h5>
-                    <h5 class="prescriptionDaySupply" th:text="${prescription.daySupply}"></h5>
+                    <h5 class="prescriptionDaySupply" th:text="${prescription.daySupply}"></h5> // needed for alerts
+                    <h5 class="prescritiptionQuantity" th:text="${prescription.prescribedQuantity}"></h5>
                     <div class="list-group-item checkbox">
                         <label>
-                            <input type="checkbox" th:text="*{name}" checked="checked" />
+                            <input id="prescriptionCheckbox" type="checkbox" th:text="*{name}" checked="checked" />
                         </label>
                         <a>
                             <i class="fa fa-sort-desc pull-right fa-2x" aria-hidden="true"></i>
