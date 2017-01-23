@@ -178,4 +178,12 @@ public class Prescription {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Medication getMedication() {
+        return medication;
+    }
+
+    public void setMedication(Medication medication) {
+        this.medication = medication;
+    }
 }

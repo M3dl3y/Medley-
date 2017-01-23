@@ -22,7 +22,7 @@
 
         <!-- Development settings -->
         <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">true</property>
+        <property name="show_sql">true</property>t
         <!-- DB schema will be updated if needed -->
         <property name="hbm2ddl.auto">update</property>
         <property name="format_sql">true</property>
@@ -31,12 +31,12 @@
         <!-- Add mapped classes here -->
         <mapping class="com.medman.models.User"/>
         <mapping class="com.medman.models.Role"/>
+        <mapping class="com.medman.models.Medication"/>
+        <mapping class="com.medman.models.Prescription"/>
 
         <!--<mapping class="com.medman.models.Reminder"/>-->
-        <mapping class="com.medman.models.Prescription"/>
         <!--<mapping class="com.medman.models.NotificationSetting"/>-->
         <!--<mapping class="com.medman.models.Message"/>-->
-        <mapping class="com.medman.models.Medication"/>
         <!--<mapping class="com.medman.models.AppointmentTime"/>-->
         <!-- ... -->
     </session-factory>
