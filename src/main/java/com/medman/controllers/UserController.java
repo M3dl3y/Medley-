@@ -45,6 +45,9 @@ public class UserController extends BaseController {
     PrescriptionRepository prescriptionsDao;
 
     @Autowired
+    Medications medicationsDao;
+
+    @Autowired
     Appointments appointmentsDao;
 
 
@@ -71,6 +74,7 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
+        prescription.setMedication(medicationsDao.findOne((long) 3));
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
