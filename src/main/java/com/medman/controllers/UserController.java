@@ -6,7 +6,6 @@ import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,7 +42,7 @@ public class UserController extends BaseController {
     PrescriptionRepository prescriptionsDao;
 
     @Autowired
-    Medications medicationsDao;
+    MedicationRepository medicationsDao;
 
     @Autowired
     Appointments appointmentsDao;
@@ -59,12 +58,15 @@ public class UserController extends BaseController {
         model.addAttribute("prescription", new Prescription());
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
+        model.addAttribute("medications", medicationsDao.findAll());
+
         return "shared/dashboard";
     }
 
     @PostMapping("/dashboard")
     public String addMedication(
             @Valid Prescription prescription,
+            @RequestParam (name = "medicationId") Long medicationId,
             Errors validation,
             Model model
     ) {
@@ -74,7 +76,7 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
-        prescription.setMedication(medicationsDao.findOne((long) 3));
+        prescription.setMedication(medicationsDao.findOne(medicationId));
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
@@ -154,12 +156,12 @@ public class UserController extends BaseController {
         User newUser = usersDao.findByUsername(loggedInUser().getUsername());
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
-        newUser.setDateOfBirth(user.getDateOfBirth());
-        newUser.setPhoneNumber(user.getPhoneNumber());
-        newUser.setStreetAddress(user.getStreetAddress());
-        newUser.setCity(user.getCity());
-        newUser.setState(user.getState());
-        newUser.setZipCode(user.getZipCode());
+//        newUser.setDateOfBirth(user.getDateOfBirth());
+//        newUser.setPhoneNumber(user.getPhoneNumber());
+//        newUser.setStreetAddress(user.getStreetAddress());
+//        newUser.setCity(user.getCity());
+//        newUser.setState(user.getState());
+//        newUser.setZipCode(user.getZipCode());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setEmail(user.getEmail());

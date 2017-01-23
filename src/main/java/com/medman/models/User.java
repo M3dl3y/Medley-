@@ -36,29 +36,29 @@ public class User {
     @NotBlank(groups = {CreateValidationGroup.class}, message = "Please enter your last name.")
     private String lastName;
 
-    @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfBirth;
-
-    @Column(nullable = false)
-    @Size(min = 10, message = "Please enter your 10 digit phone number")
-    private String phoneNumber;
-
-    @Column(nullable = false)
-    @NotBlank(message = "Please enter your street address.")
-    private String streetAddress;
-
-    @Column(nullable = false)
-    @NotBlank(message = "Please enter your city.")
-    private String city;
-
-    @Column(nullable = false)
-    @NotBlank(message = "Please enter your state.")
-    private String state;
-
-    @Column(nullable = false)
-    @NotNull(message = "Please enter a zip code.")
-    private Long zipCode;
+//    @Column(nullable = true)
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    private Date dateOfBirth;
+//
+//    @Column(nullable = true)
+//    @Size(min = 10, message = "Please enter your 10 digit phone number")
+//    private String phoneNumber;
+//
+//    @Column(nullable = true)
+//    @NotBlank(message = "Please enter your street address.")
+//    private String streetAddress;
+//
+//    @Column(nullable = true)
+//    @NotBlank(message = "Please enter your city.")
+//    private String city;
+//
+//    @Column(nullable = true)
+//    @NotBlank(message = "Please enter your state.")
+//    private String state;
+//
+//    @Column(nullable = true)
+//    @NotNull(message = "Please enter a zip code.")
+//    private Long zipCode;
 
     @Column(unique = true, nullable = false, length = 50)
     // haven't figured out how to specify messages for Size.List in the messages file
@@ -117,12 +117,12 @@ public class User {
         Id = user.Id;
         firstName = user.firstName;
         lastName = user.lastName;
-        dateOfBirth = user.dateOfBirth;
-        phoneNumber = user.phoneNumber;
-        streetAddress = user.streetAddress;
-        city = user.city;
-        state = user.state;
-        zipCode = user.zipCode;
+//        dateOfBirth = user.dateOfBirth;
+//        phoneNumber = user.phoneNumber;
+//        streetAddress = user.streetAddress;
+//        city = user.city;
+//        state = user.state;
+//        zipCode = user.zipCode;
         username = user.username;
         password = user.password;
         email = user.email;
@@ -154,53 +154,53 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getStreetAddress() {
-        return streetAddress;
-    }
-
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public Long getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(Long zipCode) {
-        this.zipCode = zipCode;
-    }
+//    public Date getDateOfBirth() {
+//        return dateOfBirth;
+//    }
+//
+//    public void setDateOfBirth(Date dateOfBirth) {
+//        this.dateOfBirth = dateOfBirth;
+//    }
+//
+//    public String getPhoneNumber() {
+//        return phoneNumber;
+//    }
+//
+//    public void setPhoneNumber(String phoneNumber) {
+//        this.phoneNumber = phoneNumber;
+//    }
+//
+//    public String getStreetAddress() {
+//        return streetAddress;
+//    }
+//
+//    public void setStreetAddress(String streetAddress) {
+//        this.streetAddress = streetAddress;
+//    }
+//
+//    public String getCity() {
+//        return city;
+//    }
+//
+//    public void setCity(String city) {
+//        this.city = city;
+//    }
+//
+//    public String getState() {
+//        return state;
+//    }
+//
+//    public void setState(String state) {
+//        this.state = state;
+//    }
+//
+//    public Long getZipCode() {
+//        return zipCode;
+//    }
+//
+//    public void setZipCode(Long zipCode) {
+//        this.zipCode = zipCode;
+//    }
 
     public String getUsername() {
         return username;

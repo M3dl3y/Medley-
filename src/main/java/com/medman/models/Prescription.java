@@ -20,9 +20,6 @@ public class Prescription {
     private Date prescribedDate;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
     private String strength;
 
     @Column(nullable = false)
@@ -181,14 +178,6 @@ public class Prescription {
         this.user = user;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Medication getMedication() {
         return medication;
