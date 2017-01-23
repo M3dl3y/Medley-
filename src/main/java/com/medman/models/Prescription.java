@@ -29,7 +29,7 @@ public class Prescription {
     private String sig;
 
     @Column(nullable = true)
-    private Long dosageAmount;
+    private Long dosageAmount = 0L;
 
     @Column(nullable = true)
     private String dosageForm;
@@ -38,19 +38,19 @@ public class Prescription {
     private String dosageRoute;
 
     @Column(nullable = true)
-    private Long dosageFrequency;
+    private Long dosageFrequency = 0L;
 
     @Column(nullable = true)
     private String dosageInterval;
 
     @Column(nullable = true)
-    private Long daySupply;
+    private Long daySupply = 0L;
 
     @Column(nullable = false)
-    private Long prescribedQuantity;
+    private Long prescribedQuantity = 0L;
 
     @Column(nullable = true)
-    private Long pillsTaken;
+    private Long pillsTaken = 0L;
 
     public Long getPillsTaken() {
         return pillsTaken;
@@ -196,5 +196,22 @@ public class Prescription {
 
     public void setMedication(Medication medication) {
         this.medication = medication;
+    }
+
+    @Override
+    public String toString() {
+        return "day supply: " + daySupply +
+                "id: " + getId() +
+                " dosage ammount " + dosageAmount +
+                " dosage_form : " + dosageForm +
+                " dosage_frequency: " + dosageFrequency +
+                " dosage interval: " + dosageInterval +
+                " dosage route: " + dosageRoute +
+                " name: " + name +
+                " pills taken: " + pillsTaken +
+                " prescribed date: " + prescribedDate +
+                " prescribed quantity: " + prescribedQuantity +
+                " sig: " + sig +
+                " strength: " + strength;
     }
 }

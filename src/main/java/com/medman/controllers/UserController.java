@@ -6,16 +6,14 @@ import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
@@ -83,16 +81,21 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/dashboard/medTaken")
-    public String takenMed(@Valid Prescription prescription) {
+    public String takenMed(@Valid Prescription prescription, @RequestParam("id") Long id  ) {
+        Prescription currentPr = prescriptionsDao.findOne(id);
+        System.out.print(currentPr);
         long ppd;
-        ppd = prescription.getPrescribedQuantity()/prescription.getDaySupply();
-        if (prescription.getPillsTaken() == ppd) {
-            prescription.setPillsTaken((long) 0);
-            prescription.setDaySupply(prescription.getDaySupply()-1);
+        ppd = currentPr.getPrescribedQuantity()/currentPr.getDaySupply();
+        if (currentPr.getPillsTaken() >= ppd) {
+            currentPr.setPillsTaken((long) 0);
+            currentPr.setDaySupply(currentPr.getDaySupply()-1);
         } else {
-            prescription.setPillsTaken(prescription.getPrescribedQuantity()+1);
+            currentPr.setPillsTaken(currentPr.getPrescribedQuantity()+1);
         }
-        return "redirect:shared/dashboard";
+
+        prescriptionsDao.save(currentPr);
+
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/my_doctors")
