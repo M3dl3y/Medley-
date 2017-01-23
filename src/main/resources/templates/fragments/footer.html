@@ -7,13 +7,16 @@
 </head>
 <body>
 
-<div id="footer" th:fragment="footer" class="col-md-10 col-md-offset-1">
-    <div class="horizontal_line col-md-12"></div>
-
-    <div class="row col-md-offset-1">
-        <h5><a id="aboutLink" th:href="@{/about}">About</a></h5>
-    </div>
-
+<div id="footer" th:fragment="footer" >
+    <div class="horizontal_line col-md-10 col-md-offset-1 row"></div>
+        <div class="col-md-offset-1 col-md-2">
+            <h5><a id="aboutLink" th:href="@{/about}">About</a></h5>
+            <i id="twitterIcon" class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            <i id="facebookIcon" class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+        </div>
+        <div class="row">
+            <h5 class="col-md-offset-10"><a id="siteMap" href="#">Site Map</a></h5>
+        </div>
 </div>
 
 

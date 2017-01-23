@@ -7,17 +7,29 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<div class="col-md-10 col-md-offset-1">
-    <div class="col-md-3 col-md-offset-1">
+<h1 class="text-center">About Us</h1>
+
+<div class="col-md-10 col-md-offset-1 text-center">
+    <div class="col-md-3 infoCard">
         <h1>Jesse</h1>
+        <img class="img-responsive" th:src="@{../img/jesse.jpeg}" />
+        <button class="btn btn-info">Github</button>
+        <button class="btn btn-info">Email</button>
     </div>
-    <div class="col-md-3 col-md-offset-1">
+    <div class="col-md-3 col-md-offset-1 infoCard">
         <h1>Lloyd</h1>
+        <img class="img-responsive" th:src="@{../img/lloyd.jpeg}" />
+        <button class="btn btn-info">Github</button>
+        <button class="btn btn-info">Email</button>
     </div>
-    <div class="col-md-3 col-md-offset-1">
+    <div class="col-md-3 col-md-offset-1 infoCard">
         <h1>Nick</h1>
+        <img class="img-responsive" th:src="@{../img/nick.jpeg}" />
+        <button class="btn btn-info">Github</button>
+        <button class="btn btn-info">Email</button>
     </div>
 </div>
+
 
 <div class="col-md-10 col-md-offset-1">
     <p class="text-center">This paragraph tells us things </p>
