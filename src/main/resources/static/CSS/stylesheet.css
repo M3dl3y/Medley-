@@ -1,26 +1,12 @@
-html,body
-{
-    width: 100%;
-    margin-top: 3% !important;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
-}
-
 body{
     background-color: white;
-
+    display: flex;
+    min-height:100vh;
+    flex-direction: column;
 }
 
-nav {
-    margin-bottom: 0 !important;
-}
-
-.brand{
-    position: absolute;
-    left:48%;
-    margin-left: -48px;
-    display: block;
+main{
+    flex: 1 0 auto;
 }
 
 #splashTopImage{
@@ -152,10 +138,9 @@ nav {
 .card{
     box-shadow: #dadad7 5px 5px 5px;
 }
-
-#aboutLink{
-    color: #878e87;
-    margin-top:2%;
+.iconFooter{
+    margin-right: 2%;
+    margin-left: 2%;
 }
 
 #messageHistory{
@@ -163,10 +148,6 @@ nav {
     overflow: scroll;
 }
 
-#footer{
-    margin-top: 3%;
-    margin-bottom: 5%;
-}
 
 #alertMessage{
     display: hidden;
@@ -177,20 +158,11 @@ nav {
 
 }
 
+
 @media screen and (max-width: 992px) {
     #moreInfo, #heartDiv, #calendarDiv, #reminderDiv {
         display: none !important;
 
-    }
-}
-@media screen and (max-width: 768px){
-    body{
-        margin-top: 10% !important;
-    }
-}
-@media screen and (max-width: 482px){
-    body{
-        margin-top: 15% !important;
     }
 }
 @media screen and (max-width: 992px) {

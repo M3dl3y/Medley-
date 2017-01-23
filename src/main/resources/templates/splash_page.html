@@ -7,7 +7,7 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<h1 class="text-center">Welcome to Medly</h1>
+<h1 class="center-align">Welcome to Medly</h1>
 
 <!--image of doctor and patient-->
 <div id="splashTopImage">
@@ -16,21 +16,21 @@
 
 <!--Div of testimony -->
 <div id="testimonyContainer">
-    <h3 class="text-center">
+    <h3 class="center-align">
         "The management tool we've been looking for."
     </h3>
-    <p class="text-center">Dr. Patel</p>
+    <p class="center-align">Dr. Patel</p>
 </div>
 
 <!--Show off features-->
 <div id="splashBottomImage">
 
-    <div id="additionalFeatures" class="col-md-offset-1 col-md-2">
+    <div id="additionalFeatures" class="offset-s1 col s2">
         <div id="heartDiv" class="circleFeature spaceBelow"><i class="fa fa-heart-o fa-4x centerIcon" aria-hidden="true"></i></div>
         <div id="calendarDiv" class="circleFeature spaceBelow"><i class="fa fa-calendar-check-o fa-4x centerIcon" aria-hidden="true"></i></div>
         <div id="reminderDiv" class="circleFeature"><i class="fa fa-bell-o fa-4x centerIcon" aria-hidden="true"></i></div>
     </div>
-    <div id="moreInfo" class="panel panel-default col-md-2">
+    <div id="moreInfo" class="panel panel-default col s2">
         <div class="panel-body">
             <p id="moreInfoDetail">
 
@@ -41,7 +41,7 @@
 </div>
 
 <!--Sign up-->
-<div id="signupContainer" class="text-center">
+<div id="signupContainer" class="center-align">
     <h3>The tools you need to take back your health.</h3>
     <a  th:href="@{/create}"><button type="button" class="btn btn-info">Sign-up</button></a>
 </div>
