@@ -16,14 +16,20 @@
                 <h4 class="modal-title" id="medicationCardLabel">Add a medication</h4>
             </div>
             <div class="modal-body">
+
+
                 <form id="addPrescriptionForm" th:action="@{/addPrescription}" method="post"
                       th:object="${prescription}">
                     <div class="form-group">
-                        <label for="prescriptionName">Name of Medication:</label>
-                        <input type="text" class="form-control" id="prescriptionName"
-                               th:field="*{name}"/>
-                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+
+                        <select id="medicationId" name="medicationId" th:required="required" class="form-control">
+                            <option th:each="medication : ${medications}"
+                                    th:value="${medication.id}"
+                                    th:text="${medication.genericName} + ${medication.brandName}">
+                            </option>
+                        </select>
                     </div>
+
                     <div class="form-group">
                         <label for="prescribedDate">Prescribed Date:</label>
                         <input type="date" class="form-control" id="prescribedDate"

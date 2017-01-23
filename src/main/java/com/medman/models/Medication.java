@@ -1,5 +1,7 @@
 package com.medman.models;
 
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
