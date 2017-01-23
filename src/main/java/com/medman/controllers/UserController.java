@@ -66,7 +66,7 @@ public class UserController extends BaseController {
     @PostMapping("/dashboard")
     public String addMedication(
             @Valid Prescription prescription,
-            @RequestParam (name = "medicationId") Long medicationId,
+            @RequestParam(name = "medicationId") Long medicationId,
             Errors validation,
             Model model
     ) {
@@ -83,15 +83,15 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/dashboard/medTaken")
-    public String takenMed(@RequestParam("id") Long id  ) {
+    public String takenMed(@RequestParam("id") Long id) {
         Prescription currentPr = prescriptionsDao.findOne(id);
+        System.out.println(currentPr);
         long ppd;
-        ppd = currentPr.getPrescribedQuantity()/currentPr.getDaySupply();
-        if (currentPr.getPillsTaken() >= ppd) {
+        currentPr.setDosageFrequency(currentPr.getPrescribedQuantity()/currentPr.getDaySupply());
+        currentPr.setPillsTaken(currentPr.getPillsTaken() + 1);
+        if (currentPr.getPillsTaken().equals(currentPr.getDosageFrequency())) {
             currentPr.setPillsTaken((long) 0);
-            currentPr.setDaySupply(currentPr.getDaySupply()-1);
-        } else {
-            currentPr.setPillsTaken(currentPr.getPrescribedQuantity()+1);
+            currentPr.setDaySupply(currentPr.getDaySupply() - 1);
         }
 
         prescriptionsDao.save(currentPr);
@@ -133,7 +133,7 @@ public class UserController extends BaseController {
     @GetMapping("/edit")
     public String editPage(Model model) {
         User user = usersDao.findOne(loggedInUser().getId());
-        if(user.getId() != loggedInUser().getId()){
+        if (user.getId() != loggedInUser().getId()) {
             return "/login";
         }
         model.addAttribute("user", user);
