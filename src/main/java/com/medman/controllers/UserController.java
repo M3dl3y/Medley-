@@ -61,11 +61,10 @@ public class UserController extends BaseController {
         model.addAttribute("prescription", new Prescription());
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
-
         return "shared/dashboard";
     }
 
-    @PostMapping("/addPrescription")
+    @PostMapping("/dashboard")
     public String addMedication(
             @Valid Prescription prescription,
             Errors validation,
@@ -81,8 +80,19 @@ public class UserController extends BaseController {
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
+    }
 
-        
+    @PostMapping("/dashboard/medTaken")
+    public String takenMed(@Valid Prescription prescription) {
+        long ppd;
+        ppd = prescription.getPrescribedQuantity()/prescription.getDaySupply();
+        if (prescription.getPillsTaken() == ppd) {
+            prescription.setPillsTaken((long) 0);
+            prescription.setDaySupply(prescription.getDaySupply()-1);
+        } else {
+            prescription.setPillsTaken(prescription.getPrescribedQuantity()+1);
+        }
+        return "redirect:shared/dashboard";
     }
 
     @GetMapping("/my_doctors")

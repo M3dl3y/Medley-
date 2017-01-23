@@ -49,6 +49,17 @@ public class Prescription {
     @Column(nullable = false)
     private Long prescribedQuantity;
 
+    @Column(nullable = true)
+    private Long pillsTaken;
+
+    public Long getPillsTaken() {
+        return pillsTaken;
+    }
+
+    public void setPillsTaken(Long pillsTaken) {
+        this.pillsTaken = pillsTaken;
+    }
+
     @ManyToOne
     private User user;
 

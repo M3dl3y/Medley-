@@ -16,7 +16,7 @@
                 <h4 class="modal-title" id="medicationCardLabel">Add a medication</h4>
             </div>
             <div class="modal-body">
-                <form id="addPrescriptionForm" th:action="@{/addPrescription}" method="post"
+                <form id="addPrescriptionForm" th:action="@{/dashboard}" method="post"
                       th:object="${prescription}">
                     <div class="form-group">
                         <label for="prescriptionName">Name of Medication:</label>
