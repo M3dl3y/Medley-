@@ -93,7 +93,6 @@ public class UserController extends BaseController {
             currentPr.setPillsTaken((long) 0);
             currentPr.setDaySupply(currentPr.getDaySupply() - 1);
         }
-
         prescriptionsDao.save(currentPr);
 
         return "redirect:/dashboard";
