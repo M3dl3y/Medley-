@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface Users extends CrudRepository<User, Long> {
     public User findByUsername(String username);
-//
-    @Query("select u.id from User u where u.generated_identifier = ?")
-    public Long findByDocNum(Long id);
+
+    @Query("select u from User u where u.generated_identifier = ?1")
+    public User findByDocNum(Long id);
 
 }

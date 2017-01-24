@@ -117,9 +117,8 @@ public class UserController extends BaseController {
         System.out.println("dockey "+ docKey );
         dpr.setPatient(loggedInUser().getId());
         System.out.println("user id " + loggedInUser().getId());
-        System.out.println("here is some more text");
-        System.out.println("doctors id " + usersDao.findByDocNum(docKey));
-        dpr.setDoctor(usersDao.findByDocNum(docKey)); // this needs to use the "docKey"
+        System.out.println("doctors id " + usersDao.findByDocNum(docKey).getId());
+        dpr.setDoctor(usersDao.findByDocNum(docKey).getId()); // this needs to use the "docKey"
         docPatientDao.save(dpr);
         return "shared/viewLinkedUsers";
     }

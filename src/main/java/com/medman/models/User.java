@@ -95,8 +95,6 @@ public class User {
     @Column(nullable = true)
     private Long generated_identifier;
 
-    @Column(nullable = true)
-    private boolean accountVerified;
 
     @Column(nullable = true)
     private String npiNumber;
@@ -135,7 +133,7 @@ public class User {
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.Id = id;
     }
 
     public String getFirstName() {
