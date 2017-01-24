@@ -63,7 +63,7 @@ public class UserController extends BaseController {
         return "shared/dashboard";
     }
 
-    @PostMapping("/dashboard")
+    @PostMapping("/addPrescription")
     public String addMedication(
             @Valid Prescription prescription,
             @RequestParam(name = "medicationId") Long medicationId,
@@ -86,8 +86,9 @@ public class UserController extends BaseController {
     public String takenMed(@RequestParam("id") Long id) {
         Prescription currentPr = prescriptionsDao.findOne(id);
         System.out.println(currentPr);
-        long ppd;
-        currentPr.setDosageFrequency(currentPr.getPrescribedQuantity()/currentPr.getDaySupply());
+        if (currentPr.getDosageFrequency() == 0) {
+            currentPr.setDosageFrequency(currentPr.getPrescribedQuantity()/currentPr.getDaySupply());
+        }
         currentPr.setPillsTaken(currentPr.getPillsTaken() + 1);
         if (currentPr.getPillsTaken().equals(currentPr.getDosageFrequency())) {
             currentPr.setPillsTaken((long) 0);
