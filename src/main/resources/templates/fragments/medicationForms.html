@@ -25,7 +25,7 @@
                         <select id="medicationId" name="medicationId" th:required="required" class="form-control">
                             <option th:each="medication : ${medications}"
                                     th:value="${medication.id}"
-                                    th:text="${medication.genericName} + ${medication.brandName}">
+                                    th:text="${medication.genericName} + ' ' + ${medication.brandName}">
                             </option>
                         </select>
                     </div>

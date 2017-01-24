@@ -22,7 +22,7 @@ public class Reminder {
     private LocalDateTime reminderDate;
 
     @ManyToOne
-    private Long userId;
+    private User user;
 
     public Long getId() {
         return Id;
@@ -48,12 +48,12 @@ public class Reminder {
         this.reminderDate = reminderDate;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     //    public Long getUserId() {

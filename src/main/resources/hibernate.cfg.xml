@@ -33,6 +33,9 @@
         <mapping class="com.medman.models.Role"/>
         <mapping class="com.medman.models.Medication"/>
         <mapping class="com.medman.models.Prescription"/>
+        <mapping class="com.medman.models.AppointmentTime"/>
+        <mapping class="com.medman.models.Reminder"/>
+
 
         <!--<mapping class="com.medman.models.Reminder"/>-->
         <!--<mapping class="com.medman.models.NotificationSetting"/>-->
