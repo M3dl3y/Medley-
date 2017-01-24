@@ -50,6 +50,9 @@ public class UserController extends BaseController {
     @Autowired
     Messages messageDao;
 
+    @Autowired
+    DoctorPatients docPatientDao;
+
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
@@ -102,9 +105,22 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/my_doctors")
-    public String showMyDoctors(Model model) {
+    public String showMyDoctors() {
         // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
         // current logged in user's connected users should be called here and it should show their info.
+        return "shared/viewLinkedUsers";
+    }
+
+    @PostMapping("/my_doctors")
+    public String setDoctor(@RequestParam("docKey") Long docKey) {
+        DoctorPatientRelationship dpr = new DoctorPatientRelationship();
+        System.out.println("dockey "+ docKey );
+        dpr.setPatient(loggedInUser().getId());
+        System.out.println("user id " + loggedInUser().getId());
+        System.out.println("here is some more text");
+        System.out.println("doctors id " + usersDao.findByDocNum(docKey));
+        dpr.setDoctor(usersDao.findByDocNum(docKey)); // this needs to use the "docKey"
+        docPatientDao.save(dpr);
         return "shared/viewLinkedUsers";
     }
 

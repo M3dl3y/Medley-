@@ -45,10 +45,11 @@
             </div>
             <div class="modal-body">
 
-                <form id="addDoctorForm"> <!--th:action="" method="post" th:object=""-->
+                <form id="addDoctorForm" th:action="@{/my_doctors}" th:method="POST"> <!--th:action="" method="post" th:object=""-->
                     <div class="form-group">
                         <label for="addADoctor">What's your doctors key code:</label>
-                        <input type="text" class="form-control" id="addADoctor" placeholder="Key code"   />
+                        <input type="text" class="form-control" id="addADoctor" placeholder="Key code" name="docKey"/>
+                        <button type="submit" class="btn btn-primary">Add Doctor</button>
                         <!--<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>-->
                     </div>
                 </form>

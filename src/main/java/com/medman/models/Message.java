@@ -17,8 +17,16 @@ public class Message {
     @Column (nullable = false)
     private String messageContent;
 
+//    public DoctorPatientRelationship getRelationship() {
+//        return relationship;
+//    }
+//
+//    public void setRelationship(DoctorPatientRelationship relationship) {
+//        this.relationship = relationship;
+//    }
+//
 //    @Column
-//    private Long relationship;
+//    private DoctorPatientRelationship relationship;
 
     public Message() {}
 
@@ -51,11 +59,4 @@ public class Message {
         this.messageContent = messageContent;
     }
 
-    //    public long getRelationship() {
-//        return relationship;
-//    }
-//
-//    public void setRelationship(long relationship) {
-//        this.relationship = relationship;
-//    }
 }
