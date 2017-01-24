@@ -85,7 +85,6 @@ public class UserController extends BaseController {
     @PostMapping("/dashboard/medTaken")
     public String takenMed(@RequestParam("id") Long id) {
         Prescription currentPr = prescriptionsDao.findOne(id);
-        System.out.println(currentPr);
         if (currentPr.getDosageFrequency() == 0) {
             currentPr.setDosageFrequency(currentPr.getPrescribedQuantity()/currentPr.getDaySupply());
         }
