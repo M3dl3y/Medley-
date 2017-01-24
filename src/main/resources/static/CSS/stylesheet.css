@@ -3,6 +3,7 @@ body{
     display: flex;
     min-height:100vh;
     flex-direction: column;
+    -webkit-font-smoothing: antialiased;
 }
 
 main{
@@ -135,9 +136,6 @@ main{
     display: none;
 }
 
-.card{
-    box-shadow: #dadad7 5px 5px 5px;
-}
 .iconFooter{
     margin-right: 2%;
     margin-left: 2%;
@@ -155,9 +153,23 @@ main{
 
 .infoCard{
     box-shadow: 5px 5px 5px #e0dad1;
-
 }
 
+#logo{
+    padding-top: 7px;
+}
+
+.cardSpace{
+    margin-left: 6% !important;
+}
+
+.dash-icons{
+    padding-top: 7%;
+}
+
+.cardSegment{
+    margin-bottom: 5%;
+}
 
 @media screen and (max-width: 992px) {
     #moreInfo, #heartDiv, #calendarDiv, #reminderDiv {
@@ -172,5 +184,8 @@ main{
     }
 }
 
+.cards>button{
+    top: -9%;
+}
 
 

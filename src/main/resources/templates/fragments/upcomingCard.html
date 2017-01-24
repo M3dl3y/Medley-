@@ -5,30 +5,52 @@
 </head>
 <body>
 
-
-<!--Upcoming Card-->
-<div id="contactCard" class="col-md-4 card" th:fragment="upcomingCard">
-
-    <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-            <h3 class="panel-title text-center" id="todaysDate">Date</h3>
+<div th:fragment="upcomingCard">
+    <div class="card cardSpace hoverable medium col m3">
+        <div class="card-image waves-effect waves-block waves-ligh center-align">
+            <i class="large activator material-icons dash-icons">schedule</i>
         </div>
-        <div class="list-group">
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4 center-align">Upcoming<i class="material-icons right">more_vert</i></span>
+            <div class="divider"></div>
 
-            <a class="list-group-item" data-toggle="modal" data-target="#addAppointment" href="#">
-                <h4 class="list-group-item-heading"><i class="fa fa-calendar-o appointmentIcon"
-                                                       aria-hidden="true"></i>Appointments</h4>
-            </a>
+            <!--Modal Trigger to add medications-->
+            <button data-target="addAppointmentForm" class="btn btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></button>
 
-            <a class="list-group-item" data-toggle="modal" data-target="#addReminder" href="#">
-                <h4 class="list-group-item-heading"><i class="fa fa-clock-o remindersIcon"
-                                                       aria-hidden="true"></i>Reminders</h4>
-            </a>
-
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+            <p>Here is some more information about this product that is only revealed once clicked on.</p>
         </div>
     </div>
+</div>
 
-</div><!--contact card-->
+
+
+
+<!--&lt;!&ndash;Upcoming Card&ndash;&gt;-->
+<!--<div id="contactCard" class="col-md-4 card" th:fragment="upcomingCard">-->
+
+    <!--<div class="panel panel-default">-->
+        <!--<div class="panel-heading clearfix">-->
+            <!--<h3 class="panel-title text-center" id="todaysDate">Date</h3>-->
+        <!--</div>-->
+        <!--<div class="list-group">-->
+
+            <!--<a class="list-group-item" data-toggle="modal" data-target="#addAppointment" href="#">-->
+                <!--<h4 class="list-group-item-heading"><i class="fa fa-calendar-o appointmentIcon"-->
+                                                       <!--aria-hidden="true"></i>Appointments</h4>-->
+            <!--</a>-->
+
+            <!--<a class="list-group-item" data-toggle="modal" data-target="#addReminder" href="#">-->
+                <!--<h4 class="list-group-item-heading"><i class="fa fa-clock-o remindersIcon"-->
+                                                       <!--aria-hidden="true"></i>Reminders</h4>-->
+            <!--</a>-->
+
+        <!--</div>-->
+    <!--</div>-->
+
+<!--</div>&lt;!&ndash;contact card&ndash;&gt;-->
 
 
 </body>
