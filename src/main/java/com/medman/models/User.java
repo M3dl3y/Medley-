@@ -258,14 +258,6 @@ public class User {
         this.generated_identifier = generated_identifier;
     }
 
-    public boolean isAccountVerified() {
-        return accountVerified;
-    }
-
-    public void setAccountVerified(boolean accountVerified) {
-        this.accountVerified = accountVerified;
-    }
-
     public String getNpiNumber() {
         return npiNumber;
     }
