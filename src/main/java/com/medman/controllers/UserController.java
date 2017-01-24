@@ -105,9 +105,8 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/my_doctors")
-    public String showMyDoctors() {
-        // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
-        // current logged in user's connected users should be called here and it should show their info.
+    public String showMyDoctors(Model model) {
+
         return "shared/viewLinkedUsers";
     }
 
