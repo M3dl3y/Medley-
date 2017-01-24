@@ -20,7 +20,7 @@
                         <i class="fa fa-exclamation-circle fa-3x alertIcon" aria-hidden="true"></i>
                         <h4>Medication<span id="medicationAlertNumber" class="label label-danger"></span></h4>
                         <div th:each="prescription : ${lowSupplyPrescriptions}">
-                            <h5 th:text="${prescription.medication.brandName}">sameple</h5>
+                            <h5 th:text="${prescription.medication.brandName}">sample</h5>
                         </div>
                         <!--By assigning an id to the span, we can input a number here that will reflect how many medications need a patients attention-->
                     </a>
