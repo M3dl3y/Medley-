@@ -1,6 +1,7 @@
 package com.medman.models;
 
 import com.medman.utils.LocalDateTimePersistenceConverter;
+import org.hibernate.Session;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -192,7 +193,7 @@ public class Prescription {
     public String toString() {
         return "day supply: " + daySupply +
                 "id: " + getId() +
-                " dosage ammount " + dosageAmount +
+                " dosage amount " + dosageAmount +
                 " dosage_form : " + dosageForm +
                 " dosage_frequency: " + dosageFrequency +
                 " dosage interval: " + dosageInterval +
@@ -203,4 +204,7 @@ public class Prescription {
                 " sig: " + sig +
                 " strength: " + strength;
     }
+
+
+//    "select * from prescriptions where day_supply <= 3;";
 }

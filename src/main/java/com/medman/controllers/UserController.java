@@ -1,7 +1,7 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
-import com.medman.repositories.PrescriptionRepository;
+import com.medman.models.PrescriptionRepository;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +59,8 @@ public class UserController extends BaseController {
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
         model.addAttribute("medications", medicationsDao.findAll());
+        model.addAttribute("lowSupplyPrescriptions", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
+        // add to model list of prescriptions with low daysSupply to display in alert panel
 
         return "shared/dashboard";
     }
@@ -94,7 +96,8 @@ public class UserController extends BaseController {
             currentPr.setDaySupply(currentPr.getDaySupply() - 1);
         }
         prescriptionsDao.save(currentPr);
-
+        // when daySuuply hits a certain number, we should send a text message here.
+        // prescriptions with low daysSupply should be calculated here and placed in a list.
         return "redirect:/dashboard";
     }
 
