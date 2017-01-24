@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Table(name = "doctor_patient_relationships")
 public class DoctorPatientRelationship {
 
+    public DoctorPatientRelationship() {}
+
     @Id
     @GeneratedValue
     private Long Id;

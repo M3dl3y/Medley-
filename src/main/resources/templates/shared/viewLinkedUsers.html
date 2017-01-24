@@ -10,6 +10,10 @@
 
 <h1 class="text-center">My Doctors</h1>
 
+<div th:each="doctor: ${doctors}" th:object="${doctor}">
+    <p th:text="*{lastName}">testing</p>
+</div>
+
 <div class="doctorDisplay">
     <div class="doctorImg col-md-2 col-md-offset-1">
         <h1>IMG</h1>

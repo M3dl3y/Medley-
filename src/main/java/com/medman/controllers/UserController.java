@@ -106,6 +106,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
+//        model.addAttribute("doctors", docPatientDao.findDoctorsByUser(loggedInUser().getId()));
 
         return "shared/viewLinkedUsers";
     }
