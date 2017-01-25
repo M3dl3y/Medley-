@@ -14,12 +14,24 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
+import com.twilio.sdk.resource.factory.MessageFactory;
+import com.twilio.sdk.resource.instance.Message;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+
 
 /**
  * Created by jessedavila on 1/17/17.
