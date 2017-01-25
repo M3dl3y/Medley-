@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -106,7 +107,13 @@ public class UserController extends BaseController {
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
-//        model.addAttribute("doctors", docPatientDao.findDoctorsByPatient(loggedInUser().getId()));
+
+        List<Long> patientIds = docPatientDao.findByDoctor(loggedInUser().getId());
+        for (Long patient : patientIds) {
+            System.out.println("patient id " + patient);
+            List<User> myUsers = new ArrayList<>();
+                    myUsers.add(usersDao.findOne(patient));
+        }
         return "shared/viewLinkedUsers";
     }
 
@@ -138,6 +145,7 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
 //        message.setUser(loggedInUser()); work this in somehow
+        message.setUser(loggedInUser());
         messageDao.save(message);
         return "redirect:/dashboard";
 
