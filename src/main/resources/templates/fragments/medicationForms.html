@@ -19,11 +19,11 @@
 
 
                 <form id="addPrescriptionForm" th:action="@{/addPrescription}" method="post"
-                      th:object="${prescription}">
+                      th:object="${prescriptions}">
                     <div class="form-group">
 
                         <select id="medicationId" name="medicationId" th:required="required" class="form-control">
-                            <option th:each="medication : ${medications}"
+                            <option th:each="medication : ${savedMedications}"
                                     th:value="${medication.id}"
                                     th:text="${medication.genericName} + ' ' + ${medication.brandName}">
                             </option>
@@ -32,8 +32,7 @@
 
                     <div class="form-group">
                         <label for="prescribedDate">Prescribed Date:</label>
-                        <input type="date" class="form-control" id="prescribedDate"
-                               th:field="*{prescribedDate}"/>
+                        <input type="date" class="form-control" id="prescribedDate" th:field="*{prescribedDate}"/>
                         <p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"></p>
                     </div>
                     <div class="form-group">

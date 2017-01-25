@@ -19,9 +19,10 @@
                 <h4 class="list-group-item-heading"><i class="fa fa-calendar-o appointmentIcon"
                                                        aria-hidden="true"></i>Appointments</h4>
 
-                <div th:each="appointment : ${appointmentTimes}" >
+                <div th:each="savedAppointment : ${savedAppointments}" th:object="${savedAppointment}">
                     <div class="list-group">
-                        <h5 th:text="*{name} + ' ' + *{appointmentDate}"></h5>
+                        <h5 th:text="*{title}"></h5>
+                        <h5 th:text="*{appDate}"></h5>
                     </div>
                 </div>
             </a>
@@ -29,9 +30,10 @@
             <a class="list-group-item" data-toggle="modal" data-target="#addReminder" href="#">
                 <h4 class="list-group-item-heading"><i class="fa fa-clock-o remindersIcon"
                                                        aria-hidden="true"></i>Reminders</h4>
-                <div th:each="reminder : ${reminders}" >
+                <div th:each="savedReminder : ${savedReminders}" th:object="${savedReminder}">
                     <div class="list-group">
-                        <h5 th:text="*{reminder} + ' ' + *{reminderDate}"></h5>
+                        <h5 th:text="*{title}"></h5>
+                        <h5 th:text="*{reminderDate}"></h5>
                     </div>
                 </div>
             </a>

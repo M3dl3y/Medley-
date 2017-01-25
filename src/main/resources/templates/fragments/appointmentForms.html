@@ -16,16 +16,16 @@
             </div>
             <div class="modal-body">
 
-                <form id="addAppointmentForm" th:action="@{/addAppointment}" th:method="POST" th:object="${appointment}">
+                <form id="addAppointmentForm" th:action="@{/addAppointment}" th:method="POST" th:object="${appointments}">
                     <div class="form-group">
                         <label for="name">Name this appointment:</label>
-                        <input type="text" class="form-control" id="name" th:field="*{name}" />
-                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                        <input type="text" class="form-control" id="name" th:field="*{title}" />
+                        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
                     </div>
                     <div class="form-group">
                         <label for="appointmentDate">Appointment date and time:</label>
-                        <input type="datetime-local" class="form-control" id="appointmentDate" th:field="*{appointmentDate}" />
-                        <p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>
+                        <input type="datetime-local" class="form-control" id="appointmentDate" th:field="*{appDate}" />
+                        <p th:if="${#fields.hasErrors('appDate')}" th:errors="*{appDate}"></p>
                     </div>
                     <div class="form-group">
                         <label for="notes">Notes:</label>

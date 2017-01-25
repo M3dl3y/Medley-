@@ -15,7 +15,7 @@ public class Reminder {
     private Long Id;
 
     @Column
-    private String reminder;
+    private String title;
 
     @Column
     @Convert(converter = LocalDateTimePersistenceConverter.class)
@@ -32,12 +32,12 @@ public class Reminder {
         Id = id;
     }
 
-    public String getReminder() {
-        return reminder;
+    public String getTitle() {
+        return title;
     }
 
-    public void setReminder(String reminder) {
-        this.reminder = reminder;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDateTime getReminderDate() {

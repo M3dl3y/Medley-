@@ -18,11 +18,11 @@ public class AppointmentTime {
 
     @Column
     @NotBlank(message = "Please name this appointment")
-    private String name;
+    private String title;
 
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private Date appointmentDate;
+    private Date appDate;
 
     @Column
     private String notes;
@@ -34,28 +34,27 @@ public class AppointmentTime {
 
     }
 
-    public AppointmentTime(long Id, String name, Date appointmentDate, String notes){
+    public AppointmentTime(long Id, String title, Date appDate, String notes){
         this.Id = Id;
-        this.name = name;
-        this.appointmentDate = appointmentDate;
+        this.title = title;
+        this.appDate = appDate;
         this.notes = notes;
     }
 
-
-    public String getName() {
-        return name;
+    public Date getAppDate() {
+        return appDate;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAppDate(Date appDate) {
+        this.appDate = appDate;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
+    public String getTitle() {
+        return title;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getNotes() {
@@ -72,5 +71,13 @@ public class AppointmentTime {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 }

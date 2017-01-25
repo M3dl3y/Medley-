@@ -43,4 +43,5 @@
         <!--<mapping class="com.medman.models.AppointmentTime"/>-->
         <!-- ... -->
     </session-factory>
+
 </hibernate-configuration>
