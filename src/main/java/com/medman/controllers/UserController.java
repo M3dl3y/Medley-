@@ -136,8 +136,14 @@ public class UserController extends BaseController {
         model.addAttribute("message", new Message());
 
         List<User> myUsers = new ArrayList<>();
+        List<DoctorPatientRelationship> relationships= new ArrayList<>();
         getConnectedUsers(myUsers);
         model.addAttribute("users", myUsers);
+        for (User connectedUser: myUsers) {
+            relationships.add(docPatientDao.findByIds(loggedInUser().getId(), connectedUser.getId()));
+            System.out.println("this is a dpr: " + relationships);
+        }
+        model.addAttribute("dpr", relationships);
         // take the doctors id and find the dpr where patient matches loggedInUser and doctor matches user.id;
 
         return "shared/messages";
@@ -155,6 +161,8 @@ public class UserController extends BaseController {
             model.addAttribute("message", message);
             return "shared/dashboard";
         }
+
+
         message.setUser(loggedInUser());
         message.setDpr(docPatientDao.findOne(1l)); // this is hardcoded
         messageDao.save(message);

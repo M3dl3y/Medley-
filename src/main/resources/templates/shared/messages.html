@@ -10,6 +10,9 @@
 
 
 <div>
+        <div class="list-group" th:each="messageGroup : ${dpr}">
+            <h1 th:text="*{message.messageContent}">Sample</h1>
+        </div>
     <div class="doctorImg col-md-2 col-md-offset-1">
         <h1>IMG</h1>
         <button class="btn btn-default">Send Message</button>
@@ -58,7 +61,8 @@
             <div class="panel-heading clearfix">
                 <h3 class="panel-title pull-left">Message History</h3>
             </div>
-            <div class="list-group">
+            <!--<div class="list-group" th:each="messageGroup : ${dpr}">-->
+                <!--<h1 th:text="*{message.messageContent}">Sample</h1>-->
                 <div class="list-group-item">
                     <p class="list-group-item-text">Name</p>
                     <h4 class="list-group-item-heading">John Smith</h4>
@@ -79,7 +83,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 

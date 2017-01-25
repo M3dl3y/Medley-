@@ -22,9 +22,30 @@ public class DoctorPatientRelationship {
     @Column
     private Long Patient;
 
-    @OneToMany(mappedBy = "dpr")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dpr")
     private List<Message> messages;
 
+    public DoctorPatientRelationship(DoctorPatientRelationship dpr) {
+        Id = dpr.Id;
+        Doctor = dpr.Doctor;
+        Patient = dpr.Patient;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public Long getDoctor() {
         return Doctor;

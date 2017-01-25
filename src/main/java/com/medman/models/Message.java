@@ -17,6 +17,10 @@ public class Message {
     @Column (nullable = false)
     private String messageContent;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dpr_id")
+    private DoctorPatientRelationship dpr;
+
     public DoctorPatientRelationship getDpr() {
         return dpr;
     }
@@ -25,9 +29,6 @@ public class Message {
         this.dpr = dpr;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dpr_id")
-    private DoctorPatientRelationship dpr;
 
     public Message() {}
 
