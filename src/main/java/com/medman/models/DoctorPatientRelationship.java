@@ -1,6 +1,7 @@
 package com.medman.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by jessedavila on 1/24/17.
@@ -20,6 +21,10 @@ public class DoctorPatientRelationship {
 
     @Column
     private Long Patient;
+
+    @OneToMany(mappedBy = "dpr")
+    private List<Message> messages;
+
 
     public Long getDoctor() {
         return Doctor;

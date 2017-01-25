@@ -17,16 +17,9 @@ public class Message {
     @Column (nullable = false)
     private String messageContent;
 
-//    public DoctorPatientRelationship getRelationship() {
-//        return relationship;
-//    }
-//
-//    public void setRelationship(DoctorPatientRelationship relationship) {
-//        this.relationship = relationship;
-//    }
-//
-//    @Column
-//    private DoctorPatientRelationship relationship;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dpr_id")
+    private DoctorPatientRelationship dpr;
 
     public Message() {}
 

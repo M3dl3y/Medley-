@@ -11,7 +11,7 @@
 <h1 class="text-center">My Doctors</h1>
 
 <div th:each="user: ${users}" th:object="${user}">
-    <p th:text="*{lastName}">testing</p>
+    <h1 th:text="*{lastName}">testing</h1>
 </div>
 
 <div class="doctorDisplay">
