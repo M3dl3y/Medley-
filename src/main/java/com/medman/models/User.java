@@ -111,6 +111,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Prescription> prescriptions;
 
+    @OneToMany(mappedBy = "user")
+    private List<Reminder> reminders;
+
+    @OneToMany(mappedBy = "user")
+    private List<AppointmentTime> appointmentTimes;
+
     public User(){}
 
     public User(User user) {
@@ -154,53 +160,6 @@ public class User {
         this.lastName = lastName;
     }
 
-//    public Date getDateOfBirth() {
-//        return dateOfBirth;
-//    }
-//
-//    public void setDateOfBirth(Date dateOfBirth) {
-//        this.dateOfBirth = dateOfBirth;
-//    }
-//
-//    public String getPhoneNumber() {
-//        return phoneNumber;
-//    }
-//
-//    public void setPhoneNumber(String phoneNumber) {
-//        this.phoneNumber = phoneNumber;
-//    }
-//
-//    public String getStreetAddress() {
-//        return streetAddress;
-//    }
-//
-//    public void setStreetAddress(String streetAddress) {
-//        this.streetAddress = streetAddress;
-//    }
-//
-//    public String getCity() {
-//        return city;
-//    }
-//
-//    public void setCity(String city) {
-//        this.city = city;
-//    }
-//
-//    public String getState() {
-//        return state;
-//    }
-//
-//    public void setState(String state) {
-//        this.state = state;
-//    }
-//
-//    public Long getZipCode() {
-//        return zipCode;
-//    }
-//
-//    public void setZipCode(Long zipCode) {
-//        this.zipCode = zipCode;
-//    }
 
     public String getUsername() {
         return username;
@@ -293,6 +252,22 @@ public class User {
     }
 
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public List<Reminder> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(List<Reminder> reminders) {
+        this.reminders = reminders;
+    }
+
 
 //    public boolean hasRole(String role) {
 //        role = role.toUpperCase();
@@ -313,6 +288,53 @@ public class User {
 //                ", enabled=" + enabled +
 //                ", roles=" + roles +
 //                '}';
+//    }
+//    public Date getDateOfBirth() {
+//        return dateOfBirth;
+//    }
+//
+//    public void setDateOfBirth(Date dateOfBirth) {
+//        this.dateOfBirth = dateOfBirth;
+//    }
+//
+//    public String getPhoneNumber() {
+//        return phoneNumber;
+//    }
+//
+//    public void setPhoneNumber(String phoneNumber) {
+//        this.phoneNumber = phoneNumber;
+//    }
+//
+//    public String getStreetAddress() {
+//        return streetAddress;
+//    }
+//
+//    public void setStreetAddress(String streetAddress) {
+//        this.streetAddress = streetAddress;
+//    }
+//
+//    public String getCity() {
+//        return city;
+//    }
+//
+//    public void setCity(String city) {
+//        this.city = city;
+//    }
+//
+//    public String getState() {
+//        return state;
+//    }
+//
+//    public void setState(String state) {
+//        this.state = state;
+//    }
+//
+//    public Long getZipCode() {
+//        return zipCode;
+//    }
+//
+//    public void setZipCode(Long zipCode) {
+//        this.zipCode = zipCode;
 //    }
 
 }
