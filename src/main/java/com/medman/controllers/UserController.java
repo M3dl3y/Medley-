@@ -107,18 +107,14 @@ public class UserController extends BaseController {
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
 //        model.addAttribute("doctors", docPatientDao.findDoctorsByUser(loggedInUser().getId()));
-
         return "shared/viewLinkedUsers";
     }
 
     @PostMapping("/my_doctors")
     public String setDoctor(@RequestParam("docKey") Long docKey) {
         DoctorPatientRelationship dpr = new DoctorPatientRelationship();
-        System.out.println("dockey "+ docKey );
         dpr.setPatient(loggedInUser().getId());
-        System.out.println("user id " + loggedInUser().getId());
-        System.out.println("doctors id " + usersDao.findByDocNum(docKey).getId());
-        dpr.setDoctor(usersDao.findByDocNum(docKey).getId()); // this needs to use the "docKey"
+        dpr.setDoctor(usersDao.findByDocNum(docKey).getId());
         docPatientDao.save(dpr);
         return "shared/viewLinkedUsers";
     }
