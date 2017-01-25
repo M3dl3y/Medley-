@@ -17,7 +17,7 @@
 
             <div th:each="savedPrescription : ${savedPrescriptions}" th:object="${savedPrescription}" th:if="${not #lists.isEmpty(savedPrescriptions)}">
                 <div class="list-group">
-                    <!--<form th:action="@{/dashboard/medTaken}" th:method="post">-->
+                    <form th:action="@{/dashboard/medTaken}" th:method="post">
                     <h5 th:text="*{prescribedDate}">"</h5>
                     <h5 th:text="*{strength}"></h5>
                     <h5 th:text="*{medication.brandName}"></h5>
@@ -34,7 +34,7 @@
                             <i class="fa fa-sort-desc pull-right fa-2x" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <!--</form>-->
+                    </form>
 
                 </div>
             </div>
