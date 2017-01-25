@@ -15,16 +15,14 @@ public class Reminder {
     private Long Id;
 
     @Column
-    private String reminder;
+    private String title;
 
     @Column
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime reminderDate;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Long userId;
-
-
+    @ManyToOne
+    private User user;
 
     public Long getId() {
         return Id;
@@ -34,12 +32,12 @@ public class Reminder {
         Id = id;
     }
 
-    public String getReminder() {
-        return reminder;
+    public String getTitle() {
+        return title;
     }
 
-    public void setReminder(String reminder) {
-        this.reminder = reminder;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDateTime getReminderDate() {
@@ -50,7 +48,15 @@ public class Reminder {
         this.reminderDate = reminderDate;
     }
 
-//    public Long getUserId() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    //    public Long getUserId() {
 //        return userId;
 //    }
 //

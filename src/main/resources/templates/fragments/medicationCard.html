@@ -15,12 +15,12 @@
         <div class="list-group">
 
 
-            <div  th:each="prescription : ${prescriptions}">
+            <div th:each="savedPrescription : ${savedPrescriptions}" th:object="${savedPrescription}" th:if="${not #lists.isEmpty(savedPrescriptions)}">
                 <div class="list-group">
-                    <form th:action="@{/dashboard/medTaken}" th:method="post" th:object="${prescription}">
+                    <!--<form th:action="@{/dashboard/medTaken}" th:method="post">-->
                     <h5 th:text="*{prescribedDate}">"</h5>
                     <h5 th:text="*{strength}"></h5>
-                    <h5 th:text="${prescription.medication.brandName}"></h5>
+                    <h5 th:text="*{medication.brandName}"></h5>
                     <h5 class="prescriptionDaySupply" th:text="*{daySupply}"></h5> <!--// needed for alerts-->
                     <h5 class="prescriptionQuantity" th:text="*{prescribedQuantity}"></h5>
                         <input type="hidden" th:value="*{id}" name="id" />
@@ -34,12 +34,10 @@
                             <i class="fa fa-sort-desc pull-right fa-2x" aria-hidden="true"></i>
                         </a>
                     </div>
-                    </form>
+                    <!--</form>-->
 
                 </div>
             </div>
-
-
 
             <!--This progress bar would be a visual representation of how the patient is progressing with their daily medications.-->
             <div class="list-group-item">
