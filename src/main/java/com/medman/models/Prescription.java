@@ -1,11 +1,13 @@
 package com.medman.models;
 
 import com.medman.utils.LocalDateTimePersistenceConverter;
+import org.hibernate.Session;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "prescriptions")
@@ -195,7 +197,7 @@ public class Prescription {
     public String toString() {
         return "day supply: " + daySupply +
                 "id: " + getId() +
-                " dosage ammount " + dosageAmount +
+                " dosage amount " + dosageAmount +
                 " dosage_form : " + dosageForm +
                 " dosage_frequency: " + dosageFrequency +
                 " dosage interval: " + dosageInterval +

@@ -1,7 +1,7 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
-import com.medman.repositories.PrescriptionRepository;
+import com.medman.models.PrescriptionRepository;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,6 @@ import java.util.List;
  * Created by jessedavila on 1/17/17.
  */
 @Controller
-//@RequestMapping("/user")
 public class UserController extends BaseController {
 
 
@@ -50,7 +50,13 @@ public class UserController extends BaseController {
    Appointments appointmentsDao;
 
     @Autowired
+    ReminderRepository remindersDao;
+
+    @Autowired
     Messages messageDao;
+
+    @Autowired
+    DoctorPatients docPatientDao;
 
 
     @GetMapping("/dashboard")
@@ -87,7 +93,6 @@ public class UserController extends BaseController {
     @PostMapping("/dashboard/medTaken")
     public String takenMed(@RequestParam("id") Long id) {
         Prescription currentPr = prescriptionsDao.findOne(id);
-        System.out.println(currentPr);
         if (currentPr.getDosageFrequency() == 0) {
             currentPr.setDosageFrequency(currentPr.getPrescribedQuantity()/currentPr.getDaySupply());
         }
@@ -96,7 +101,6 @@ public class UserController extends BaseController {
             currentPr.setPillsTaken((long) 0);
             currentPr.setDaySupply(currentPr.getDaySupply() - 1);
         }
-
         prescriptionsDao.save(currentPr);
 
         return "redirect:/dashboard";
@@ -104,8 +108,22 @@ public class UserController extends BaseController {
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
-        // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
-        // current logged in user's connected users should be called here and it should show their info.
+        List<User> myUsers = new ArrayList<>();
+        List<Long> patientIds = docPatientDao.findByPatient(loggedInUser().getId());
+        for (Long patient : patientIds) {
+            System.out.println("patient id " + patient);
+            myUsers.add(usersDao.findOne(patient));
+        }
+        model.addAttribute("users", myUsers);
+        return "shared/viewLinkedUsers";
+    }
+
+    @PostMapping("/my_doctors")
+    public String setDoctor(@RequestParam("docKey") Long docKey) {
+        DoctorPatientRelationship dpr = new DoctorPatientRelationship();
+        dpr.setPatient(loggedInUser().getId());
+        dpr.setDoctor(usersDao.findByDocNum(docKey).getId());
+        docPatientDao.save(dpr);
         return "shared/viewLinkedUsers";
     }
 
@@ -128,6 +146,7 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
 //        message.setUser(loggedInUser()); work this in somehow
+        message.setUser(loggedInUser());
         messageDao.save(message);
         return "redirect:/dashboard";
 
@@ -145,28 +164,7 @@ public class UserController extends BaseController {
 
     }
 
-//    @PostMapping("/editLoginCred")
-//    public String editUserDetailForm(
-//            @Valid User user,
-//            Errors validation,
-//            Model model
-//    ){
-//        if(validation.hasErrors()){
-//            model.addAttribute("errors", validation);
-//            model.addAttribute("user", user);
-//            return "shared/edit";
-//        }
-//        loggedInUser().setUsername(user.getUsername());
-//        User existingUser = usersDao.findByUsername(loggedInUser().getUsername());
-//        existingUser.setUsername(user.getUsername());
-//        existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
-//        usersDao.save(existingUser);
-//        return "redirect:/dashboard";
-//    }
-
-
-
-    @PostMapping("/editUserDetail")
+    @PostMapping("/edit")
     public String editUserInfo(
             @Valid User user,
             Errors validation,

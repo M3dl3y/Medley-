@@ -8,9 +8,9 @@ INSERT INTO medly_db.roles (role) VALUES ('ROLE_DOCTOR');
 INSERT INTO medly_db.roles (role) VALUES ('ROLE_PATIENT');
 
 
-INSERT INTO users(id, first_name, last_name, username, email, password, enabled, role_id)
+INSERT INTO users(account_verified, first_name, last_name, username, email, password, enabled, role_id)
 VALUES(1, 'joe', 'joe', 'test', 'test@test.com', '$2a$10$O5lrKNXfAdWWpf0P3Ij7Du03J7WuCRRtVDT7JGJwHTighGmweFhDO', 1, 3),
-      (2, 'tom', 'tom', 'root', 'tester@test.com', '$2a$12$P4EO3NigCVDe5QD5YEDx4Og4p80VrLu8ka4Hp.qc97YcsNVIjkytq', 1, 3);
+      (1, 'tom', 'tom', 'root', 'tester@test.com', '$2a$10$mhGBce4Tu5TPLooNjVfOpObdX2tPblf/UKkLRniEtB4C.49EmrFb.', 1, 3);
 
 INSERT INTO medly_db.medications (brand_name, generic_name)
     VALUES ('Albuterol', 'ProAir® HFA'),

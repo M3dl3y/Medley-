@@ -17,8 +17,9 @@ public class Message {
     @Column (nullable = false)
     private String messageContent;
 
-//    @Column
-//    private Long relationship;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dpr_id")
+    private DoctorPatientRelationship dpr;
 
     public Message() {}
 
@@ -51,11 +52,4 @@ public class Message {
         this.messageContent = messageContent;
     }
 
-    //    public long getRelationship() {
-//        return relationship;
-//    }
-//
-//    public void setRelationship(long relationship) {
-//        this.relationship = relationship;
-//    }
 }
