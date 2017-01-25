@@ -122,11 +122,7 @@ public class UserController extends BaseController {
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
         List<User> myUsers = new ArrayList<>();
-        List<Long> patientIds = docPatientDao.findByPatient(loggedInUser().getId());
-        for (Long patient : patientIds) {
-            System.out.println("patient id " + patient);
-            myUsers.add(usersDao.findOne(patient));
-        }
+        getConnectedUsers(myUsers);
         model.addAttribute("users", myUsers);
         return "shared/viewLinkedUsers";
     }
@@ -145,11 +141,7 @@ public class UserController extends BaseController {
         model.addAttribute("message", new Message());
 
         List<User> myUsers = new ArrayList<>();
-        List<Long> patientIds = docPatientDao.findByPatient(loggedInUser().getId());
-        for (Long patient : patientIds) {
-            System.out.println("patient id " + patient);
-            myUsers.add(usersDao.findOne(patient));
-        }
+        getConnectedUsers(myUsers);
         model.addAttribute("users", myUsers);
         // take the doctors id and find the dpr where patient matches loggedInUser and doctor matches user.id;
 
@@ -267,6 +259,15 @@ public class UserController extends BaseController {
         remindersDao.save(reminder);
         model.addAttribute("reminders", new Reminder());
         return "redirect:/dashboard";
+    }
+
+    private List<User> getConnectedUsers(List<User> myUsers) {
+        List<Long> patientIds = docPatientDao.findByPatient(loggedInUser().getId());
+        for (Long patient : patientIds) {
+            System.out.println("patient id " + patient);
+            myUsers.add(usersDao.findOne(patient));
+        }
+        return myUsers;
     }
 }
 
