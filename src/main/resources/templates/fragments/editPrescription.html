@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="/fragments/header :: header(${'Dashboard'})">
+</head>
+<body>
+
+!-- Modal Structure -->
+<div>
+
+</div>
+<div th:id="*{name}" >
+
+</div>
+<div id="editPrescription" class="modal modal-fixed-footer" th:fragment="editPrescription">
+    <div class="modal-content">
+        <h4>Edit Prescription</h4>
+        <form name="addPrescriptionForm" id="addPrescriptionForm" th:action="@{/editPrescription}" method="post" th:object="${prescription}">
+            <div class="input-field col s6">
+                <input type="text" id="autocomplete-input" class="autocomplete" th:field="*{name}" />
+                <label for="autocomplete-input">Name of Medication</label>
+            </div>
+            <div class="input-field col s6">
+                <label for="prescribedDate">Prescribed Date</label>
+                <input type="date" class="validate datepicker" id="prescribedDate"
+                       th:field="*{prescribedDate}"/>
+                <p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"></p>
+            </div>
+            <div class="input-field col s6">
+                <label for="strength">Strength</label>
+                <input type="text" class="validate" id="strength" th:field="*{strength}"/>
+                <p th:if="${#fields.hasErrors('strength')}" th:errors="*{strength}"></p>
+            </div>
+            <div class="input-field col s6">
+                <label for="sig">Directions</label>
+                <input type="text" class="validate" id="sig"
+                       placeholder="Take 1 tablet by mouth twice a day for thirty days."
+                       th:field="*{sig}"/>
+                <p th:if="${#fields.hasErrors('sig')}" th:errors="*{sig}"></p>
+            </div>
+            <div class="input-field col s6">
+                <label for="daySupply">Day Supply</label>
+                <input type="text" class="validate" id="daySupply"
+                       th:field="*{daySupply}"/>
+                <p th:if="${#fields.hasErrors('daySupply')}" th:errors="*{daySupply}"></p>
+            </div>
+            <div class="input-field col s6">
+                <label for="prescribedQuantity">Prescribed Quantity</label>
+                <input type="text" class="validate" id="prescribedQuantity" th:field="*{prescribedQuantity}"/>
+                <p th:if="${#fields.hasErrors('prescribedQuantity')}" th:errors="*{prescribedQuantity}"></p>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button id="editPrescriptionSubmit"  type="submit" class="btn btn-info">Edit</button>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

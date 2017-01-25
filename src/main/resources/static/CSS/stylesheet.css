@@ -1,26 +1,13 @@
-html,body
-{
-    width: 100%;
-    margin-top: 3% !important;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
-}
-
 body{
     background-color: white;
-
+    display: flex;
+    min-height:100vh;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
 }
 
-nav {
-    margin-bottom: 0 !important;
-}
-
-.brand{
-    position: absolute;
-    left:48%;
-    margin-left: -48px;
-    display: block;
+main{
+    flex: 1 0 auto;
 }
 
 #splashTopImage{
@@ -30,8 +17,6 @@ nav {
     height: 0;
     padding-bottom: 30%;
     background-size: 100%;
-    background-image: url("../img/splash-top.jpg");
-    background-repeat: no-repeat;
     opacity: 0.8;
     box-shadow: 5px 5px 5px #e0dad1;
 }
@@ -43,10 +28,12 @@ nav {
     height: 0;
     padding-bottom: 50%;
     background-size: 100%;
-    background-image: url("../img/splash-bottom.jpg");
-    background-repeat: no-repeat;
     opacity: 0.8;
     box-shadow: 5px 5px 5px #e0dad1;
+}
+
+.parallax-container img {
+    bottom: 0;
 }
 
 .circleFeature{
@@ -149,13 +136,9 @@ nav {
     display: none;
 }
 
-.card{
-    box-shadow: #dadad7 5px 5px 5px;
-}
-
-#aboutLink{
-    color: #878e87;
-    margin-top:2%;
+.iconFooter{
+    margin-right: 2%;
+    margin-left: 2%;
 }
 
 #messageHistory{
@@ -163,10 +146,6 @@ nav {
     overflow: scroll;
 }
 
-#footer{
-    margin-top: 3%;
-    margin-bottom: 5%;
-}
 
 #alertMessage{
     display: hidden;
@@ -174,23 +153,29 @@ nav {
 
 .infoCard{
     box-shadow: 5px 5px 5px #e0dad1;
+}
 
+#logo{
+    padding-top: 7px;
+}
+
+.cardSpace{
+    margin-left: 6% !important;
+    overflow: visible !important;
+}
+
+.dash-icons{
+    padding-top: 7%;
+}
+
+.cardSegment{
+    margin-bottom: 5%;
 }
 
 @media screen and (max-width: 992px) {
     #moreInfo, #heartDiv, #calendarDiv, #reminderDiv {
         display: none !important;
 
-    }
-}
-@media screen and (max-width: 768px){
-    body{
-        margin-top: 10% !important;
-    }
-}
-@media screen and (max-width: 482px){
-    body{
-        margin-top: 15% !important;
     }
 }
 @media screen and (max-width: 992px) {
@@ -200,5 +185,10 @@ nav {
     }
 }
 
+.addButton{
+    right: -5%;
+    position: absolute;
+    top: -5%;
+}
 
 

@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -18,11 +19,15 @@ public class AppointmentTime {
 
     @Column
     @NotBlank(message = "Please name this appointment")
-    private String title;
+    private String name;
 
     @Column
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private Date appDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date appointmentDate;
+
+    @Column
+    @DateTimeFormat(pattern = "HH:mm")
+    private Time appointmentTimes;
 
     @Column
     private String notes;
@@ -34,27 +39,29 @@ public class AppointmentTime {
 
     }
 
-    public AppointmentTime(long Id, String title, Date appDate, String notes){
+    public AppointmentTime(long Id, String name, Date appointmentDate, Time appointmentTimes, String notes){
         this.Id = Id;
-        this.title = title;
-        this.appDate = appDate;
+        this.name = name;
+        this.appointmentDate = appointmentDate;
+        this.appointmentTimes = appointmentTimes;
         this.notes = notes;
     }
 
-    public Date getAppDate() {
-        return appDate;
+
+    public String getName() {
+        return name;
     }
 
-    public void setAppDate(Date appDate) {
-        this.appDate = appDate;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTitle() {
-        return title;
+    public Date getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
     public String getNotes() {
@@ -71,6 +78,14 @@ public class AppointmentTime {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Time getAppointmentTimes() {
+        return appointmentTimes;
+    }
+
+    public void setAppointmentTimes(Time appointmentTimes) {
+        this.appointmentTimes = appointmentTimes;
     }
 
     public Long getId() {

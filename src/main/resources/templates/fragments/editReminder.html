@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="/fragments/header :: header(${'Dashboard'})">
+</head>
+<body>
+
+!-- Modal Structure -->
+<div id="editUserDetails" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Edit Account Information</h4>
+        <form name="editUserDetailForm" id="edit" th:action="@{/editUserDetail}" method="post" th:object="${user}">
+            <div class="input-field">
+                <label for="firstName">First Name:</label>
+                <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}"  />
+                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+            </div>
+            <div class="input-field">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Last Name" th:field="*{lastName}" />
+                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+            </div>
+            <div class="input-field">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}"  />
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button id="editUserDetailSubmit"  type="submit" class="btn btn-info">Add</button>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>

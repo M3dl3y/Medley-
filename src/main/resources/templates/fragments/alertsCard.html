@@ -5,38 +5,21 @@
 </head>
 <body>
 
-
-<!--Alerts Card -->
-<div id="alertsCard" class="col-md-4 card" th:fragment="alertsCard">
-
-    <div class="panel panel-default bootcards-summary">
-        <div class="panel-heading">
-            <h3 class="panel-title text-center">Alerts</h3>
+<div th:fragment="alertsCard">
+    <div class="card cardSpace medium hoverable col m3">
+        <div class="card-image waves-effect waves-block waves-light center-align">
+            <i class="activator material-icons large dash-icons">error</i>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-6 col-sm-6">
-                    <a class="bootcards-summary-item" href="#">
-                        <i class="fa fa-exclamation-circle fa-3x alertIcon" aria-hidden="true"></i>
-                        <h4>Medication<span id="medicationAlertNumber" class="label label-danger"></span></h4>
-                        <div th:each="prescription : ${lowSupplyPrescriptions}">
-                            <h5 th:text="${prescription.medication.brandName}">sample</h5>
-                        </div>
-                        <!--By assigning an id to the span, we can input a number here that will reflect how many medications need a patients attention-->
-                    </a>
-                </div>
-                <div class="col-xs-6 col-sm-6">
-                    <a class="bootcards-summary-item" th:href="@{/messages}">
-                        <i class="fa fa-comment fa-3x messageIcon" aria-hidden="true"></i>
-                        <h4>Messages<span class="label label-info">3</span></h4>
-                        <!--By assigning an id to the span, we can input a number here that will reflect how many messages need a patients attention-->
-                    </a>
-                </div>
-            </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4 center-align">Alerts<i class="material-icons right">more_vert</i></span>
+            <div class="divider"></div>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+            <p>Here is some more information about this product that is only revealed once clicked on.</p>
         </div>
     </div>
-
-</div><!--contact card-->
+</div>
 
 
 
