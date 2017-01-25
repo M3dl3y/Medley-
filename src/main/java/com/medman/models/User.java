@@ -95,8 +95,6 @@ public class User {
     @Column(nullable = true)
     private Long generated_identifier;
 
-    @Column(nullable = true)
-    private boolean accountVerified;
 
     @Column(nullable = true)
     private String npiNumber;
@@ -104,8 +102,8 @@ public class User {
     @OneToOne
     private Role role = new Role(3);
 
-    @OneToMany(mappedBy = "user")
-    private List<Message> messages;
+//    @OneToMany(mappedBy = "user")
+//    private List<Message> messages;
 
 
     @OneToMany(mappedBy = "user")
@@ -141,7 +139,7 @@ public class User {
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.Id = id;
     }
 
     public String getFirstName() {
@@ -219,14 +217,6 @@ public class User {
         this.generated_identifier = generated_identifier;
     }
 
-    public boolean isAccountVerified() {
-        return accountVerified;
-    }
-
-    public void setAccountVerified(boolean accountVerified) {
-        this.accountVerified = accountVerified;
-    }
-
     public String getNpiNumber() {
         return npiNumber;
     }
@@ -252,13 +242,13 @@ public class User {
     }
 
 
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
+//    public List<Message> getMessages() {
+//        return messages;
+//    }
+//
+//    public void setMessages(List<Message> messages) {
+//        this.messages = messages;
+//    }
 
     public List<Reminder> getReminders() {
         return reminders;

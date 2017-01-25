@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -52,11 +53,20 @@ public class UserController extends BaseController {
     @Autowired
     Messages messageDao;
 
+    @Autowired
+    DoctorPatients docPatientDao;
+
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
 
         model.addAttribute("user", loggedInUser());
+        model.addAttribute("prescription", new Prescription());
+        model.addAttribute("appointment", new AppointmentTime());
+        model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
+        model.addAttribute("medications", medicationsDao.findAll());
+        model.addAttribute("lowSupplyPrescriptions", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
+        // add to model list of prescriptions with low daysSupply to display in alert panel
         model.addAttribute("prescriptions", new Prescription());
         model.addAttribute("appointments", new AppointmentTime());
         model.addAttribute("medications", new Medication());
@@ -91,7 +101,6 @@ public class UserController extends BaseController {
     @PostMapping("/dashboard/medTaken")
     public String takenMed(@RequestParam("id") Long id) {
         Prescription currentPr = prescriptionsDao.findOne(id);
-        System.out.println(currentPr);
         if (currentPr.getDosageFrequency() == 0) {
             currentPr.setDosageFrequency(currentPr.getPrescribedQuantity()/currentPr.getDaySupply());
         }
@@ -107,8 +116,22 @@ public class UserController extends BaseController {
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
-        // model.addAttribute("users", new User()); Need to call on user relationships between patient and doctor.
-        // current logged in user's connected users should be called here and it should show their info.
+        List<User> myUsers = new ArrayList<>();
+        List<Long> patientIds = docPatientDao.findByPatient(loggedInUser().getId());
+        for (Long patient : patientIds) {
+            System.out.println("patient id " + patient);
+            myUsers.add(usersDao.findOne(patient));
+        }
+        model.addAttribute("users", myUsers);
+        return "shared/viewLinkedUsers";
+    }
+
+    @PostMapping("/my_doctors")
+    public String setDoctor(@RequestParam("docKey") Long docKey) {
+        DoctorPatientRelationship dpr = new DoctorPatientRelationship();
+        dpr.setPatient(loggedInUser().getId());
+        dpr.setDoctor(usersDao.findByDocNum(docKey).getId());
+        docPatientDao.save(dpr);
         return "shared/viewLinkedUsers";
     }
 
@@ -131,6 +154,7 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
 //        message.setUser(loggedInUser()); work this in somehow
+        message.setUser(loggedInUser());
         messageDao.save(message);
         return "redirect:/dashboard";
 
@@ -199,8 +223,6 @@ public class UserController extends BaseController {
     public String logout() {
         return "redirect:/";
     }
-
-
 
     @PostMapping("/addAppointment")
     public String addAppointment(@Valid AppointmentTime appointmentTime, Errors validation, Model model) {
