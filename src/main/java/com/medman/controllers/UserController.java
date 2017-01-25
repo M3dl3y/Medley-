@@ -66,11 +66,6 @@ public class UserController extends BaseController {
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
         model.addAttribute("medications", medicationsDao.findAll());
         model.addAttribute("lowSupplyPrescriptions", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
-        prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()).forEach(prescription -> {
-            System.out.println("id: " + prescription.getId());
-            System.out.println("user_id: " + prescription.getUser().getId());
-            System.out.println("how many left: " + prescription.getDaySupply());
-        });
         // add to model list of prescriptions with low daysSupply to display in alert panel
         model.addAttribute("prescriptions", new Prescription());
         model.addAttribute("appointments", new AppointmentTime());
