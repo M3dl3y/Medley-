@@ -10,7 +10,7 @@
 
 <h1 class="text-center">My Doctors</h1>
 
-<div th:each="doctor: ${doctors}" th:object="${doctor}">
+<div th:each="user: ${users}" th:object="${user}">
     <p th:text="*{lastName}">testing</p>
 </div>
 

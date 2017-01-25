@@ -21,5 +21,8 @@ public interface DoctorPatients extends CrudRepository<DoctorPatientRelationship
     @Query("select dpr.Patient from DoctorPatientRelationship dpr where dpr.Doctor = ?1")
     List<Long> findByDoctor(Long id);
 
+    @Query("select dpr.Doctor from DoctorPatientRelationship dpr where dpr.Patient = ?1")
+    List<Long> findByPatient(Long id);
+
 
 }

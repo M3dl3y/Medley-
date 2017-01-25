@@ -13,4 +13,5 @@ public interface Users extends CrudRepository<User, Long> {
     @Query("select u from User u where u.generated_identifier = ?1")
     public User findByDocNum(Long id);
 
+
 }

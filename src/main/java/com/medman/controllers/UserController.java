@@ -107,13 +107,13 @@ public class UserController extends BaseController {
 
     @GetMapping("/my_doctors")
     public String showMyDoctors(Model model) {
-
-        List<Long> patientIds = docPatientDao.findByDoctor(loggedInUser().getId());
+        List<User> myUsers = new ArrayList<>();
+        List<Long> patientIds = docPatientDao.findByPatient(loggedInUser().getId());
         for (Long patient : patientIds) {
             System.out.println("patient id " + patient);
-            List<User> myUsers = new ArrayList<>();
-                    myUsers.add(usersDao.findOne(patient));
+            myUsers.add(usersDao.findOne(patient));
         }
+        model.addAttribute("users", myUsers);
         return "shared/viewLinkedUsers";
     }
 
