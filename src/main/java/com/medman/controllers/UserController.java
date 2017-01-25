@@ -138,6 +138,16 @@ public class UserController extends BaseController {
     @GetMapping("/messages")
     public String showMessages(Model model) {
         model.addAttribute("message", new Message());
+
+        List<User> myUsers = new ArrayList<>();
+        List<Long> patientIds = docPatientDao.findByPatient(loggedInUser().getId());
+        for (Long patient : patientIds) {
+            System.out.println("patient id " + patient);
+            myUsers.add(usersDao.findOne(patient));
+        }
+        model.addAttribute("users", myUsers);
+        // take the doctors id and find the dpr where patient matches loggedInUser and doctor matches user.id;
+
         return "shared/messages";
     }
 
@@ -153,8 +163,8 @@ public class UserController extends BaseController {
             model.addAttribute("message", message);
             return "shared/dashboard";
         }
-//        message.setUser(loggedInUser()); work this in somehow
         message.setUser(loggedInUser());
+        message.setDpr(docPatientDao.findOne(1l));
         messageDao.save(message);
         return "redirect:/dashboard";
 
