@@ -8,22 +8,26 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<h1 class="text-center spaceBelow" id="greeting"></h1>
+<h1 class="center-align spaceBelow" id="greeting"></h1>
 
 <!--If patient is logged in -->
 <div sec:authorize="hasRole('PATIENT')">
 
-    <div th:replace="/fragments/alertsCard :: alertsCard"></div>
+    <div class="row">
+        <div th:replace="/fragments/alertsCard :: alertsCard"></div>
 
-    <div th:replace="/fragments/medicationCard :: medicationCard"></div>
+        <div th:replace="/fragments/medicationCard :: medicationCard"></div>
+
+        <div th:replace="/fragments/upcomingCard :: upcomingCard"></div>
+    </div>
 
     <div th:replace="/fragments/medicationForms :: medicationForms"></div>
-
-    <div th:replace="/fragments/upcomingCard :: upcomingCard"></div>
 
     <div th:replace="/fragments/appointmentForms :: appointmentForms"></div>
 
     <div th:replace="/fragments/reminderForms :: reminderForms"></div>
+
+
 
 </div>
 

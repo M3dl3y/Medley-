@@ -8,7 +8,7 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<h1 class="text-center">Login</h1>
+<h1 class="center-align">Login</h1>
 <div th:if="${param.error}">
     Invalid Username and Password.
 </div>
@@ -16,37 +16,39 @@
     You have been logged out.
 </div>
 
-<!--Login Error-->
-<div id="alertMessage" class="alert alert-danger col-md-8 col-md-offset-2 hidden" role="alert">
-    <h5 id="usernameErrorMessage" class="hidden" >Please enter your username</h5>
-    <h5 id="passwordErrorMessage" class="hidden" >Please enter your password</h5>
+<!--&lt;!&ndash;Login Error&ndash;&gt;-->
+<!--<div id="alertMessage" class="alert alert-danger col-md-8 col-md-offset-2 hidden" role="alert">-->
+    <!--<h5 id="usernameErrorMessage" class="hidden" >Please enter your username</h5>-->
+    <!--<h5 id="passwordErrorMessage" class="hidden" >Please enter your password</h5>-->
+<!--</div>-->
+
+
+<div class="container">
+    <form class="col s12" th:action="@{/login}" method="post">
+        <div class="row">
+            <div class="row input-field col s6 offset-s3">
+                <i class="material-icons prefix">person</i>
+                <input type="text" class="validate" id="username" name="username" placeholder="Username" />
+                <label for="username"></label>
+            </div>
+            <div class="row input-field col s6 offset-s3">
+                <i class="material-icons prefix">vpn_key</i>
+                <input type="password" class="validate" id="password" name="password" placeholder="Password" />
+                <label for="password"></label>
+            </div>
+        </div>
+        <div class="center-align">
+            <button id="loginButton" type="submit" class="btn btn-info" value="Log In">Submit</button>
+            <h6>Need an account? <a th:href="@{/create}">Sign-up</a></h6>
+        </div>
+    </form>
 </div>
 
 
 
-<!--Login Form-->
-<form class="col-md-8 col-md-offset-2 text-center" th:action="@{/login}" method="post">
-    <div class="form-group" id="usernameInput">
-        <label for="username"></label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
-    </div>
-    <div class="form-group" id="passwordInput">
-        <label for="password"></label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
-    </div>
 
-    <button id="loginButton" type="submit" class="btn btn-info" value="Log In">Submit</button>
-</form>
-
-
-
-
-<div class="col-md-10 col-md-offset-1">
-    <h5 class="text-center">Need an account? <a th:href="@{/create}">Sign-up</a></h5>
-</div>
 
 <div th:replace="/fragments/footer :: footer"></div>
-
 
 <div th:replace="/fragments/javascript :: javascript"></div>
 </body>

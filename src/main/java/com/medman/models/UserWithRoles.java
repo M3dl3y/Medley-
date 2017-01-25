@@ -58,7 +58,7 @@ public class UserWithRoles extends User implements UserDetails {
     public static interface PrescriptionRepository extends CrudRepository<Prescription, Long> {
     }
 
-    public static interface MedicationRepository extends CrudRepository<Medication, Long> {
-
-    }
+//    public static interface MedicationRepository extends CrudRepository<Medication, Long> {
+//
+//    }
 }

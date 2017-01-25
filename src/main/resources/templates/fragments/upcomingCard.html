@@ -5,41 +5,67 @@
 </head>
 <body>
 
-
-<!--Upcoming Card-->
-<div id="contactCard" class="col-md-4 card" th:fragment="upcomingCard">
-
-    <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-            <h3 class="panel-title text-center" id="todaysDate">Date</h3>
+<div th:fragment="upcomingCard">
+    <div class="card cardSpace hoverable medium col m3">
+        <button data-target="addAppointment" class="addButton btn btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></button>
+        <div class="card-image waves-effect waves-block waves-light center-align">
+            <i class="large activator material-icons dash-icons">schedule</i>
         </div>
-        <div class="list-group">
-
-            <a class="list-group-item" data-toggle="modal" data-target="#addAppointment" href="#">
-                <h4 class="list-group-item-heading"><i class="fa fa-calendar-o appointmentIcon"
-                                                       aria-hidden="true"></i>Appointments</h4>
-
-                <div th:each="savedAppointment : ${savedAppointments}" th:object="${savedAppointment}">
-                    <div class="list-group">
-                        <h5 th:text="*{title}"></h5>
-                        <h5 th:text="*{appDate}"></h5>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4 center-align">Upcoming<i class="material-icons right">more_vert</i></span>
+            <div class="divider"></div>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Upcoming<i class="material-icons right">close</i></span>
+            <div th:each="appointments : ${appointments}" th:object="${appointments}">
+                <a th:href="*{'#' + name}" ><p th:text="*{name}"></p></a>
+            </div>
+        </div>
+        <div th:each="appointments : ${appointments}" th:object="${appointments}">
+            <div th:id="*{name}" class="modal bottom-sheet">
+                <div class="modal-content">
+                    <h4 th:text="*{name}">Medication Name</h4>
+                    <p th:text="*{notes}">A bunch of text</p>
+                    <a th:href="*{'#' + Id}">Edit</a>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Dismiss</a>
+                </div>
+            </div>
+            <div th:each="appointments : ${appointments}" th:object="${appointments}">
+                <div th:id="*{Id}" class="modal">
+                    <div class="modal-content">
+                        <h4>Edit Appointment</h4>
+                        <form name="editAppointmentForm" id="editAppointmentForm" th:action="@{/editAppointment}" th:method="POST" th:object="${appointment}">
+                            <div class="input-field">
+                                <label for="name">Edit Reminder</label>
+                                <input name="id" th:value="${appointments.Id}" type="hidden" />
+                                <input type="text" class="validate" id="name" name="name" th:value="${appointments.name}"  />
+                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                            </div>
+                            <div class="input-field">
+                                <label for="appointmentDate">Reminder Date</label>
+                                <input type="date" class="validate datepicker" id="appointmentDate" name="appointmentDate" th:value="${appointments.appointmentDate}" />
+                                <p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>
+                            </div>
+                            <div>
+                                <label for="appointmentTime">Appointment Time</label>
+                                <input type="time" class="validate" id="appointmentTime" name="appointmentTime" th:value="${appointments.appointmentTimes}" />
+                                <p th:if="${#fields.hasErrors('appointmentTimes')}" th:errors="*{appointmentTimes}"></p>
+                            </div>
+                            <div class="input-field">
+                                <label for="notes">Notes:</label>
+                                <textarea class="materialize-textarea" id="notes" name="notes" th:value="${appointments.notes}"></textarea>
+                                <p th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></p>
+                            </div>
+                            <input type="submit" value="Edit" />
+                        </form>
                     </div>
                 </div>
-            </a>
-
-            <a class="list-group-item" data-toggle="modal" data-target="#addReminder" href="#">
-                <h4 class="list-group-item-heading"><i class="fa fa-clock-o remindersIcon"
-                                                       aria-hidden="true"></i>Reminders</h4>
-                <div th:each="savedReminder : ${savedReminders}" th:object="${savedReminder}">
-                    <div class="list-group">
-                        <h5 th:text="*{title}"></h5>
-                        <h5 th:text="*{reminderDate}"></h5>
-                    </div>
-                </div>
-            </a>
-
+            </div>
         </div>
     </div>
+</div>
 
 </div><!--contact card-->
 

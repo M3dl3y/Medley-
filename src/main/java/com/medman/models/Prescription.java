@@ -25,6 +25,9 @@ public class Prescription {
     private String strength;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private String sig;
 
     @Column(nullable = true)
@@ -62,9 +65,9 @@ public class Prescription {
     @ManyToOne
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medication_id")
-    private Medication medication;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "medication_id")
+//    private Medication medication;
 
     public Prescription (){}
 
@@ -72,6 +75,7 @@ public class Prescription {
         Id = prescription.Id;
         prescribedDate = prescription.prescribedDate;
         strength = prescription.strength;
+        name = prescription.name;
         sig = prescription.sig;
         dosageAmount = prescription.dosageAmount;
         dosageForm = prescription.dosageForm;
@@ -89,7 +93,7 @@ public class Prescription {
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.Id = id;
     }
 
     public Date getPrescribedDate() {
@@ -181,13 +185,13 @@ public class Prescription {
     }
 
 
-    public Medication getMedication() {
-        return medication;
-    }
-
-    public void setMedication(Medication medication) {
-        this.medication = medication;
-    }
+//    public Medication getMedication() {
+//        return medication;
+//    }
+//
+//    public void setMedication(Medication medication) {
+//        this.medication = medication;
+//    }
 
     @Override
     public String toString() {
@@ -203,5 +207,13 @@ public class Prescription {
                 " prescribed quantity: " + prescribedQuantity +
                 " sig: " + sig +
                 " strength: " + strength;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
