@@ -7,20 +7,62 @@
 
 <div th:fragment="upcomingCard">
     <div class="card cardSpace hoverable medium col m3">
-        <div class="card-image waves-effect waves-block waves-ligh center-align">
+        <button data-target="addAppointment" class="addButton btn btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></button>
+        <div class="card-image waves-effect waves-block waves-light center-align">
             <i class="large activator material-icons dash-icons">schedule</i>
         </div>
         <div class="card-content">
             <span class="card-title activator grey-text text-darken-4 center-align">Upcoming<i class="material-icons right">more_vert</i></span>
             <div class="divider"></div>
-
-            <!--Modal Trigger to add medications-->
-            <button data-target="addAppointmentForm" class="btn btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></button>
-
         </div>
         <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            <span class="card-title grey-text text-darken-4">Upcoming<i class="material-icons right">close</i></span>
+            <div th:each="appointments : ${appointments}" th:object="${appointments}">
+                <a th:href="*{'#' + name}" ><p th:text="*{name}"></p></a>
+            </div>
+        </div>
+        <div th:each="appointments : ${appointments}" th:object="${appointments}">
+            <div th:id="*{name}" class="modal bottom-sheet">
+                <div class="modal-content">
+                    <h4 th:text="*{name}">Medication Name</h4>
+                    <p th:text="*{notes}">A bunch of text</p>
+                    <a th:href="*{'#' + Id}">Edit</a>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Dismiss</a>
+                </div>
+            </div>
+            <div th:each="appointments : ${appointments}" th:object="${appointments}">
+                <div th:id="*{Id}" class="modal">
+                    <div class="modal-content">
+                        <h4>Edit Appointment</h4>
+                        <form name="editAppointmentForm" id="editAppointmentForm" th:action="@{/editAppointment}" th:method="POST" th:object="${appointment}">
+                            <div class="input-field">
+                                <label for="name">Edit Reminder</label>
+                                <input name="id" th:value="${appointments.Id}" type="hidden" />
+                                <input type="text" class="validate" id="name" name="name" th:value="${appointments.name}"  />
+                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                            </div>
+                            <div class="input-field">
+                                <label for="appointmentDate">Reminder Date</label>
+                                <input type="date" class="validate datepicker" id="appointmentDate" name="appointmentDate" th:value="${appointments.appointmentDate}" />
+                                <p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>
+                            </div>
+                            <div>
+                                <label for="appointmentTime">Appointment Time</label>
+                                <input type="time" class="validate" id="appointmentTime" name="appointmentTime" th:value="${appointments.appointmentTimes}" />
+                                <p th:if="${#fields.hasErrors('appointmentTimes')}" th:errors="*{appointmentTimes}"></p>
+                            </div>
+                            <div class="input-field">
+                                <label for="notes">Notes:</label>
+                                <textarea class="materialize-textarea" id="notes" name="notes" th:value="${appointments.notes}"></textarea>
+                                <p th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></p>
+                            </div>
+                            <input type="submit" value="Edit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

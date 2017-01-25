@@ -8,20 +8,21 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<h1 class="text-center">Profile</h1>
+<h1 class="center-align">Profile</h1>
 
-<div class="col-md-10 col-md-offset-1">
+<div class="col m6 offset-3 row">
 
-    <div class="col-md-10 col-md-offset-1">
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editLoginCred">Login Information</button>
-    </div>
-    <div class="col-md-10 col-md-offset-1">
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editUserSettings">Personal Information</button>
-    </div>
+    <button data-target="editUserDetails" class="btn btn-floating btn-large waves-effect waves-light"><i class="addButton material-icons">assignment_ind</i></button>
+
+    <!--<div class="col m4">-->
+        <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editLoginCred">Login Information</button>-->
+    <!--</div>-->
+    <!--<div class="col m4">-->
+        <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editUserSettings">Personal Information</button>-->
+    <!--</div>-->
 
     <div th:replace="/fragments/editUserDetailsForm :: editUserDetailsForm"></div>
 
-    <div th:replace="/fragments/editLoginCredForm :: editLoginCredForm"></div>
 
 
 

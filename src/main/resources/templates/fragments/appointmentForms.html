@@ -7,31 +7,34 @@
 
 <div th:fragment="appointmentForms">
     <!-- Modal Structure -->
-    <div id="addAppointmentForm" class="modal modal-fixed-footer">
+    <div id="addAppointment" class="modal modal-fixed-footer">
         <div class="modal-content">
-            <h4>Add Appointment</h4>
-            <form name="addAppointment" id="addAppointment" th:action="@{/addAppointment}" th:method="POST" th:object="${appointment}">
-                <div class="form-group">
-                    <label for="name">Name this appointment:</label>
-                    <input type="text" class="form-control" id="name" th:field="*{name}" />
+            <h4>Add Reminder</h4>
+            <form name="addAppointmentForm" id="addAppointmentForm" th:action="@{/addAppointment}" th:method="POST" th:object="${appointment}">
+                <div class="input-field">
+                    <label for="name">Name this Reminder</label>
+                    <input type="text" class="validate" id="name" th:field="*{name}" />
                     <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                 </div>
-                <div class="form-group">
-                    <label for="appointmentDate">Appointment date and time:</label>
-                    <input type="datetime-local" class="form-control" id="appointmentDate" th:field="*{appointmentDate}" />
+                <div class="input-field">
+                    <label for="appointmentDate">Reminder Date</label>
+                    <input type="date" class="validate datepicker" id="appointmentDate" th:field="*{appointmentDate}" />
                     <p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>
                 </div>
-                <div class="form-group">
+                <div>
+                    <label for="appointmentTime">Appointment Time</label>
+                    <input type="time" class="validate" id="appointmentTime" th:field="*{appointmentTimes}" />
+                    <p th:if="${#fields.hasErrors('appointmentTimes')}" th:errors="*{appointmentTimes}"></p>
+                </div>
+                <div class="input-field">
                     <label for="notes">Notes:</label>
-                    <input type="text" class="form-control" id="notes" th:field="*{notes}" />
+                    <textarea class="materialize-textarea" id="notes" th:field="*{notes}"></textarea>
                     <p th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></p>
                 </div>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="submit"  class="btn btn-primary">Save appointment</button>
             </form>
         </div>
         <div class="modal-footer">
-            <button id="addAppointmentForm"  type="submit" class="btn btn-info">Add</button>
+            <button id="addAppointmentSubmit"  type="submit" class="btn btn-info">Add</button>
         </div>
     </div>
 </div>

@@ -17,8 +17,6 @@ main{
     height: 0;
     padding-bottom: 30%;
     background-size: 100%;
-    background-image: url("../img/splash-top.jpg");
-    background-repeat: no-repeat;
     opacity: 0.8;
     box-shadow: 5px 5px 5px #e0dad1;
 }
@@ -30,10 +28,12 @@ main{
     height: 0;
     padding-bottom: 50%;
     background-size: 100%;
-    background-image: url("../img/splash-bottom.jpg");
-    background-repeat: no-repeat;
     opacity: 0.8;
     box-shadow: 5px 5px 5px #e0dad1;
+}
+
+.parallax-container img {
+    bottom: 0;
 }
 
 .circleFeature{
@@ -161,6 +161,7 @@ main{
 
 .cardSpace{
     margin-left: 6% !important;
+    overflow: visible !important;
 }
 
 .dash-icons{
@@ -184,8 +185,10 @@ main{
     }
 }
 
-.cards>button{
-    top: -9%;
+.addButton{
+    right: -5%;
+    position: absolute;
+    top: -5%;
 }
 
 

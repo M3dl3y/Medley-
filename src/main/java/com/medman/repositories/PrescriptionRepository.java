@@ -1,4 +1,4 @@
-package com.medman.models;
+package com.medman.repositories;
 
 import com.medman.models.Prescription;
 import org.springframework.data.jpa.repository.JpaRepository;

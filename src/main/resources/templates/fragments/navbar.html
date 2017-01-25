@@ -10,7 +10,7 @@
 <div th:fragment="navbar">
     <div class="nav-fixed">
         <ul id="dropdown1" class="dropdown-content">
-            <li><a th:href="@{/create}">Sign-up</a></li>
+            <li sec:authorize="!isAuthenticated()"><a th:href="@{/create}">Sign-up</a></li>
             <li class="divider"></li>
             <li><a th:href="@{/about}">About</a></li>
         </ul>
@@ -22,7 +22,7 @@
             <li class="divider"></li>
             <li><a th:href="@{/messages}">Messages</a></li>
             <li class="divider"></li>
-            <li><a th:href="@{/edit}">Settings</a></li>
+            <li class="disabled"><a th:href="@{/edit}">Settings</a></li>
             <li class="divider"></li>
             <li><a th:href="@{/logout}" id="logout_link">Logout</a></li>
         </ul>
@@ -31,7 +31,7 @@
             <li sec:authorize="hasRole('PATIENT')"><a th:href="@{/my_doctors}">Doctors</a></li>
             <li sec:authorize="hasRole('DOCTOR')"><a th:href="@{/my_doctors}" >Patients</a></li>
             <li><a th:href="@{/messages}">Messages</a></li>
-            <li><a th:href="@{/edit}">Settings</a></li>
+            <li class="disabled" ><a th:href="@{/edit}">Settings</a></li>
             <li><a th:href="@{/logout}" id="logout_link_side">Logout</a></li>
         </ul>
         <ul class="side-nav" id="mobileMenuOut" >

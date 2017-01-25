@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -41,11 +43,11 @@ public class UserController extends BaseController {
     @Autowired
     PrescriptionRepository prescriptionsDao;
 
-    @Autowired
-    MedicationRepository medicationsDao;
+//    @Autowired
+//    MedicationRepository medicationsDao;
 
-    @Autowired
-    Appointments appointmentsDao;
+   @Autowired
+   Appointments appointmentsDao;
 
     @Autowired
     Messages messageDao;
@@ -58,7 +60,7 @@ public class UserController extends BaseController {
         model.addAttribute("prescription", new Prescription());
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
-        model.addAttribute("medications", medicationsDao.findAll());
+        model.addAttribute("appointments", appointmentsDao.findByPatient(loggedInUser().getId()));
 
         return "shared/dashboard";
     }
@@ -66,7 +68,8 @@ public class UserController extends BaseController {
     @PostMapping("/addPrescription")
     public String addMedication(
             @Valid Prescription prescription,
-            @RequestParam(name = "medicationId") Long medicationId,
+//            @RequestParam(name = "medicationId") Long medicationId,
+            @RequestParam(name = "prescribedDate_submit") String prescribedDate_submit,
             Errors validation,
             Model model
     ) {
@@ -76,7 +79,6 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
-        prescription.setMedication(medicationsDao.findOne(medicationId));
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
@@ -137,12 +139,34 @@ public class UserController extends BaseController {
         if (user.getId() != loggedInUser().getId()) {
             return "/login";
         }
+        loggedInUser().setUsername(user.getUsername());
         model.addAttribute("user", user);
         return "shared/profile"; // only a logged in user can go to user/edit
 
     }
 
-    @PostMapping("/edit")
+//    @PostMapping("/editLoginCred")
+//    public String editUserDetailForm(
+//            @Valid User user,
+//            Errors validation,
+//            Model model
+//    ){
+//        if(validation.hasErrors()){
+//            model.addAttribute("errors", validation);
+//            model.addAttribute("user", user);
+//            return "shared/edit";
+//        }
+//        loggedInUser().setUsername(user.getUsername());
+//        User existingUser = usersDao.findByUsername(loggedInUser().getUsername());
+//        existingUser.setUsername(user.getUsername());
+//        existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+//        usersDao.save(existingUser);
+//        return "redirect:/dashboard";
+//    }
+
+
+
+    @PostMapping("/editUserDetail")
     public String editUserInfo(
             @Valid User user,
             Errors validation,
@@ -151,24 +175,14 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("user", user);
-            return "posts/edit";
+            return "shared/edit";
         }
 
-        User newUser = usersDao.findByUsername(loggedInUser().getUsername());
-        newUser.setFirstName(user.getFirstName());
-        newUser.setLastName(user.getLastName());
-//        newUser.setDateOfBirth(user.getDateOfBirth());
-//        newUser.setPhoneNumber(user.getPhoneNumber());
-//        newUser.setStreetAddress(user.getStreetAddress());
-//        newUser.setCity(user.getCity());
-//        newUser.setState(user.getState());
-//        newUser.setZipCode(user.getZipCode());
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        newUser.setEmail(user.getEmail());
-
-
-        usersDao.save(newUser);
+        User existingUser = usersDao.findOne(loggedInUser().getId());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setEmail(user.getEmail());
+        usersDao.save(existingUser);
         return "redirect:/dashboard";
 
     }
@@ -186,7 +200,7 @@ public class UserController extends BaseController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
-        return "redirect:/about";
+        return "redirect:/login";
 
     }
 
@@ -200,7 +214,7 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("appointment", appointmentTime);
-            return "shared/dashboard";
+//            return "shared/dashboard";
         }
 
         appointmentTime.setUser(loggedInUser());
@@ -208,6 +222,59 @@ public class UserController extends BaseController {
         model.addAttribute("appointment", new AppointmentTime());
         return "redirect:/dashboard";
     }
+
+    @PostMapping("/editPrescription")
+    public String editPrescription(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "date") String date, @RequestParam(value = "strength") String strength,
+                                   @RequestParam(value = "sig") String sig, @RequestParam(value = "daySupply") Long daySupply, @RequestParam(value = "prescribedQuantity") Long prescribedQuantity, Model model){
+
+        Prescription pr = prescriptionsDao.findOne(id);
+        pr.setName(name);
+
+        try{
+            Date newdate = new SimpleDateFormat().parse(date);
+            pr.setPrescribedDate(newdate);
+        }catch(Exception e){
+
+        }
+
+        pr.setStrength(strength);
+        pr.setSig(sig);
+        pr.setDaySupply(daySupply);
+        pr.setPrescribedQuantity(prescribedQuantity);
+        prescriptionsDao.save(pr);
+        return "redirect:/dashboard";
+    }
+
+
+    @PostMapping("/editAppointment")
+    public String editPrescription(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "appointmentDate") String appointmentDate,
+                                   @RequestParam(value = "appointmentTime") String appointmentTime, @RequestParam(value = "notes") String notes, Model model){
+
+
+        AppointmentTime appointment = appointmentsDao.findOne(id);
+        appointment.setName(name);
+
+        DateFormat formatter = new SimpleDateFormat("HH:mm");
+
+        try{
+            Date newdate = new SimpleDateFormat().parse(appointmentDate);
+            appointment.setAppointmentDate(newdate);
+        }catch(Exception e){
+
+        }
+        try{
+            Time newTime = new Time(formatter.parse(appointmentTime).getTime());
+            appointment.setAppointmentTimes(newTime);
+        }catch (Exception e){
+
+        }
+
+        appointment.setNotes(notes);
+        appointmentsDao.save(appointment);
+        return "redirect:/dashboard";
+    }
+
+
 }
 
 
