@@ -12,4 +12,9 @@ import java.util.List;
 @Repository
 public interface DoctorPatients extends CrudRepository<DoctorPatientRelationship, Long> {
 
+//    @Query("select dpr.Doctor from DoctorPatientRelationship dpr, User u where dpr.Patient = ?1")
+//    List<User> findDoctorsByPatient(Long id);
+
+//    @Query("select dpr.Doctor from DoctorPatientRelationship dpr, User u where dpr.Patient = ?1")
+//    List<User> findDoctorsByPatient(Long id);
 }
