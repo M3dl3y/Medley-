@@ -207,6 +207,7 @@ public class UserController extends BaseController {
             @Valid User user,
             Errors validation,
             Model model
+
     ) {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
@@ -215,6 +216,7 @@ public class UserController extends BaseController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
+
         return "redirect:/about";
 
     }

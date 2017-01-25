@@ -22,17 +22,15 @@ import java.util.List;
 public class GreetingController {
 
     // Find your Account Sid and Token at twilio.com/user/account
-    public static final String ACCOUNT_SID = "ACaff88bc37e7ed52a4980273b456d28ef";
-    public static final String AUTH_TOKEN = "462fdbe629d195e949bdf65e491a529a";
-    public static final String TWILIO_NUMBER = "+12103611492";
 
-    public void sendSMS(String to) {
+
+    public void sendSMS(String body, String to) {
         try {
             TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
             // Build a filter for the MessageList
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("Body", "Hello, Welcome from Medly... pineApples!"));
+            params.add(new BasicNameValuePair("Body", body));
             params.add(new BasicNameValuePair("To", to));
             params.add(new BasicNameValuePair("From", TWILIO_NUMBER));
 
@@ -65,13 +63,14 @@ public class GreetingController {
 
     @RequestMapping("/greeting")
     public String greeting(
-            @RequestParam(value="mode", required=false, defaultValue="text") String mode,
+            @RequestParam(value="mode", required=false, defaultValue="text") String mode, String body,
             @RequestParam(value="number", required=true) String number, Model model) {
         model.addAttribute("number", number);
         model.addAttribute("mode", mode);
+        model.addAttribute("body", body);
 
         if(mode.equalsIgnoreCase("text")){
-            sendSMS(number);
+            sendSMS(body, number);
         }
         else if (mode.equalsIgnoreCase("call")) {
             makeCall(number);

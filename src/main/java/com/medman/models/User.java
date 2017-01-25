@@ -40,9 +40,9 @@ public class User {
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")
 //    private Date dateOfBirth;
 //
-//    @Column(nullable = true)
-//    @Size(min = 10, message = "Please enter your 10 digit phone number")
-//    private String phoneNumber;
+    @Column(nullable = true)
+    @Size(min = 10, message = "Please enter your 10 digit phone number")
+    private String phoneNumber;
 //
 //    @Column(nullable = true)
 //    @NotBlank(message = "Please enter your street address.")
