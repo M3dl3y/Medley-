@@ -12,10 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
@@ -45,7 +42,7 @@ public class UserController extends BaseController {
     PrescriptionRepository prescriptionsDao;
 
     @Autowired
-    Medications medicationsDao;
+    MedicationRepository medicationsDao;
 
     @Autowired
     Appointments appointmentsDao;
@@ -61,6 +58,7 @@ public class UserController extends BaseController {
         model.addAttribute("prescription", new Prescription());
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
+        model.addAttribute("medications", medicationsDao.findAll());
 
         return "shared/dashboard";
     }
@@ -68,6 +66,7 @@ public class UserController extends BaseController {
     @PostMapping("/addPrescription")
     public String addMedication(
             @Valid Prescription prescription,
+            @RequestParam(name = "medicationId") Long medicationId,
             Errors validation,
             Model model
     ) {
@@ -77,12 +76,28 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
-        prescription.setMedication(medicationsDao.findOne((long) 3));
+        prescription.setMedication(medicationsDao.findOne(medicationId));
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
+    }
 
-        
+    @PostMapping("/dashboard/medTaken")
+    public String takenMed(@RequestParam("id") Long id) {
+        Prescription currentPr = prescriptionsDao.findOne(id);
+        System.out.println(currentPr);
+        if (currentPr.getDosageFrequency() == 0) {
+            currentPr.setDosageFrequency(currentPr.getPrescribedQuantity()/currentPr.getDaySupply());
+        }
+        currentPr.setPillsTaken(currentPr.getPillsTaken() + 1);
+        if (currentPr.getPillsTaken().equals(currentPr.getDosageFrequency())) {
+            currentPr.setPillsTaken((long) 0);
+            currentPr.setDaySupply(currentPr.getDaySupply() - 1);
+        }
+
+        prescriptionsDao.save(currentPr);
+
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/my_doctors")
@@ -119,7 +134,7 @@ public class UserController extends BaseController {
     @GetMapping("/edit")
     public String editPage(Model model) {
         User user = usersDao.findOne(loggedInUser().getId());
-        if(user.getId() != loggedInUser().getId()){
+        if (user.getId() != loggedInUser().getId()) {
             return "/login";
         }
         model.addAttribute("user", user);
@@ -142,12 +157,12 @@ public class UserController extends BaseController {
         User newUser = usersDao.findByUsername(loggedInUser().getUsername());
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
-        newUser.setDateOfBirth(user.getDateOfBirth());
-        newUser.setPhoneNumber(user.getPhoneNumber());
-        newUser.setStreetAddress(user.getStreetAddress());
-        newUser.setCity(user.getCity());
-        newUser.setState(user.getState());
-        newUser.setZipCode(user.getZipCode());
+//        newUser.setDateOfBirth(user.getDateOfBirth());
+//        newUser.setPhoneNumber(user.getPhoneNumber());
+//        newUser.setStreetAddress(user.getStreetAddress());
+//        newUser.setCity(user.getCity());
+//        newUser.setState(user.getState());
+//        newUser.setZipCode(user.getZipCode());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setEmail(user.getEmail());

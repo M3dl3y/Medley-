@@ -14,7 +14,7 @@ $('#heartDiv').hover(
 $('#calendarDiv').hover(
     function() {
         $('#moreInfo').css('display', 'block');
-        $('#moreInfoDetail').append('Save appojntments and we will remind you');
+        $('#moreInfoDetail').append('Save appointments and we will remind you');
     },
     function() {
         $('#moreInfo').css('display', 'none');
@@ -24,7 +24,7 @@ $('#calendarDiv').hover(
 $('#reminderDiv').hover(
     function() {
         $('#moreInfo').css('display', 'block');
-        $('#moreInfoDetail').append('Remeber to take your pills');
+        $('#moreInfoDetail').append('Remember to take your pills');
     },
     function() {
         $('#moreInfo').css('display', 'none');
