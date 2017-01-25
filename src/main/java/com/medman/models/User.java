@@ -122,7 +122,7 @@ public class User {
         firstName = user.firstName;
         lastName = user.lastName;
 //        dateOfBirth = user.dateOfBirth;
-//        phoneNumber = user.phoneNumber;
+        phoneNumber = user.phoneNumber;
 //        streetAddress = user.streetAddress;
 //        city = user.city;
 //        state = user.state;
@@ -286,15 +286,15 @@ public class User {
 //    public void setDateOfBirth(Date dateOfBirth) {
 //        this.dateOfBirth = dateOfBirth;
 //    }
-//
-//    public String getPhoneNumber() {
-//        return phoneNumber;
-//    }
-//
-//    public void setPhoneNumber(String phoneNumber) {
-//        this.phoneNumber = phoneNumber;
-//    }
-//
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 //    public String getStreetAddress() {
 //        return streetAddress;
 //    }

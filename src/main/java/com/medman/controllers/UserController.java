@@ -2,6 +2,7 @@ package com.medman.controllers;
 
 import com.medman.models.*;
 import com.medman.models.PrescriptionRepository;
+import com.medman.utils.TwillioService;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,9 @@ public class UserController extends BaseController {
 
     @Autowired
     DoctorPatients docPatientDao;
+
+    @Autowired
+    TwillioService twillioService;
 
 
     @GetMapping("/dashboard")
@@ -216,6 +220,7 @@ public class UserController extends BaseController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
+        twillioService.sendSMS("Welcome to twillio", (user.getPhoneNumber()));
 
         return "redirect:/about";
 
@@ -232,7 +237,7 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("appointments", appointmentTime);
-//            return "shared/dashboard";
+            return "shared/dashboard";
         }
 
         appointmentTime.setUser(loggedInUser());
@@ -247,7 +252,7 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("reminders", reminder);
-//            return "shared/dashboard";
+            return "shared/dashboard";
         }
 
         reminder.setUser(loggedInUser());
