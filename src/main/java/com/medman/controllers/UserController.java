@@ -26,7 +26,6 @@ import java.util.List;
  * Created by jessedavila on 1/17/17.
  */
 @Controller
-//@RequestMapping("/user")
 public class UserController extends BaseController {
 
 
@@ -49,6 +48,9 @@ public class UserController extends BaseController {
     Appointments appointmentsDao;
 
     @Autowired
+    ReminderRepository remindersDao;
+
+    @Autowired
     Messages messageDao;
 
     @Autowired
@@ -65,6 +67,14 @@ public class UserController extends BaseController {
         model.addAttribute("medications", medicationsDao.findAll());
         model.addAttribute("lowSupplyPrescriptions", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
         // add to model list of prescriptions with low daysSupply to display in alert panel
+        model.addAttribute("prescriptions", new Prescription());
+        model.addAttribute("appointments", new AppointmentTime());
+        model.addAttribute("medications", new Medication());
+        model.addAttribute("reminders", new Reminder());
+        model.addAttribute("savedPrescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
+        model.addAttribute("savedAppointments", appointmentsDao.findByUserId(loggedInUser().getId()));
+        model.addAttribute("savedMedications", medicationsDao.findAll());
+        model.addAttribute("savedReminders", remindersDao.findAll());
 
         return "shared/dashboard";
     }
@@ -100,8 +110,7 @@ public class UserController extends BaseController {
             currentPr.setDaySupply(currentPr.getDaySupply() - 1);
         }
         prescriptionsDao.save(currentPr);
-        // when daySuuply hits a certain number, we should send a text message here.
-        // prescriptions with low daysSupply should be calculated here and placed in a list.
+
         return "redirect:/dashboard";
     }
 
@@ -217,15 +226,31 @@ public class UserController extends BaseController {
 
     @PostMapping("/addAppointment")
     public String addAppointment(@Valid AppointmentTime appointmentTime, Errors validation, Model model) {
+        System.out.println("Add appointment");
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
-            model.addAttribute("appointment", appointmentTime);
-            return "shared/dashboard";
+            model.addAttribute("appointments", appointmentTime);
+//            return "shared/dashboard";
         }
 
         appointmentTime.setUser(loggedInUser());
         appointmentsDao.save(appointmentTime);
-        model.addAttribute("appointment", new AppointmentTime());
+        model.addAttribute("appointments", new AppointmentTime());
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("/addReminder")
+    public String addReminder(@Valid Reminder reminder, Errors validation, Model model) {
+        System.out.println("Add reminder");
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("reminders", reminder);
+//            return "shared/dashboard";
+        }
+
+        reminder.setUser(loggedInUser());
+        remindersDao.save(reminder);
+        model.addAttribute("reminders", new Reminder());
         return "redirect:/dashboard";
     }
 }

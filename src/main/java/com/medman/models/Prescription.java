@@ -204,7 +204,4 @@ public class Prescription {
                 " sig: " + sig +
                 " strength: " + strength;
     }
-
-
-//    "select * from prescriptions where day_supply <= 3;";
 }
