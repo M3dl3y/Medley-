@@ -1,7 +1,7 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
-import com.medman.models.PrescriptionRepository;
+import com.medman.repositories.PrescriptionRepository;
 import com.medman.utils.TwillioService;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
