@@ -6,18 +6,24 @@
 <body>
 
 <div th:fragment="alertsCard">
-    <div class="card cardSpace medium hoverable col m3">
+    <div class="card cardSpace large hoverable col m3">
         <div class="card-image waves-effect waves-block waves-light center-align">
             <i class="activator material-icons large dash-icons">error</i>
         </div>
         <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4 center-align">Alerts<i class="material-icons right">more_vert</i></span>
+            <span class="card-title activator grey-text text-darken-4 center-align">Upcoming</span>
             <div class="divider"></div>
+            <div th:each="alertPrescription : ${alertPrescription}" th:object="${alertPrescription}">
+                <h6 th:text="*{name}">Test</h6>
+            </div>
+            <div th:each="alertAppointment : ${alertAppointment}" th:object="${alertAppointment}">
+                <h6 th:text="*{name}">Test</h6>
+            </div>
         </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-        </div>
+        <!--<div class="card-reveal">-->
+            <!--<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>-->
+            <!--<p>Here is some more information about this product that is only revealed once clicked on.</p>-->
+        <!--</div>-->
     </div>
 </div>
 
