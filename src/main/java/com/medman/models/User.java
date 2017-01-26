@@ -36,29 +36,9 @@ public class User {
     @NotBlank(groups = {CreateValidationGroup.class}, message = "Please enter your last name.")
     private String lastName;
 
-//    @Column(nullable = true)
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    private Date dateOfBirth;
-//
-//    @Column(nullable = true)
-//    @Size(min = 10, message = "Please enter your 10 digit phone number")
-//    private String phoneNumber;
-//
-//    @Column(nullable = true)
-//    @NotBlank(message = "Please enter your street address.")
-//    private String streetAddress;
-//
-//    @Column(nullable = true)
-//    @NotBlank(message = "Please enter your city.")
-//    private String city;
-//
-//    @Column(nullable = true)
-//    @NotBlank(message = "Please enter your state.")
-//    private String state;
-//
-//    @Column(nullable = true)
-//    @NotNull(message = "Please enter a zip code.")
-//    private Long zipCode;
+    @Column(nullable = true)
+    @Size(min = 10, message = "Please enter your 10 digit phone number")
+    private String phoneNumber;
 
     @Column(unique = true, nullable = false, length = 50)
     // haven't figured out how to specify messages for Size.List in the messages file
@@ -99,11 +79,12 @@ public class User {
     @Column(nullable = true)
     private String npiNumber;
 
+    @Column
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    private LocalDateTime lastLoginDate;
+
     @OneToOne
     private Role role = new Role(3);
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Message> messages;
 
 
     @OneToMany(mappedBy = "user")
@@ -121,18 +102,14 @@ public class User {
         Id = user.Id;
         firstName = user.firstName;
         lastName = user.lastName;
-//        dateOfBirth = user.dateOfBirth;
-//        phoneNumber = user.phoneNumber;
-//        streetAddress = user.streetAddress;
-//        city = user.city;
-//        state = user.state;
-//        zipCode = user.zipCode;
+        phoneNumber = user.phoneNumber;
         username = user.username;
         password = user.password;
         email = user.email;
         role = user.role;
 
     }
+
 
     public Long getId() {
         return Id;
@@ -158,7 +135,6 @@ public class User {
         this.lastName = lastName;
     }
 
-
     public String getUsername() {
         return username;
     }
@@ -183,6 +159,21 @@ public class User {
         this.email = email;
     }
 
+    public LocalDateTime getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(LocalDateTime lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public List<AppointmentTime> getAppointmentTimes() {
+        return appointmentTimes;
+    }
+
+    public void setAppointmentTimes(List<AppointmentTime> appointmentTimes) {
+        this.appointmentTimes = appointmentTimes;
+    }
 
     public boolean isEnabled() {
         return enabled;
@@ -241,15 +232,6 @@ public class User {
         this.prescriptions = prescriptions;
     }
 
-
-//    public List<Message> getMessages() {
-//        return messages;
-//    }
-//
-//    public void setMessages(List<Message> messages) {
-//        this.messages = messages;
-//    }
-
     public List<Reminder> getReminders() {
         return reminders;
     }
@@ -258,73 +240,12 @@ public class User {
         this.reminders = reminders;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-//    public boolean hasRole(String role) {
-//        role = role.toUpperCase();
-//
-//        if (!role.startsWith("ROLE_"))
-//            role = "ROLE_" + role;
-//
-//        final String finalRole = role;
-//        return getRoles().stream().anyMatch(r -> r.getRole().equals(finalRole));
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "Id=" + Id +
-//                ", username='" + username + '\'' +
-//                ", email='" + email + '\'' +
-//                ", enabled=" + enabled +
-//                ", roles=" + roles +
-//                '}';
-//    }
-//    public Date getDateOfBirth() {
-//        return dateOfBirth;
-//    }
-//
-//    public void setDateOfBirth(Date dateOfBirth) {
-//        this.dateOfBirth = dateOfBirth;
-//    }
-//
-//    public String getPhoneNumber() {
-//        return phoneNumber;
-//    }
-//
-//    public void setPhoneNumber(String phoneNumber) {
-//        this.phoneNumber = phoneNumber;
-//    }
-//
-//    public String getStreetAddress() {
-//        return streetAddress;
-//    }
-//
-//    public void setStreetAddress(String streetAddress) {
-//        this.streetAddress = streetAddress;
-//    }
-//
-//    public String getCity() {
-//        return city;
-//    }
-//
-//    public void setCity(String city) {
-//        this.city = city;
-//    }
-//
-//    public String getState() {
-//        return state;
-//    }
-//
-//    public void setState(String state) {
-//        this.state = state;
-//    }
-//
-//    public Long getZipCode() {
-//        return zipCode;
-//    }
-//
-//    public void setZipCode(Long zipCode) {
-//        this.zipCode = zipCode;
-//    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
 }

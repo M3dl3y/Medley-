@@ -33,6 +33,5 @@ public class UserDetailsLoader implements UserDetailsService {
         List<String> userRoles = roles.ofUserWith(username);
         return new UserWithRoles(user, userRoles);
 
-
     }
 }

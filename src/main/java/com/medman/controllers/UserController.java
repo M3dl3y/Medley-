@@ -4,9 +4,6 @@ import com.medman.models.*;
 import com.medman.models.PrescriptionRepository;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.joda.time.*;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.context.SecurityContext;
@@ -19,11 +16,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
-import java.sql.PreparedStatement;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by jessedavila on 1/17/17.
@@ -47,7 +46,7 @@ public class UserController extends BaseController {
 //    @Autowired
 //    MedicationRepository medicationsDao;
 
-   @Autowired
+    @Autowired
     Appointments appointmentsDao;
 
     @Autowired
@@ -58,6 +57,9 @@ public class UserController extends BaseController {
 
     @Autowired
     DoctorPatients docPatientDao;
+
+    @Autowired
+    TwillioService twillioService;
 
 
     @GetMapping("/dashboard")
@@ -206,6 +208,8 @@ public class UserController extends BaseController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
+        twillioService.sendSMS("Welcome to twillio", (user.getPhoneNumber()));
+
         return "redirect:/login";
 
     }
@@ -217,10 +221,11 @@ public class UserController extends BaseController {
 
     @PostMapping("/addAppointment")
     public String addAppointment(@Valid AppointmentTime appointmentTime, Errors validation, Model model) {
+        System.out.println("Add appointment");
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
-            model.addAttribute("appointment", appointmentTime);
-//            return "shared/dashboard";
+            model.addAttribute("appointments", appointmentTime);
+            return "shared/dashboard";
         }
 
         appointmentTime.setUser(loggedInUser());
@@ -297,6 +302,7 @@ public class UserController extends BaseController {
         appointmentsDao.delete(currentAppointment);
         return "redirect:/dashboard";
     }
+
 
 }
 

@@ -30,6 +30,11 @@
                 <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </div>
             <div class="input-field">
+                <label for="phoneNumber">Phone Number:</label>
+                <input cf-questions="Great, {previous-answer}! In order to contact you, please enter a need a phone number?" th:field="*{phoneNumber}" type="text" class="validate" id="phoneNumber" />
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{phoneNumber}"></p>
+            </div>
+            <div class="input-field">
                 <label for="email">Email:</label>
                 <input cf-questions="Now that we have your login and basic information down I think you're ready. There are many other details you can supply us with such as date of birth, and even uploading a picture, but we won't ask you that here. One last thing, we want to make sure you are you. What's your email address?" th:field="*{email}" type="email" class="validate" id="email" data-error="wrong" data-success="right"  />
                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
