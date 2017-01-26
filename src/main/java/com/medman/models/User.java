@@ -115,6 +115,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<AppointmentTime> appointmentTimes;
 
+    @OneToMany(mappedBy = "user")
+    private List<NotificationSetting> notificationSettings;
+
     public User(){}
 
     public User(User user) {

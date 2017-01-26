@@ -10,8 +10,14 @@ public class NotificationSetting {
     @GeneratedValue
     private Long id;
 
-    @Column
-    private Long userId;
+//    @Column
+//    private Long userId;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Prescription prescription;
 
     @Column
     private Long textMessage;
@@ -19,8 +25,8 @@ public class NotificationSetting {
     @Column
     private Long email;
 
-    @Column
-    private Long prescriptionId;
+//    @Column
+//    private Long prescriptionId;
 
 
     public Long getId() {
@@ -31,13 +37,13 @@ public class NotificationSetting {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
 
     public Long getTextMessage() {
         return textMessage;
@@ -55,13 +61,13 @@ public class NotificationSetting {
         this.email = email;
     }
 
-    public Long getPrescriptionId() {
-        return prescriptionId;
-    }
-
-    public void setPrescriptionId(Long prescriptionId) {
-        this.prescriptionId = prescriptionId;
-    }
-
+//    public Long getPrescriptionId() {
+//        return prescriptionId;
+//    }
+//
+//    public void setPrescriptionId(Long prescriptionId) {
+//        this.prescriptionId = prescriptionId;
+//    }
+//
 
 }

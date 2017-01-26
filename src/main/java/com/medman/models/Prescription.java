@@ -65,6 +65,9 @@ public class Prescription {
     @ManyToOne
     private User user;
 
+    @OneToMany(mappedBy = "prescription")
+    private List<NotificationSetting> notificationSettings;
+
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "medication_id")
 //    private Medication medication;
