@@ -23,3 +23,28 @@ and create upcoming evnts as reminders.
 [1]: http://www.codeup.com/    "Codeup" 
 [2]: http://www.twillio.com/    "Twillio" 
 [3]: http://www.codeup.com/    "Codeup" 
+
+```java
+@Service("twillioSvc")
+public class TwillioService {
+    ...
+    public void sendSMS(String body, String to) {
+            try {
+                TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+    
+                // Build a filter for the MessageList
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("Body", body));
+                params.add(new BasicNameValuePair("To", to));
+                params.add(new BasicNameValuePair("From", TWILIO_NUMBER));
+    
+                MessageFactory messageFactory = client.getAccount().getMessageFactory();
+                Message message = messageFactory.create(params);
+                System.out.println(message.getSid());
+            }
+            catch (TwilioRestException e) {
+                System.out.println(e.getErrorMessage());
+            }
+        }
+    }
+```
