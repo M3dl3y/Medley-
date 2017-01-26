@@ -24,16 +24,28 @@
         <div th:each="appointments : ${appointments}" th:object="${appointments}">
             <div th:id="*{name}" class="modal bottom-sheet">
                 <div class="modal-content">
-                    <h4 th:text="*{name}">Medication Name</h4>
+                    <h4 th:text="*{name}">Appointment Name</h4>
                     <p th:text="*{notes}">A bunch of text</p>
-                    <a th:href="*{'#' + Id}">Edit</a>
+                    <a th:href="*{'#' + Id + 'appointments'}">Edit</a>
+                    <a th:href="*{'#' + Id + 'deleteAppointment'}">Delete</a>
                 </div>
                 <div class="modal-footer">
                     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Dismiss</a>
                 </div>
             </div>
             <div th:each="appointments : ${appointments}" th:object="${appointments}">
-                <div th:id="*{Id}" class="modal">
+                <div th:id="*{Id + 'deleteAppointment'}" class="modal">
+                    <div class="modal-content">
+                        <h4>Delete Prescription</h4>
+                        <p>Are you sure you want to delete this prescription?</p>
+                        <a th:href="@{'/deleteAppointment/' + *{Id}}" >Delete</a>
+                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                    </div>
+
+                </div>
+            </div>
+            <div th:each="appointments : ${appointments}" th:object="${appointments}">
+                <div th:id="*{Id + 'appointments'}" class="modal">
                     <div class="modal-content">
                         <h4>Edit Appointment</h4>
                         <form name="editAppointmentForm" id="editAppointmentForm" th:action="@{/editAppointment}" th:method="POST" th:object="${appointment}">
@@ -66,9 +78,6 @@
         </div>
     </div>
 </div>
-
-</div><!--contact card-->
-
 
 </body>
 </html>

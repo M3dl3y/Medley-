@@ -240,6 +240,7 @@ public class UserController extends BaseController {
         pr.setDaySupply(daySupply);
         pr.setPrescribedQuantity(prescribedQuantity);
         prescriptionsDao.save(pr);
+        model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
     }
 
@@ -269,9 +270,24 @@ public class UserController extends BaseController {
 
         appointment.setNotes(notes);
         appointmentsDao.save(appointment);
+        model.addAttribute("appointment", new AppointmentTime());
         return "redirect:/dashboard";
     }
 
+
+    @GetMapping("/deletePrescription/{id}")
+    public String deletePost(@PathVariable long id, @ModelAttribute Prescription prescription){
+        Prescription currentPrescription = prescriptionsDao.findOne(id);
+        prescriptionsDao.delete(currentPrescription);
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/deleteAppointment/{id}")
+    public String deleteAppointment(@PathVariable long id, @ModelAttribute AppointmentTime appointmentTime){
+        AppointmentTime currentAppointment = appointmentsDao.findOne(id);
+        appointmentsDao.delete(currentAppointment);
+        return "redirect:/dashboard";
+    }
 
 }
 
