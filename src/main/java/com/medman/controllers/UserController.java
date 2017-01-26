@@ -4,6 +4,9 @@ import com.medman.models.*;
 import com.medman.models.PrescriptionRepository;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.joda.time.*;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.context.SecurityContext;
@@ -16,13 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
+import java.sql.PreparedStatement;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by jessedavila on 1/17/17.
@@ -47,7 +48,7 @@ public class UserController extends BaseController {
 //    MedicationRepository medicationsDao;
 
    @Autowired
-   Appointments appointmentsDao;
+    Appointments appointmentsDao;
 
     @Autowired
     ReminderRepository remindersDao;
@@ -67,6 +68,13 @@ public class UserController extends BaseController {
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
         model.addAttribute("appointments", appointmentsDao.findByPatient(loggedInUser().getId()));
+
+
+//        model.addAttribute("alertPrescription" , prescriptionsDao.findByUser(loggedInUser().getId()));
+
+        LocalDate today = new LocalDate().now();
+        LocalDate toDate = today.plusDays(3);
+        model.addAttribute("alertAppointment", appointmentsDao.findByUserAndAppointmentDateBetween(loggedInUser(), today.toDate(), toDate.toDate()));
 
         return "shared/dashboard";
     }
@@ -216,6 +224,7 @@ public class UserController extends BaseController {
         }
 
         appointmentTime.setUser(loggedInUser());
+        appointmentTime.setAppointmentDate(appointmentTime.getAppointmentDate());
         appointmentsDao.save(appointmentTime);
         model.addAttribute("appointment", new AppointmentTime());
         return "redirect:/dashboard";
@@ -253,7 +262,7 @@ public class UserController extends BaseController {
         AppointmentTime appointment = appointmentsDao.findOne(id);
         appointment.setName(name);
 
-        DateFormat formatter = new SimpleDateFormat("HH:mm");
+        DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
 
         try{
             Date newdate = new SimpleDateFormat().parse(appointmentDate);
@@ -262,7 +271,7 @@ public class UserController extends BaseController {
 
         }
         try{
-            Time newTime = new Time(formatter.parse(appointmentTime).getTime());
+            Time newTime = new Time(timeFormatter.parse(appointmentTime).getTime());
             appointment.setAppointmentTimes(newTime);
         }catch (Exception e){
 
@@ -270,7 +279,7 @@ public class UserController extends BaseController {
 
         appointment.setNotes(notes);
         appointmentsDao.save(appointment);
-        model.addAttribute("appointment", new AppointmentTime());
+        model.addAttribute("appointments", new AppointmentTime());
         return "redirect:/dashboard";
     }
 

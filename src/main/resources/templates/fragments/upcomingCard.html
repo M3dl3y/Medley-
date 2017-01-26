@@ -6,21 +6,21 @@
 <body>
 
 <div th:fragment="upcomingCard">
-    <div class="card cardSpace hoverable medium col m3">
+    <div class="card cardSpace hoverable large col m3">
         <button data-target="addAppointment" class="addButton btn btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></button>
         <div class="card-image waves-effect waves-block waves-light center-align">
             <i class="large activator material-icons dash-icons">schedule</i>
         </div>
         <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4 center-align">Upcoming<i class="material-icons right">more_vert</i></span>
+            <span class="card-title activator grey-text text-darken-4 center-align">Reminders</span>
             <div class="divider"></div>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Upcoming<i class="material-icons right">close</i></span>
             <div th:each="appointments : ${appointments}" th:object="${appointments}">
                 <a th:href="*{'#' + name}" ><p th:text="*{name}"></p></a>
             </div>
         </div>
+        <!--<div class="card-reveal">-->
+            <!---->
+        <!--</div>-->
         <div th:each="appointments : ${appointments}" th:object="${appointments}">
             <div th:id="*{name}" class="modal bottom-sheet">
                 <div class="modal-content">
