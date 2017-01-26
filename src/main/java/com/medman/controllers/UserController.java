@@ -72,6 +72,7 @@ public class UserController extends BaseController {
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
         model.addAttribute("appointments", appointmentsDao.findByPatient(loggedInUser().getId()));
+        model.addAttribute("lowSupplyPrescriptions", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
 
 
 //        model.addAttribute("alertPrescription" , prescriptionsDao.findByUser(loggedInUser().getId()));
