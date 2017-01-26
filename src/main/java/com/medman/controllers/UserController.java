@@ -43,8 +43,6 @@ public class UserController extends BaseController {
     @Autowired
     PrescriptionRepository prescriptionsDao;
 
-//    @Autowired
-//    MedicationRepository medicationsDao;
 
    @Autowired
    Appointments appointmentsDao;
