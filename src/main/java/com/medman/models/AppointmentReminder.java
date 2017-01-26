@@ -1,16 +1,16 @@
-package com.medman.models;
+//package com.medman.models;
+//
+//import org.springframework.stereotype.Service;
+//
+//public class AppointmentReminder extends AppointmentTime{
+//
 
-import org.springframework.stereotype.Service;
-
-public class AppointmentReminder extends AppointmentTime{
-
-
-
-
-    if()
-    }
-
-}
+//
+//
+//    if()
+//    }
+//
+//}
 //
 //daily @8:00
 //

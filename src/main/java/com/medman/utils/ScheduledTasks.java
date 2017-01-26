@@ -36,5 +36,4 @@ public class ScheduledTasks {
 //            twillioService.sendSMS("You have an appointment to day", (user.getPhoneNumber()));
 //        }
 
-    }
 }
