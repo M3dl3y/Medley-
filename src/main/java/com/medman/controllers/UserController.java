@@ -44,8 +44,8 @@ public class UserController extends BaseController {
     @Autowired
     PrescriptionRepository prescriptionsDao;
 
-    @Autowired
-    MedicationRepository medicationsDao;
+//    @Autowired
+//    MedicationRepository medicationsDao;
 
     @Autowired
     Appointments appointmentsDao;
@@ -70,17 +70,7 @@ public class UserController extends BaseController {
         model.addAttribute("prescription", new Prescription());
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
-        model.addAttribute("medications", medicationsDao.findAll());
-        model.addAttribute("lowSupplyPrescriptions", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
-        // add to model list of prescriptions with low daysSupply to display in alert panel
-        model.addAttribute("prescriptions", new Prescription());
-        model.addAttribute("appointments", new AppointmentTime());
-        model.addAttribute("medications", new Medication());
-        model.addAttribute("reminders", new Reminder());
-        model.addAttribute("savedPrescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
-        model.addAttribute("savedAppointments", appointmentsDao.findByUserId(loggedInUser().getId()));
-        model.addAttribute("savedMedications", medicationsDao.findAll());
-        model.addAttribute("savedReminders", remindersDao.findAll());
+        model.addAttribute("appointments", appointmentsDao.findByPatient(loggedInUser().getId()));
 
         return "shared/dashboard";
     }
@@ -88,7 +78,8 @@ public class UserController extends BaseController {
     @PostMapping("/addPrescription")
     public String addMedication(
             @Valid Prescription prescription,
-            @RequestParam(name = "medicationId") Long medicationId,
+//            @RequestParam(name = "medicationId") Long medicationId,
+            @RequestParam(name = "prescribedDate_submit") String prescribedDate_submit,
             Errors validation,
             Model model
     ) {
@@ -98,7 +89,6 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
-        prescription.setMedication(medicationsDao.findOne(medicationId));
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
