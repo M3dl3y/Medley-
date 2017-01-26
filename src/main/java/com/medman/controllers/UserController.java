@@ -2,6 +2,7 @@ package com.medman.controllers;
 
 import com.medman.models.*;
 import com.medman.models.PrescriptionRepository;
+import com.medman.utils.TwillioService;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +44,11 @@ public class UserController extends BaseController {
     @Autowired
     PrescriptionRepository prescriptionsDao;
 
-//    @Autowired
-//    MedicationRepository medicationsDao;
+    @Autowired
+    MedicationRepository medicationsDao;
 
-   @Autowired
-   Appointments appointmentsDao;
+    @Autowired
+    Appointments appointmentsDao;
 
     @Autowired
     ReminderRepository remindersDao;
@@ -58,6 +59,9 @@ public class UserController extends BaseController {
     @Autowired
     DoctorPatients docPatientDao;
 
+    @Autowired
+    TwillioService twillioService;
+
 
     @GetMapping("/dashboard")
     public String showDash(Model model) {
@@ -66,7 +70,17 @@ public class UserController extends BaseController {
         model.addAttribute("prescription", new Prescription());
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
-        model.addAttribute("appointments", appointmentsDao.findByPatient(loggedInUser().getId()));
+        model.addAttribute("medications", medicationsDao.findAll());
+        model.addAttribute("lowSupplyPrescriptions", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
+        // add to model list of prescriptions with low daysSupply to display in alert panel
+        model.addAttribute("prescriptions", new Prescription());
+        model.addAttribute("appointments", new AppointmentTime());
+        model.addAttribute("medications", new Medication());
+        model.addAttribute("reminders", new Reminder());
+        model.addAttribute("savedPrescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
+        model.addAttribute("savedAppointments", appointmentsDao.findByUserId(loggedInUser().getId()));
+        model.addAttribute("savedMedications", medicationsDao.findAll());
+        model.addAttribute("savedReminders", remindersDao.findAll());
 
         return "shared/dashboard";
     }
@@ -74,8 +88,7 @@ public class UserController extends BaseController {
     @PostMapping("/addPrescription")
     public String addMedication(
             @Valid Prescription prescription,
-//            @RequestParam(name = "medicationId") Long medicationId,
-            @RequestParam(name = "prescribedDate_submit") String prescribedDate_submit,
+            @RequestParam(name = "medicationId") Long medicationId,
             Errors validation,
             Model model
     ) {
@@ -85,6 +98,7 @@ public class UserController extends BaseController {
             return "shared/dashboard";
         }
         prescription.setUser(loggedInUser());
+        prescription.setMedication(medicationsDao.findOne(medicationId));
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
         return "redirect:/dashboard";
@@ -198,6 +212,8 @@ public class UserController extends BaseController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
+        twillioService.sendSMS("Welcome to twillio", (user.getPhoneNumber()));
+
         return "redirect:/login";
 
     }
@@ -209,10 +225,11 @@ public class UserController extends BaseController {
 
     @PostMapping("/addAppointment")
     public String addAppointment(@Valid AppointmentTime appointmentTime, Errors validation, Model model) {
+        System.out.println("Add appointment");
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
-            model.addAttribute("appointment", appointmentTime);
-//            return "shared/dashboard";
+            model.addAttribute("appointments", appointmentTime);
+            return "shared/dashboard";
         }
 
         appointmentTime.setUser(loggedInUser());
