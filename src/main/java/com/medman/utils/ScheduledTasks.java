@@ -24,10 +24,10 @@ public class ScheduledTasks {
 
 //    private static final AppointmentReminder appointment = AppointmentReminder.getAppointment()
 
-    @Scheduled(fixedRate = 5000)
-    public void reportCurrentTime() {
-        log.info("The time is now {}", dateFormat.format(new Date()));
-    }
+//    @Scheduled(fixedRate = 5000)
+//    public void reportCurrentTime() {
+//        log.info("The time is now {}", dateFormat.format(new Date()));
+//    }
 
 //    @Scheduled(cron="*/5 * * * * MON-FRI")
 //    public void appReminder(@Valid User user) {
