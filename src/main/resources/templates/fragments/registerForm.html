@@ -9,37 +9,45 @@
     <div id="form-outer" class="panel panel-default"  th:fragment="conversationRegisterForm">
     <div class="container">
         <form id="registerForm" th:action="@{/register}" method="post" th:object="${user}">
-            <div class="input-field">
-                <label for="firstName">First Name:</label>
-                <input cf-questions="Hello, my name is Medly. What's your first name?" th:field="*{firstName}" type="text" class="validate" id="firstName"  />
-                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+            <div class="row">
+                <div class="input-field col m6">
+                    <i class="material-icons prefix">accessibility</i>
+                    <label for="firstName">First Name</label>
+                    <input cf-questions="Hello, my name is Medly. What's your first name?" th:field="*{firstName}" type="text" class="validate" id="firstName"  />
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+                </div>
+                <div class="input-field col m6">
+                    <label for="lastName">Last Name</label>
+                    <input cf-questions="Great to meet you, {previous-answer}! Now tell me your last name, I know lots of {previous-answer}s" th:field="*{lastName}" type="text" class="validate" id="lastName" />
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+                </div>
             </div>
+
             <div class="input-field">
-                <label for="lastName">Last Name:</label>
-                <input cf-questions="Great to meet you, {previous-answer}! Now tell me your last name, I know lots of {previous-answer}s" th:field="*{lastName}" type="text" class="validate" id="lastName" />
-                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
-            </div>
-            <div class="input-field">
+                <i class="material-icons prefix">person</i>
                 <label for="username">Desired Username:</label>
                 <input cf-questions="{previous-answer}, huh? Well it's nice to meet you! Now, let's see... Oh, that's right! What would you like your username to be?"  th:field="*{username}" type="text" class="validate" id="username"   />
                 <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
             </div>
             <div class="input-field">
-                <label for="password">Password:</label>
+                <i class="material-icons prefix">vpn_key</i>
+                <label for="password">Password</label>
                 <input cf-questions="Okay, {previous-answer} it is! Now I need you to enter a password. The username and password will be important for you to remember when you want to log into the website. Now, what will be your password?" th:field="*{password}" type="password" class="validate" id="password"   />
                 <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </div>
             <div class="input-field">
-                <label for="phoneNumber">Phone Number:</label>
+                <i class="material-icons prefix">phone</i>
+                <label for="phoneNumber">Phone Number</label>
                 <input cf-questions="Great, {previous-answer}! In order to contact you, please enter a need a phone number?" th:field="*{phoneNumber}" type="text" class="validate" id="phoneNumber" />
                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{phoneNumber}"></p>
             </div>
             <div class="input-field">
+                <i class="material-icons prefix">email</i>
                 <label for="email">Email:</label>
                 <input cf-questions="Now that we have your login and basic information down I think you're ready. There are many other details you can supply us with such as date of birth, and even uploading a picture, but we won't ask you that here. One last thing, we want to make sure you are you. What's your email address?" th:field="*{email}" type="email" class="validate" id="email" data-error="wrong" data-success="right"  />
                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer center-align">
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>
         </form>

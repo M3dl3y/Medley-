@@ -7,9 +7,9 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<div id="homeTitle">
-    <h1 class="center-align">Welcome to Medly</h1>
-    <h5 class="center-align">Medication Management Never Looked So Good.</h5>
+<div id="homeTitle" class="col s12 m12 l12">
+    <h2 class="center-align">Welcome to Medly</h2>
+    <h5 class="center-align flow-text">Managing medication has never been this easy.</h5>
 </div>
 
 <!--image of doctor and patient-->
@@ -18,11 +18,21 @@
 </div>
 
 <!--Show off features-->
-<div id="additionalFeatures" class="col s12">
-    <div id="heartDiv" class="circleFeature tooltipped" data-position="top" data-delay="50" data-tooltip="Your health is important to us."><i class="fa fa-heart-o fa-5x centerIcon" aria-hidden="true"></i></div>
-    <div id="calendarDiv" class="circleFeature tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add reminders, to help you keep track of important events."><i class="fa fa-calendar-check-o fa-5x centerIcon" aria-hidden="true"></i></div>
-    <div id="reminderDiv" class="circleFeature tooltipped" data-position="top" data-delay="50" data-tooltip="Get text-messaging alerts to notify you."><i class="fa fa-bell-o fa-5x centerIcon" aria-hidden="true"></i></div>
-    <div id="moreInfo "></div>
+<div id="additionalFeatures" class="col s12 m12 l12">
+    <div class="row center-align">
+        <div class="col s4 m4 l4">
+            <i id="medicationFeatureIcon" class="material-icons medium featureIcon">local_pharmacy</i>
+            <h5 class="flow-text">Manage your medications</h5>
+        </div>
+        <div class="col s4 m4 l4">
+            <i id="reminderFeatureIcon" class="material-icons medium featureIcon">event_available</i>
+            <h5 class="flow-text">Set Reminders</h5>
+        </div>
+        <div class="col s4 m4 l4">
+            <i id="alertFeatureIcon" class="material-icons medium">add_alert</i>
+            <h5 class="flow-text">Get alerts</h5>
+        </div>
+    </div>
 </div>
 
 <!--Show off features-->
@@ -31,8 +41,8 @@
 </div>
 
 <!--Sign up-->
-<div id="signupContainer" class="center-align">
-    <h3>The tools you need to take back your health.</h3>
+<div id="signupContainer" class="center-align col s12 m12 l12">
+    <h3 class="flow-text">The tools you need to take back your health.</h3>
     <a  th:href="@{/create}"><button type="button" class="btn btn-info">Sign-up</button></a>
 </div>
 

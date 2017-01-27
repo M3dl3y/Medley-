@@ -227,7 +227,7 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("appointments", appointmentTime);
-            return "shared/dashboard";
+//            return "shared/dashboard";
         }
 
         appointmentTime.setUser(loggedInUser());
