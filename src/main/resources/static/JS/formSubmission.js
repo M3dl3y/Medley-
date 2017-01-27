@@ -23,6 +23,10 @@ $('#editUserDetailSubmit').click(function(){
     return false;
 });
 
+$('#medTaken').click(function(){
+    document.medTakenForm.submit();
+    return false;
+});
 //
 // $('.editPrescriptionSubmit').click(function(){
 //     //document.editPrescriptionForm.submit();
