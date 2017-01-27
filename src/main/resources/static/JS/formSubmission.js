@@ -22,6 +22,7 @@ $('#editUserDetailSubmit').click(function(){
     document.editUserDetailForm.submit();
     return false;
 });
+
 //
 // $('.editPrescriptionSubmit').click(function(){
 //     //document.editPrescriptionForm.submit();

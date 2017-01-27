@@ -40,7 +40,7 @@ public class Prescription {
     private String dosageRoute;
 
     @Column(nullable = true)
-    private Long dosageFrequency;
+    private Long dosageFrequency = 0L;
 
     @Column(nullable = true)
     private String dosageInterval;
@@ -52,7 +52,7 @@ public class Prescription {
     private Long prescribedQuantity ;
 
     @Column(nullable = true)
-    private Long pillsTaken ;
+    private Long pillsTaken = 0L ;
 
     public Long getPillsTaken() {
         return pillsTaken;

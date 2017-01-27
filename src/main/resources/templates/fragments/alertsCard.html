@@ -19,7 +19,8 @@
             <div th:each="alertAppointment : ${alertAppointment}" th:object="${alertAppointment}">
                 <h6 th:text="*{name}">Test</h6>
             </div>
-            <h4>Meds</h4>
+           <span class="card-title activator grey-text text-darken-4 center-align">Meds</span>
+            <div class="divider"></div>
             <div th:each="prescription : ${lowSupplyPre}" th:object="${prescription}">
                 <h6 th:text="*{name}">Test Med</h6>
             </div>

@@ -12,7 +12,7 @@
             <i class="large activator material-icons dash-icons">schedule</i>
         </div>
         <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4 center-align">Upcoming<i class="material-icons right">more_vert</i></span>
+            <span class="card-title activator grey-text text-darken-4 center-align">Reminders<i class="material-icons right">more_vert</i></span>
             <div class="divider"></div>
             <div th:each="appointments : ${appointments}" th:object="${appointments}">
                 <a th:href="*{'#' + name}" ><p th:text="*{name}"></p></a>
@@ -23,14 +23,14 @@
                 <div class="modal-content">
                     <h4 th:text="*{name}">Medication Name</h4>
                     <p th:text="*{notes}">A bunch of text</p>
-                    <a th:href="*{'#' + Id}">Edit</a>
+                    <a th:href="*{'#' + Id + 'appointmentEdit'}">Edit</a>
                 </div>
                 <div class="modal-footer">
                     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Dismiss</a>
                 </div>
             </div>
             <div th:each="appointments : ${appointments}" th:object="${appointments}">
-                <div th:id="*{Id}" class="modal">
+                <div th:id="*{Id + 'appointmentEdit'}" class="modal">
                     <div class="modal-content">
                         <h4>Edit Appointment</h4>
                         <form name="editAppointmentForm" id="editAppointmentForm" th:action="@{/editAppointment}" th:method="POST" th:object="${appointment}">
@@ -38,22 +38,21 @@
                                 <label for="name">Edit Reminder</label>
                                 <input name="id" th:value="${appointments.Id}" type="hidden" />
                                 <input type="text" class="validate" id="name" name="name" th:value="${appointments.name}"  />
-                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                             </div>
                             <div class="input-field">
                                 <label for="appointmentDate">Reminder Date</label>
                                 <input type="date" class="validate datepicker" id="appointmentDate" name="appointmentDate" th:value="${appointments.appointmentDate}" />
-                                <p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>
+
                             </div>
                             <div>
                                 <label for="appointmentTime">Appointment Time</label>
                                 <input type="time" class="validate" id="appointmentTime" name="appointmentTime" th:value="${appointments.appointmentTimes}" />
-                                <p th:if="${#fields.hasErrors('appointmentTimes')}" th:errors="*{appointmentTimes}"></p>
+
                             </div>
                             <div class="input-field">
                                 <label for="notes">Notes:</label>
                                 <textarea class="materialize-textarea" id="notes" name="notes" th:value="${appointments.notes}"></textarea>
-                                <p th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></p>
+
                             </div>
                             <input type="submit" value="Edit" />
                         </form>
