@@ -16,10 +16,13 @@
             <span class="card-title activator grey-text text-darken-4">Medication</span>
             <div class="divider"></div>
                 <div th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
-            <form id="medTakenForm" th:action="@{/dashboard/medTaken}" method="post">
+            <form name="medTakenForm" id="medTakenForm" th:action="@{/dashboard/medTaken}" method="post">
                 <input name="id" th:value="*{Id}" type="hidden" />
-                <a id="medTaken" class="btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">check</i><button type="submit"></button></a>
-                <a th:href="*{'#' + name + 'footer'}" ><p th:text="*{name}"></p></a>
+                <div class="col s12 m12 l12 medicineList">
+                    <button id="medTaken" class="col s3 m3 l3 btn btn-small btn-info" type="submit"><i class="material-icons">check</i></button>
+                    <a class="col s9 m9 l9" th:href="*{'#' + name + 'footer'}" ><h6 th:text="*{name}"></h6></a>
+                </div>
+
             </form>
                 </div>
         </div>
