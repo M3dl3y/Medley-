@@ -1,7 +1,7 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
-import com.medman.models.PrescriptionRepository;
+import com.medman.repositories.PrescriptionRepository;
 import com.medman.utils.TwillioService;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -21,7 +21,6 @@ import javax.validation.Valid;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -73,7 +72,7 @@ public class UserController extends BaseController {
         model.addAttribute("appointment", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
         model.addAttribute("appointments", appointmentsDao.findByPatient(loggedInUser().getId()));
-
+        model.addAttribute("lowSupplyPre", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
 
 //        model.addAttribute("alertPrescription" , prescriptionsDao.findByUser(loggedInUser().getId()));
 
