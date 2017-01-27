@@ -13,4 +13,5 @@ public interface Appointments extends CrudRepository<AppointmentTime, Long> {
     @Query("select p from AppointmentTime p, User u where u.id=?1 and u.id = p.user.id")
     public List<AppointmentTime> findByPatient(Long id);
     public List<AppointmentTime> findByUserAndAppointmentDateBetween(User user, Date from, Date to);
+    public List<AppointmentTime> findByAppointmentDate(Date appointmentDate);
 }
