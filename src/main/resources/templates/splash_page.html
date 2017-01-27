@@ -7,38 +7,27 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<h1 class="center-align">Welcome to Medly</h1>
+<div id="homeTitle">
+    <h1 class="center-align">Welcome to Medly</h1>
+    <h5 class="center-align">Medication Management Never Looked So Good.</h5>
+</div>
 
 <!--image of doctor and patient-->
 <div class="parallax-container" id="splashTopImage">
-    <div class="parallax"><img id="imageSplashTop" th:src="@{../img/splash-top.jpg}" /></div>
+    <div class="parallax"><img id="imageSplashTop" class="responsive-img" th:src="@{../img/family_smiling.jpg}" /></div>
 </div>
 
-<!--Div of testimony -->
-<div id="testimonyContainer">
-    <h3 class="center-align">
-        "The management tool we've been looking for."
-    </h3>
-    <p class="center-align">Dr. Patel</p>
+<!--Show off features-->
+<div id="additionalFeatures" class="col s12">
+    <div id="heartDiv" class="circleFeature tooltipped" data-position="top" data-delay="50" data-tooltip="Your health is important to us."><i class="fa fa-heart-o fa-5x centerIcon" aria-hidden="true"></i></div>
+    <div id="calendarDiv" class="circleFeature tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add reminders, to help you keep track of important events."><i class="fa fa-calendar-check-o fa-5x centerIcon" aria-hidden="true"></i></div>
+    <div id="reminderDiv" class="circleFeature tooltipped" data-position="top" data-delay="50" data-tooltip="Get text-messaging alerts to notify you."><i class="fa fa-bell-o fa-5x centerIcon" aria-hidden="true"></i></div>
+    <div id="moreInfo "></div>
 </div>
 
 <!--Show off features-->
 <div class="parallax-container" id="splashBottomImage">
-    <div class="parallax"><img th:src="@{../img/splash-bottom.jpg}" /></div>
-
-    <!--<div id="additionalFeatures" class="offset-s1 col s2">-->
-        <!--<div id="heartDiv" class="circleFeature spaceBelow"><i class="fa fa-heart-o fa-4x centerIcon" aria-hidden="true"></i></div>-->
-        <!--<div id="calendarDiv" class="circleFeature spaceBelow"><i class="fa fa-calendar-check-o fa-4x centerIcon" aria-hidden="true"></i></div>-->
-        <!--<div id="reminderDiv" class="circleFeature"><i class="fa fa-bell-o fa-4x centerIcon" aria-hidden="true"></i></div>-->
-    <!--</div>-->
-    <!--<div id="moreInfo" class="panel panel-default col s2">-->
-        <!--<div class="panel-body">-->
-            <!--<p id="moreInfoDetail">-->
-
-            <!--</p>-->
-        <!--</div>-->
-    <!--</div>-->
-
+    <div class="parallax"><img class="responsive-img" th:src="@{../img/coupleUsingComputer.jpg}" /></div>
 </div>
 
 <!--Sign up-->

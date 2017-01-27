@@ -16,11 +16,11 @@
         </ul>
         <ul id="loggedInContent" class="dropdown-content">
             <li><a th:href="@{/dashboard}">Dashboard</a></li>
-            <li class="divider"></li>
-            <li sec:authorize="hasRole('PATIENT')"><a th:href="@{/my_doctors}">Doctors</a></li>
-            <li sec:authorize="hasRole('DOCTOR')"><a th:href="@{/my_doctors}" >Patients</a></li>
-            <li class="divider"></li>
-            <li><a th:href="@{/messages}">Messages</a></li>
+            <!--<li class="divider"></li>-->
+            <!--<li sec:authorize="hasRole('PATIENT')"><a th:href="@{/my_doctors}">Doctors</a></li>-->
+            <!--<li sec:authorize="hasRole('DOCTOR')"><a th:href="@{/my_doctors}" >Patients</a></li>-->
+            <!--<li class="divider"></li>-->
+            <!--<li><a th:href="@{/messages}">Messages</a></li>-->
             <li class="divider"></li>
             <li class="disabled"><a th:href="@{/edit}">Settings</a></li>
             <li class="divider"></li>
@@ -28,9 +28,9 @@
         </ul>
         <ul class="side-nav" id="mobileMenuIn">
             <li><a th:href="@{/dashboard}">Dashboard</a></li>
-            <li sec:authorize="hasRole('PATIENT')"><a th:href="@{/my_doctors}">Doctors</a></li>
-            <li sec:authorize="hasRole('DOCTOR')"><a th:href="@{/my_doctors}" >Patients</a></li>
-            <li><a th:href="@{/messages}">Messages</a></li>
+            <!--<li sec:authorize="hasRole('PATIENT')"><a th:href="@{/my_doctors}">Doctors</a></li>-->
+            <!--<li sec:authorize="hasRole('DOCTOR')"><a th:href="@{/my_doctors}" >Patients</a></li>-->
+            <!--<li><a th:href="@{/messages}">Messages</a></li>-->
             <li class="disabled" ><a th:href="@{/edit}">Settings</a></li>
             <li><a th:href="@{/logout}" id="logout_link_side">Logout</a></li>
         </ul>
@@ -44,7 +44,7 @@
                 <div class="nav-wrapper">
                     <a href="#" data-activates="mobileMenuOut" class="button-collapse" sec:authorize="!isAuthenticated()"><i class="material-icons">menu</i></a>
                     <a href="#" data-activates="mobileMenuIn" class="button-collapse" sec:authorize="isAuthenticated()" sec:authentication="principal.firstName"><i class="material-icons">menu</i></a>
-                    <a th:href="@{/}" class="brand-logo center"><img id="logo" th:src="@{../img/shutterstock_455489371.png}" /></a>
+                    <a th:href="@{/}" class="brand-logo center"><img id="logo" th:src="@{../img/MedlyLogo.png}" /></a>
                     <ul class="left hide-on-med-and-down">
                         <li><a class="dropdown-button"  data-activates="dropdown1"><i class="material-icons">menu</i></a></li>
                     </ul>

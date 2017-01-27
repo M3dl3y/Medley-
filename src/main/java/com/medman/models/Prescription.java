@@ -31,7 +31,7 @@ public class Prescription {
     private String sig;
 
     @Column(nullable = true)
-    private Long dosageAmount = 0L;
+    private Long dosageAmount;
 
     @Column(nullable = true)
     private String dosageForm;
@@ -40,19 +40,19 @@ public class Prescription {
     private String dosageRoute;
 
     @Column(nullable = true)
-    private Long dosageFrequency = 0L;
+    private Long dosageFrequency;
 
     @Column(nullable = true)
     private String dosageInterval;
 
     @Column(nullable = true)
-    private Long daySupply = 0L;
+    private Long daySupply ;
 
     @Column(nullable = false)
-    private Long prescribedQuantity = 0L;
+    private Long prescribedQuantity ;
 
     @Column(nullable = true)
-    private Long pillsTaken = 0L;
+    private Long pillsTaken ;
 
     public Long getPillsTaken() {
         return pillsTaken;
