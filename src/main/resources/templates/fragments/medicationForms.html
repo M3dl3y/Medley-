@@ -12,7 +12,7 @@
     <div id="addMedication" class="modal modal-fixed-footer">
         <div class="modal-content">
             <h4>Add a Medication</h4>
-            <form name="addPrescriptionForm" id="addPrescriptionForm" th:action="@{/addPrescription}" method="post" th:object="${prescription}">
+            <form name="addPrescriptionForm" id="addPrescriptionForm" th:action="@{/addPrescription}" method="post" th:object="${prescriptions}">
                 <div class="input-field col s6">
                     <input type="text" id="autocomplete-input" class="autocomplete autocomplete-input" th:field="*{name}" />
                     <label for="autocomplete-input">Name of Medication</label>

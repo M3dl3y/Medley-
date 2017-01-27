@@ -17,8 +17,8 @@
         <property name="connection.url">
             jdbc:mysql://localhost/medly_db?createDatabaseIfNotExist=true
         </property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">codeup</property>
+        <property name="connection.username">medly_user</property>
+        <property name="connection.password">medlyisgreat</property>
 
         <!-- Development settings -->
         <!-- Echo all executed SQL to stdout -->
@@ -31,7 +31,6 @@
         <!-- Add mapped classes here -->
         <mapping class="com.medman.models.User"/>
         <mapping class="com.medman.models.Role"/>
-        <mapping class="com.medman.models.Medication"/>
         <mapping class="com.medman.models.Prescription"/>
         <mapping class="com.medman.models.AppointmentTime"/>
         <mapping class="com.medman.models.Reminder"/>

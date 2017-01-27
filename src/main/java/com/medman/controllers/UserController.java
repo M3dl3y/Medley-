@@ -1,30 +1,21 @@
 package com.medman.controllers;
 
 import com.medman.models.*;
+import com.medman.utils.TwillioService;
 import com.medman.models.PrescriptionRepository;
-import com.medman.utils.TwillioService;
-import com.medman.repositories.PrescriptionRepository;
-import com.medman.utils.TwillioService;
-import org.apache.tomcat.util.http.parser.MediaType;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -70,8 +61,8 @@ public class UserController extends BaseController {
     public String showDash(Model model) {
 
         model.addAttribute("user", loggedInUser());
-        model.addAttribute("prescription", new Prescription());
-        model.addAttribute("appointment", new AppointmentTime());
+        model.addAttribute("prescriptions", new Prescription());
+        model.addAttribute("appointments", new AppointmentTime());
         model.addAttribute("prescriptions", prescriptionsDao.findByPatient(loggedInUser().getId()));
         model.addAttribute("appointments", appointmentsDao.findByPatient(loggedInUser().getId()));
         model.addAttribute("lowSupplyPre", prescriptionsDao.findByDaySupplyAlert(loggedInUser().getId()));
@@ -88,7 +79,6 @@ public class UserController extends BaseController {
     @PostMapping("/addPrescription")
     public String addMedication(
             @Valid Prescription prescription,
-//            @RequestParam(name = "medicationId") Long medicationId,
             @RequestParam(name = "prescribedDate_submit") String prescribedDate_submit,
             Errors validation,
             Model model
@@ -96,11 +86,13 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("prescriptions", prescription);
-            return "shared/dashboard";
+//            return "shared/dashboard";
+            System.out.println("This is the add prescription inner method");
         }
         prescription.setUser(loggedInUser());
         prescriptionsDao.save(prescription);
         model.addAttribute("prescriptions", new Prescription());
+        System.out.println("This is the out prescription method");
         return "redirect:/dashboard";
     }
 
@@ -305,6 +297,7 @@ public class UserController extends BaseController {
         AppointmentTime currentAppointment = appointmentsDao.findOne(id);
         appointmentsDao.delete(currentAppointment);
         return "redirect:/dashboard";
+
     }
 
 

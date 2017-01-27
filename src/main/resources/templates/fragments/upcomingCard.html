@@ -41,30 +41,30 @@
 
                 </div>
             </div>
-            <div th:each="appointments : ${appointments}" th:object="${appointments}">
+            <div th:each="appointment : ${appointments}" th:object="${appointment}">
                 <div th:id="*{Id + 'appointments'}" class="modal">
                     <div class="modal-content">
                         <h4>Edit Appointment</h4>
-                        <form name="editAppointmentForm" id="editAppointmentForm" th:action="@{/editAppointment}" th:method="POST" th:object="${appointment}">
+                        <form name="editAppointmentForm" id="editAppointmentForm" th:action="@{/editAppointment}" th:method="POST">
                             <div class="input-field">
                                 <label for="name">Edit Reminder</label>
-                                <input name="id" th:value="${appointments.Id}" type="hidden" />
-                                <input type="text" class="validate" id="name" name="name" th:value="${appointments.name}"  />
+                                <input name="id" th:value="*{Id}" type="hidden" />
+                                <input type="text" class="validate" id="name" name="name" th:value="*{name}"  />
                                 <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                             </div>
                             <div class="input-field">
                                 <label for="appointmentDate">Reminder Date</label>
-                                <input type="date" class="validate datepicker" id="appointmentDate" name="appointmentDate" th:value="${appointments.appointmentDate}" />
+                                <input type="date" class="validate datepicker" id="appointmentDate" name="appointmentDate" th:value="*{appointmentDate}" />
                                 <p th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}"></p>
                             </div>
                             <div>
                                 <label for="appointmentTime">Appointment Time</label>
-                                <input type="time" class="validate" id="appointmentTime" name="appointmentTime" th:value="${appointments.appointmentTimes}" />
+                                <input type="time" class="validate" id="appointmentTime" name="appointmentTime" th:value="*{appointmentTimes}" />
                                 <p th:if="${#fields.hasErrors('appointmentTimes')}" th:errors="*{appointmentTimes}"></p>
                             </div>
                             <div class="input-field">
                                 <label for="notes">Notes:</label>
-                                <textarea class="materialize-textarea" id="notes" name="notes" th:value="${appointments.notes}"></textarea>
+                                <textarea class="materialize-textarea" id="notes" name="notes" th:value="*{notes}"></textarea>
                                 <p th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></p>
                             </div>
                             <input type="submit" value="Edit" />

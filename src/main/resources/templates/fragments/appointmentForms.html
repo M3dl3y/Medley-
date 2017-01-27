@@ -10,7 +10,7 @@
     <div id="addAppointment" class="modal modal-fixed-footer">
         <div class="modal-content">
             <h4>Add Reminder</h4>
-            <form name="addAppointmentForm" id="addAppointmentForm" th:action="@{/addAppointment}" th:method="POST" th:object="${appointment}">
+            <form name="addAppointmentForm" id="addAppointmentForm" th:action="@{/addAppointment}" th:method="POST" th:object="${appointments}">
                 <div class="input-field">
                     <label for="name">Name this Reminder</label>
                     <input type="text" class="validate" id="name" th:field="*{name}" />

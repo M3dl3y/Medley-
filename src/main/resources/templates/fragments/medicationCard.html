@@ -15,7 +15,7 @@
         <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Medication</span>
             <div class="divider"></div>
-                <div th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
+                <div th:each="prescription : ${prescriptions}" th:object="${prescription}">
             <form th:action="@{/dashboard/medTaken}" method="post">
                     <a th:href="*{'#' + name}" ><p th:text="*{name}"></p></a>
                     <input name="id" th:value="*{Id}" type="hidden" />
@@ -26,7 +26,7 @@
         <!--<div class="card-reveal">-->
             <!---->
         <!--</div>-->
-        <div th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
+        <div th:each="prescription : ${prescriptions}" th:object="${prescription}">
             <div th:id="*{name}" class="modal bottom-sheet">
                 <div class="modal-content">
                     <h4 th:text="*{name}">Medication Name</h4>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
+        <div th:each="prescription : ${prescriptions}" th:object="${prescription}">
             <div th:id="*{Id + 'delete'}" class="modal">
                 <div class="modal-content">
                     <h4>Delete Prescription</h4>
