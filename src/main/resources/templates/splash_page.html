@@ -6,19 +6,19 @@
 
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
-
+<div class="container">
 <div id="homeTitle" class="col s12 m12 l12">
     <h2 class="center-align">Welcome to Medly</h2>
     <h5 class="center-align flow-text">Managing medication has never been this easy.</h5>
 </div>
-
+</div>
 <!--image of doctor and patient-->
 <div class="parallax-container" id="splashTopImage">
     <div class="parallax"><img id="imageSplashTop" class="responsive-img" th:src="@{../img/family_smiling.jpg}" /></div>
 </div>
 
 <!--Show off features-->
-<div id="additionalFeatures" class="col s12 m12 l12">
+<div id="additionalFeatures" class="col s12 m12 l12 container">
     <div class="row center-align">
         <div class="col s4 m4 l4">
             <i id="medicationFeatureIcon" class="material-icons medium featureIcon">local_pharmacy</i>
@@ -41,7 +41,7 @@
 </div>
 
 <!--Sign up-->
-<div id="signupContainer" class="center-align col s12 m12 l12">
+<div id="signupContainer" class="center-align col s12 m12 l12 container">
     <h3 class="flow-text">The tools you need to take back your health.</h3>
     <a  th:href="@{/create}"><button type="button" class="btn btn-info">Sign-up</button></a>
 </div>

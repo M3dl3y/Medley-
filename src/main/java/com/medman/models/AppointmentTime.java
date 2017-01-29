@@ -1,5 +1,6 @@
 package com.medman.models;
 
+import com.sun.istack.internal.Nullable;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,18 +18,14 @@ public class AppointmentTime {
     private Long Id;
 
     @Column
-    @NotBlank(message = "Please name this appointment")
+    @NotBlank(message = "Please name your reminder")
     private String name;
 
-    @Column
+    @Column(nullable = true)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date appointmentDate;
 
-    @Column
-    @DateTimeFormat(pattern = "HH:mm")
-    private Time appointmentTimes;
-
-    @Column
+    @Column(nullable = true)
     private String notes;
 
     @ManyToOne
@@ -42,7 +39,6 @@ public class AppointmentTime {
         this.Id = Id;
         this.name = name;
         this.appointmentDate = appointmentDate;
-        this.appointmentTimes = appointmentTimes;
         this.notes = notes;
     }
 
@@ -77,14 +73,6 @@ public class AppointmentTime {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Time getAppointmentTimes() {
-        return appointmentTimes;
-    }
-
-    public void setAppointmentTimes(Time appointmentTimes) {
-        this.appointmentTimes = appointmentTimes;
     }
 
     public Long getId() {

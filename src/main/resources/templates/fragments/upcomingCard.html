@@ -5,14 +5,14 @@
 </head>
 <body>
 
-<div th:fragment="upcomingCard">
+<div id="upcomingCard" th:fragment="upcomingCard">
     <div class="card cardSpace hoverable large col m3">
         <button data-target="addAppointment" class="addButton btn btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></button>
         <div class="card-image waves-effect waves-block waves-light center-align">
-            <i class="large activator material-icons dash-icons">schedule</i>
+            <i class="large material-icons dash-icons">schedule</i>
         </div>
         <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4 center-align">Reminders<i class="material-icons right">more_vert</i></span>
+            <span class="card-title grey-text text-darken-4 center-align">Reminders</span>
             <div class="divider"></div>
             <div th:each="appointments : ${appointments}" th:object="${appointments}">
                 <a th:href="*{'#' + name}" ><p th:text="*{name}"></p></a>
@@ -21,40 +21,58 @@
         <div th:each="appointments : ${appointments}" th:object="${appointments}">
             <div th:id="*{name}" class="modal bottom-sheet">
                 <div class="modal-content">
-                    <h4 th:text="*{name}">Medication Name</h4>
-                    <p th:text="*{notes}">A bunch of text</p>
-                    <a th:href="*{'#' + Id + 'appointmentEdit'}">Edit</a>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Dismiss</a>
+                    <div class="row">
+                        <div class="col s6 m6 l6">
+                            <h3 th:text="*{name}">Medication Name</h3>
+                            <h5 th:text="*{appointmentDate}"></h5>
+                            <h6 th:text="*{notes}">A bunch of text</h6>
+                        </div>
+                        <div class="col s6 m6 l6">
+                            <a  class="modal-action modal-close waves-effect waves-green btn-flat" th:href="*{'#' + Id + '/editReminder'}"><i class="material-icons medium">mode_edit</i>Edit</a>
+                            <br />
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" th:href="*{'#' + Id + '/deleteReminder'}"><i class="material-icons small medium">delete</i>Delete</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div th:each="appointments : ${appointments}" th:object="${appointments}">
-                <div th:id="*{Id + 'appointmentEdit'}" class="modal">
+                <div th:id="*{Id + '/deleteReminder'}" class="modal">
+                    <div class="modal-content">
+                        <h4>Delete Reminder</h4>
+                        <p>Are you sure you want to delete this reminder?</p>
+                        <a th:href="@{'/deleteReminder/' + *{Id}}" >Delete</a>
+                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div th:each="appointments : ${appointments}" th:object="${appointments}">
+                <div th:id="*{Id + '/editReminder'}" class="modal">
                     <div class="modal-content">
                         <h4>Edit Appointment</h4>
-                        <form name="editAppointmentForm" id="editAppointmentForm" th:action="@{/editAppointment}" th:method="POST" th:object="${appointment}">
+                        <form name="editReminderForm" id="editReminderForm" th:action="@{/editAppointment}" th:method="POST" th:object="${appointment}">
                             <div class="input-field">
+                                <i class="material-icons prefix">add_alert</i>
                                 <label for="name">Edit Reminder</label>
                                 <input name="id" th:value="${appointments.Id}" type="hidden" />
-                                <input type="text" class="validate" id="name" name="name" th:value="${appointments.name}"  />
+                                <input type="text" id="name" name="name" th:value="${appointments.name}"  />
                             </div>
                             <div class="input-field">
-                                <label for="appointmentDate">Reminder Date</label>
-                                <input type="date" class="validate datepicker" id="appointmentDate" name="appointmentDate" th:value="${appointments.appointmentDate}" />
-
-                            </div>
-                            <div>
-                                <label for="appointmentTime">Appointment Time</label>
-                                <input type="time" class="validate" id="appointmentTime" name="appointmentTime" th:value="${appointments.appointmentTimes}" />
+                                <i class="material-icons prefix">event</i>
+                                <label for="appointmentDate">Date</label>
+                                <input type="date" class="datepicker" id="appointmentDate" name="appointmentDate" th:value="${appointments.appointmentDate}" />
 
                             </div>
                             <div class="input-field">
-                                <label for="notes">Notes:</label>
+                                <i class="material-icons prefix">note_add</i>
+                                <label for="notes">Notes</label>
                                 <textarea class="materialize-textarea" id="notes" name="notes" th:value="${appointments.notes}"></textarea>
-
                             </div>
-                            <input type="submit" value="Edit" />
+                            <div class="modal-footer">
+                                <input class="btn btn-info" type="submit" value="Edit" />
+                            </div>
                         </form>
                     </div>
                 </div>
