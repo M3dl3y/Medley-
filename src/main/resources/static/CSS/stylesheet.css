@@ -180,6 +180,7 @@ h1{
 }
 
 .medicineList{
+
     margin-top: 5%;
 }
 
@@ -229,4 +230,7 @@ h1{
     #logo {
         padding-top: 4%;
     }
+
+    padding-top: 5%;
+
 }
