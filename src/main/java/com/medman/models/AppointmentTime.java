@@ -1,12 +1,10 @@
 package com.medman.models;
 
-import com.sun.istack.internal.Nullable;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
