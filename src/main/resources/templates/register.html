@@ -7,32 +7,10 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<div class="col s10 offset-s1 center-align">
-    <h1>Register</h1>
-    <p >We know signing up can be a real pain. Luckily, Medly makes signing up fun. Try it out, or register using the form below.</p>
-    <p>
-        <button id="toggle-conversation" type="button" class="btn btn-info disabled">Talk to Medly</button>
-    </p>
+<div class="container">
+    <h1 class="center-align">Register</h1>
+    <div th:replace="/fragments/registerForm :: registerForm"></div>
 </div>
-
-<div id="conversationTable" class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="row">
-
-                <div th:replace="/fragments/registerForm :: conversationRegisterForm"></div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<div th:replace="/fragments/registerForm :: registerForm"></div>
-
 
 
 <div th:replace="/fragments/footer :: footer"></div>

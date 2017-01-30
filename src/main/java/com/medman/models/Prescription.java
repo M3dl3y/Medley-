@@ -54,6 +54,9 @@ public class Prescription {
     @Column(nullable = true)
     private Long pillsTaken = 0L ;
 
+    @Column(nullable = true)
+    private String notes;
+
     public Long getPillsTaken() {
         return pillsTaken;
     }
@@ -215,5 +218,13 @@ public class Prescription {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

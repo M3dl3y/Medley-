@@ -9,58 +9,55 @@
 <div th:fragment="medicationForms">
 
     <!-- Modal Structure -->
-    <div id="addMedication" class="modal modal-fixed-footer">
+    <div id="addMedication" class="modal">
         <div class="modal-content">
             <h4>Add a Medication</h4>
             <form name="addPrescriptionForm" id="addPrescriptionForm" th:action="@{/addPrescription}" method="post" th:object="${prescription}">
-                <div class="row">
-                    <div class="input-field col s6 m6 l6">
-                        <i class="material-icons prefix">local_pharmacy</i>
-                        <input type="text" id="autocomplete-input" class="autocomplete autocomplete-input" th:field="*{name}" />
-                        <label for="autocomplete-input">Name of Medication</label>
-                    </div>
-                    <div class="input-field col s6 m6 l6">
-                        <i class="material-icons prefix">event</i>
-                        <label for="prescribedDate">Prescribed Date</label>
-                        <input type="date" class="validate datepicker" id="prescribedDate"
-                               th:field="*{prescribedDate}"/>
-                        <p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"></p>
-                    </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">local_pharmacy</i>
+                    <label for="rxName">Medication</label>
+                    <input data-error=".rxNameError" type="text" id="rxName" class="autocomplete autocomplete-input" name="rxName" th:field="*{name}" />
+                    <div class="rxNameError valError"></div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">fitness_center</i>
-                        <label for="strength">Strength</label>
-                        <input type="text" class="validate" id="strength" th:field="*{strength}"/>
-                        <p th:if="${#fields.hasErrors('strength')}" th:errors="*{strength}"></p>
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">directions</i>
-                        <label for="sig">Directions</label>
-                        <input type="text" class="validate" id="sig"
-                               th:field="*{sig}"/>
-                        <p th:if="${#fields.hasErrors('sig')}" th:errors="*{sig}"></p>
-                    </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">event</i>
+                    <label for="prescribedDate">Date Prescribed</label>
+                    <input data-error=".rxDateError" type="date" class="datepicker" id="prescribedDate" name="prescribedDate" th:field="*{prescribedDate}"/>
+                    <div class="rxDateError valError"></div>
+                    <p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"></p>
                 </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">date_range</i>
-                        <label for="daySupply">Day Supply</label>
-                        <input type="text" class="validate" id="daySupply"
-                               th:field="*{daySupply}"/>
-                        <p th:if="${#fields.hasErrors('daySupply')}" th:errors="*{daySupply}"></p>
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">poll</i>
-                        <label for="prescribedQuantity">Prescribed Quantity</label>
-                        <input type="text" class="validate" id="prescribedQuantity" th:field="*{prescribedQuantity}"/>
-                        <p th:if="${#fields.hasErrors('prescribedQuantity')}" th:errors="*{prescribedQuantity}"></p>
-                    </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">opacity</i>
+                    <label for="strength">Dosage</label>
+                    <input data-error=".dosageError" type="text" id="strength" name="strength" th:field="*{strength}"/>
+                    <div class="dosageError valError"></div>
+                    <p th:if="${#fields.hasErrors('strength')}" th:errors="*{strength}"></p>
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">format_list_numbered</i>
+                    <label for="sig">Directions</label>
+                    <input data-error=".sigError" type="text" id="sig" name="sig" th:field="*{sig}"/>
+                    <div class="sigError valError"></div>
+                    <p th:if="${#fields.hasErrors('sig')}" th:errors="*{sig}"></p>
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">date_range</i>
+                    <label for="daySupply">Day Supply</label>
+                    <input data-error=".supplyError" type="text" name="daySupply" id="daySupply" th:field="*{daySupply}"/>
+                    <div class="supplyError valError"></div>
+                    <p th:if="${#fields.hasErrors('daySupply')}" th:errors="*{daySupply}"></p>
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">equalizer</i>
+                    <label for="prescribedQuantity">Quantity</label>
+                    <input data-error=".quantityError" type="text" name="prescribedQuantity" id="prescribedQuantity" th:field="*{prescribedQuantity}"/>
+                    <div class="quantityError valError"></div>
+                    <p th:if="${#fields.hasErrors('prescribedQuantity')}" th:errors="*{prescribedQuantity}"></p>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-info" type="submit" value="Add" />
                 </div>
             </form>
-        </div>
-        <div class="modal-footer">
-            <button id="addMedicationButton"  type="submit" class="btn btn-info">Add</button>
         </div>
     </div>
 </div>
