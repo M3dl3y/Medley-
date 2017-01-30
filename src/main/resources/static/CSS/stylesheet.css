@@ -37,7 +37,7 @@ h1{
 }
 
 .parallax-container img {
-    top: -19%;
+    top: -30%;
     bottom: -29%;
 }
 
@@ -48,6 +48,11 @@ h1{
     line-height: 90px;
     margin: 5%;
 
+}
+
+#additionalFeatures{
+    margin-top:5%;
+    margin-bottom: 3%;
 }
 .centerIcon {
     text-align: center;
@@ -124,6 +129,7 @@ h1{
 .cardSpace{
     margin-left: 6% !important;
     overflow: visible !important;
+    height: inherit !important;
 }
 
 .dash-icons{
@@ -134,17 +140,7 @@ h1{
     margin-bottom: 5%;
 }
 
-@media screen and (max-width: 992px) {
-    #aboutLink {
-        margin-left: 5%;
-    }
-}
 
-@media screen and (max-width: 601px) {
-    #logo {
-        padding-top: 4%;
-    }
-}
 
 .addButton{
     right: -8%;
@@ -184,5 +180,57 @@ h1{
 }
 
 .medicineList{
+
+    margin-top: 5%;
+}
+
+.btn{
+    background-color: #0275c7;
+}
+
+#signupContainer{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#loginButton{
+    margin-bottom: 2%;
+}
+
+#loginTop{
+    margin-bottom: 3%;
+}
+
+.input-field .prefix.active {
+    color: #0f73c9;
+}
+
+.valError{
+    color: #c95254;
+}
+
+.warning{
+    color: #c95254;
+}
+#upcomingCard .divider{
+    margin-bottom: 3%;
+}
+
+@media screen and (max-width: 992px) {
+    #aboutLink {
+        margin-left: 5%;
+    }
+    .card{
+        width: 80%;
+        left: 5%;
+    }
+}
+
+@media screen and (max-width: 601px) {
+    #logo {
+        padding-top: 4%;
+    }
+
     padding-top: 5%;
+
 }

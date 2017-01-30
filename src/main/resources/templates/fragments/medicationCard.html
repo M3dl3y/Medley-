@@ -10,10 +10,10 @@
     <div class="card cardSpace large hoverable col m3">
         <button data-target="addMedication" class="addButton btn btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></button>
         <div class="card-image waves-effect waves-block waves-light center-align">
-            <i class="large activator material-icons dash-icons">reorder</i>
+            <i class="large material-icons dash-icons">local_pharmacy</i>
         </div>
         <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Medication</span>
+            <span class="card-title grey-text text-darken-4">Medication</span>
             <div class="divider"></div>
                 <div th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
             <form name="medTakenForm" id="medTakenForm" th:action="@{/dashboard/medTaken}" method="post">
@@ -26,28 +26,38 @@
             </form>
                 </div>
         </div>
-        <!--<div class="card-reveal">-->
-            <!---->
-        <!--</div>-->
+
+        <!--Medication modal-footer More detail about prescription-->
         <div th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
             <div th:id="*{name + 'footer'}" class="modal bottom-sheet">
                 <div class="modal-content">
-                    <h4 th:text="*{name}">Medication Name</h4>
-                    <p th:text="*{sig}">A bunch of text</p>
-                    <a th:href="*{'#' + Id + '/editPrescription'}">Edit</a>
-                    <a th:href="*{'#' + Id + '/deletePrescription'}">Delete</a>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Dismiss</a>
+                    <div class="row">
+                        <div class="col s6 m6 l6">
+                            <h3 th:text="*{name}">Medication Name</h3>
+                            <p th:text="*{strength}"></p>
+                            <h6 th:text="*{sig}">A bunch of text</h6>
+                            <h6 th:text="*{notes}">Notes</h6>
+                            <h6 th:text="*{daySupply + ' day(s) remaining.'}" ></h6>
+                        </div>
+                        <div class="col s6 m6 l6">
+                            <a class=" modal-action modal-close waves-effect waves-green btn-flat" th:href="*{'#' + Id + '/editPrescription'}"><i class="material-icons medium">mode_edit</i>Edit</a>
+                            <br />
+                            <a class=" modal-action modal-close waves-effect waves-green btn-flat" th:href="*{'#' + Id + '/deletePrescription'}"><i class="material-icons small medium">delete</i>Delete</a>
+                            <br />
+                            <a class=" modal-action modal-close waves-effect waves-green btn-flat" th:href="*{'https://www.drugs.com/' + name + '.html'}" target="_blank"><i class="material-icons medium">info</i>More Information</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
         <div th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
             <div th:id="*{Id + '/deletePrescription'}" class="modal">
                 <div class="modal-content">
                     <h4>Delete Prescription</h4>
                     <p>Are you sure you want to delete this prescription?</p>
-                    <a th:href="@{'/deletePrescription/' + *{Id}}" >Delete</a>
+                    <a class=" modal-action modal-close waves-effect waves-green btn-flat" th:href="@{'/deletePrescription/' + *{Id}}" >Delete</a>
                     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
                 </div>
 
@@ -58,48 +68,55 @@
         <div th:each="prescriptions : ${prescriptions}" th:object="${prescriptions}">
             <div th:id="*{Id + '/editPrescription'}" class="modal">
                 <div class="modal-content">
-                    <h4>Edit Prescription</h4>
-                    <form name="editPrescriptionForm" id="editPrescriptionForm" th:action="@{/editPrescription}" th:method="post" th:object="${prescription}">
-                        <div class="input-field col s6">
+                    <h4>Edit Medication</h4>
+                    <form name="editMedicationForm" id="editMedicationForm" th:action="@{/editPrescription}" th:method="post" th:object="${prescription}">
+                        <div class="input-field">
                             <input name="id" th:value="${prescriptions.Id}" type="hidden" />
-                            <input name="name" type="text" id="autocomplete-input" class="autocomplete autocomplete-input" th:value="${prescriptions.name}" />
-                            <label for="autocomplete-input">Name of Medication</label>
+                            <i class="material-icons prefix">local_pharmacy</i>
+                            <input data-error=".rxNameEdit" name="name" type="text" id="autocomplete-input" class="autocomplete autocomplete-input" th:value="${prescriptions.name}" />
+                            <label for="autocomplete-input">Medication</label>
+                            <div class="rxNameEdit valError"></div>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field">
+                            <i class="material-icons prefix">event</i>
                             <label for="prescribedDate">Prescribed Date</label>
-                            <input name="date" type="date" class="validate datepicker" id="prescribedDate"
-                                   th:value="${prescriptions.prescribedDate}"/>
+                            <input data-error=".rxDateEdit" name="date" type="date" class="datepicker" id="prescribedDate" th:value="${prescriptions.prescribedDate}"/>
+                            <div class="rxDateEdit valError"></div>
                             <p th:if="${#fields.hasErrors('prescribedDate')}" th:errors="*{prescribedDate}"></p>
                         </div>
-                        <div class="input-field col s6">
-                            <label for="strength">Strength</label>
-                            <input name="strength" type="text" class="validate" id="strength" th:value="${prescriptions.strength}"/>
+                        <div class="input-field">
+                            <i class="material-icons prefix">opacity</i>
+                            <label for="strength">Dosage</label>
+                            <input data-error=".rxStrengthEdit" name="strength" type="text" class=".strength" id="strength" th:value="${prescriptions.strength}"/>
+                            <div class="rxStrengthEdit valError"></div>
                             <p th:if="${#fields.hasErrors('strength')}" th:errors="*{strength}"></p>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field">
+                            <i class="material-icons prefix">format_list_numbered</i>
                             <label for="sig">Directions</label>
-                            <input name="sig" type="text" class="validate" id="sig"
-                                   placeholder="Take 1 tablet by mouth twice a day for thirty days."
-                                   th:value="${prescriptions.sig}"/>
+                            <input data-error=".rxSigEdit" name="sig" type="text" class="validate" id="sig" th:value="${prescriptions.sig}"/>
+                            <div class="rxSigEdit valError"></div>
                             <p th:if="${#fields.hasErrors('sig')}" th:errors="*{sig}"></p>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field">
+                            <i class="material-icons prefix">date_range</i>
                             <label for="daySupply">Day Supply</label>
-                            <input name="daySupply" type="text" class="validate" id="daySupply"
-                                   th:value="${prescriptions.daySupply}"/>
+                            <input data-error=".rxSupplyEdit" name="daySupply" type="text" class="validate" id="daySupply" th:value="${prescriptions.daySupply}"/>
+                            <div class="rxSupplyEdit valError"></div>
                             <p th:if="${#fields.hasErrors('daySupply')}" th:errors="*{daySupply}"></p>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field">
+                            <i class="material-icons prefix">equalizer</i>
                             <label for="prescribedQuantity">Prescribed Quantity</label>
-                            <input name="prescribedQuantity" type="text" class="validate" id="prescribedQuantity" th:value="${prescriptions.prescribedQuantity}"/>
+                            <input data-error=".rxQuantityEdit" name="prescribedQuantity" type="text" class="validate" id="prescribedQuantity" th:value="${prescriptions.prescribedQuantity}"/>
+                            <div class="rxQuantityEdit valError"></div>
                             <p th:if="${#fields.hasErrors('prescribedQuantity')}" th:errors="*{prescribedQuantity}"></p>
                         </div>
-                        <input type="submit" value="Edit" />
+                        <div class="modal-footer">
+                            <input class="btn btn-info" type="submit" value="Edit" />
+                        </div>
                     </form>
                 </div>
-                <!--<div class="modal-footer">-->
-                    <!--<button class="btn btn-info editPrescriptionSubmit">Edit</button>-->
-                <!--</div>-->
             </div>
         </div>
     </div>

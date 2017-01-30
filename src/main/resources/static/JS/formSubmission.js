@@ -4,22 +4,13 @@
 
 $(document).ready(function(){
 
-$('#addMedicationButton').click(function(){
-    document.addPrescriptionForm.submit();
+$('#medTaken').click(function(){
+    document.medTakenForm.submit();
     return false;
 });
 
-$('#addAppointmentSubmit').click(function(){
-    document.addAppointmentForm.submit();
-    return false;
-});
-$('#editLoginCredSubmit').click(function(){
-    document.editLoginCredForm.submit();
-    return false;
-});
-
-$('#editUserDetailSubmit').click(function(){
-    document.editUserDetailForm.submit();
+$('#editReminderSubmit').click(function () {
+    document.editReminderForm.submit();
     return false;
 });
 

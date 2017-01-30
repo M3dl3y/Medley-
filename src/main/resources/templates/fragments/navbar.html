@@ -21,8 +21,8 @@
             <!--<li sec:authorize="hasRole('DOCTOR')"><a th:href="@{/my_doctors}" >Patients</a></li>-->
             <!--<li class="divider"></li>-->
             <!--<li><a th:href="@{/messages}">Messages</a></li>-->
-            <li class="divider"></li>
-            <li class="disabled"><a th:href="@{/edit}">Settings</a></li>
+            <!--<li class="divider"></li>-->
+            <!--<li class="disabled"><a th:href="@{/edit}">Settings</a></li>-->
             <li class="divider"></li>
             <li><a th:href="@{/logout}" id="logout_link">Logout</a></li>
         </ul>
@@ -31,7 +31,7 @@
             <!--<li sec:authorize="hasRole('PATIENT')"><a th:href="@{/my_doctors}">Doctors</a></li>-->
             <!--<li sec:authorize="hasRole('DOCTOR')"><a th:href="@{/my_doctors}" >Patients</a></li>-->
             <!--<li><a th:href="@{/messages}">Messages</a></li>-->
-            <li class="disabled" ><a th:href="@{/edit}">Settings</a></li>
+            <!--<li class="disabled" ><a th:href="@{/edit}">Settings</a></li>-->
             <li><a th:href="@{/logout}" id="logout_link_side">Logout</a></li>
         </ul>
         <ul class="side-nav" id="mobileMenuOut" >
@@ -52,7 +52,7 @@
                         <li><a th:href="@{/login}">Login</a></li>
                     </ul>
                     <ul class="right hide-on-med-and-down" sec:authorize="isAuthenticated()">
-                        <li><a href="#" class="dropdown-button" data-activates="loggedInContent" sec:authentication="principal.firstName"></a></li>
+                        <li id="loggedInUser"><a href="#" class="dropdown-button" data-activates="loggedInContent" sec:authentication="principal.firstName"></a></li>
                     </ul>
                 </div>
                 <form name="logout_form" id="logout_form" method="post" th:action="@{/logout}">

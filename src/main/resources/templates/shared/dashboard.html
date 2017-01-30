@@ -21,24 +21,21 @@
         <div th:replace="/fragments/upcomingCard :: upcomingCard"></div>
     </div>
 
+
     <div th:replace="/fragments/medicationForms :: medicationForms"></div>
 
     <div th:replace="/fragments/appointmentForms :: appointmentForms"></div>
 
-    <!--<div th:replace="/fragments/reminderForms :: reminderForms"></div>-->
-
-
-
 </div>
 
 
-<!--If Doctor Logged in-->
-<div sec:authorize="hasRole('DOCTOR')">
+<!--&lt;!&ndash;If Doctor Logged in&ndash;&gt;-->
+<!--<div sec:authorize="hasRole('DOCTOR')">-->
 
-    <div th:replace="/fragments/doctorAlertsCard :: doctorAlertsCard"></div>
+    <!--<div th:replace="/fragments/doctorAlertsCard :: doctorAlertsCard"></div>-->
 
-    <div th:replace="/fragments/doctorMedicationCard :: doctorMedicationCard"></div>
-</div>
+    <!--<div th:replace="/fragments/doctorMedicationCard :: doctorMedicationCard"></div>-->
+<!--</div>-->
 
 
 

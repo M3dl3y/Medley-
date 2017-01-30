@@ -4,15 +4,16 @@
 var today = new Date();
 var hourNow = today.getHours();
 var greeting;
+var currentUser = $('#loggedInUser').text();
 
 if (hourNow > 18) {
-    greeting = "Good evening!";
+    greeting = "Good evening, ";
 }else if (hourNow >12) {
-    greeting = "Good Afternoon!";
+    greeting = "Good Afternoon, ";
 }else if (hourNow > 0) {
-    greeting = "Good Morning!";
+    greeting = "Good Morning, ";
 } else {
-    greeting = "Welcome!"
+    greeting = "Welcome, "
 }
 
-document.getElementById("greeting").innerHTML = greeting;
+document.getElementById("greeting").innerHTML = greeting + currentUser + "!";

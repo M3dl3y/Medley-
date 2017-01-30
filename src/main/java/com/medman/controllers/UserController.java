@@ -227,7 +227,6 @@ public class UserController extends BaseController {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("appointments", appointmentTime);
-//            return "shared/dashboard";
         }
 
         appointmentTime.setUser(loggedInUser());
@@ -239,7 +238,8 @@ public class UserController extends BaseController {
 
     @PostMapping("/editPrescription")
     public String editPrescription(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "date") String date, @RequestParam(value = "strength") String strength,
-                                   @RequestParam(value = "sig") String sig, @RequestParam(value = "daySupply") Long daySupply, @RequestParam(value = "prescribedQuantity") Long prescribedQuantity, Model model){
+                                   @RequestParam(value = "sig") String sig, @RequestParam(value = "daySupply") Long daySupply, @RequestParam(value = "prescribedQuantity") Long prescribedQuantity,
+                                   Model model){
 
         Prescription pr = prescriptionsDao.findOne(id);
         pr.setName(name);
@@ -263,24 +263,17 @@ public class UserController extends BaseController {
 
     @PostMapping("/editAppointment")
     public String editPrescription(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "appointmentDate") String appointmentDate,
-                                   @RequestParam(value = "appointmentTime") String appointmentTime, @RequestParam(value = "notes") String notes, Model model){
+                                   @RequestParam(value = "notes") String notes, Model model){
 
 
         AppointmentTime appointment = appointmentsDao.findOne(id);
         appointment.setName(name);
 
-        DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
 
         try{
             Date newdate = new SimpleDateFormat().parse(appointmentDate);
             appointment.setAppointmentDate(newdate);
         }catch(Exception e){
-
-        }
-        try{
-            Time newTime = new Time(timeFormatter.parse(appointmentTime).getTime());
-            appointment.setAppointmentTimes(newTime);
-        }catch (Exception e){
 
         }
 
@@ -298,7 +291,7 @@ public class UserController extends BaseController {
         return "redirect:/dashboard";
     }
 
-    @GetMapping("/deleteAppointment/{id}")
+    @GetMapping("/deleteReminder/{id}")
     public String deleteAppointment(@PathVariable long id, @ModelAttribute AppointmentTime appointmentTime){
         AppointmentTime currentAppointment = appointmentsDao.findOne(id);
         appointmentsDao.delete(currentAppointment);

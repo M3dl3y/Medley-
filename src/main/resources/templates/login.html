@@ -8,33 +8,30 @@
 <!--Navbar-->
 <div th:replace="/fragments/navbar :: navbar"></div>
 
-<h1 class="center-align">Login</h1>
-<div th:if="${param.error}">
-    Invalid Username and Password.
+<div id="loginTop" class="center-align">
+    <h1>Login</h1>
+    <div th:if="${param.error}">
+        The username and password you entered does not exist. Please try again.
+    </div>
+    <div th:if="${param.logout}" >
+        You have been logged out. Have a nice day!
+    </div>
 </div>
-<div th:if="${param.logout}" >
-    You have been logged out.
-</div>
-
-<!--&lt;!&ndash;Login Error&ndash;&gt;-->
-<!--<div id="alertMessage" class="alert alert-danger col-md-8 col-md-offset-2 hidden" role="alert">-->
-    <!--<h5 id="usernameErrorMessage" class="hidden" >Please enter your username</h5>-->
-    <!--<h5 id="passwordErrorMessage" class="hidden" >Please enter your password</h5>-->
-<!--</div>-->
-
 
 <div class="container">
-    <form class="col s12" th:action="@{/login}" method="post">
+    <form id="loginForm" th:action="@{/login}" method="post">
         <div class="row">
-            <div class="row input-field col s6 offset-s3">
+            <div class="row input-field col s8 m8 l8 offset-s2 offset-m2 offset-l2">
                 <i class="material-icons prefix">person</i>
-                <input type="text" class="validate" id="username" name="username" placeholder="Username" />
-                <label for="username"></label>
+                <label for="username">Username</label>
+                <input class="errorTxt1" type="text"  data-error=".errorTxt1"  id="username" name="username" />
+                <div class="errorTxt1 valError"></div>
             </div>
-            <div class="row input-field col s6 offset-s3">
-                <i class="material-icons prefix">vpn_key</i>
-                <input type="password" class="validate" id="password" name="password" placeholder="Password" />
-                <label for="password"></label>
+            <div class="row input-field col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+                <i class="material-icons prefix">lock</i>
+                <label for="password">Password</label>
+                <input type="password" data-error=".errorTxt2" id="password" name="password" />
+                <div class="errorTxt2 valError"></div>
             </div>
         </div>
         <div class="center-align">
@@ -43,9 +40,6 @@
         </div>
     </form>
 </div>
-
-
-
 
 
 <div th:replace="/fragments/footer :: footer"></div>
