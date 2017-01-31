@@ -32,6 +32,10 @@ public class VisitorController {
         model.addAttribute("user", new User());
         return "register"; // return to user register page.
     }
+    @GetMapping("/sitemap")
+    public String siteMap(Model model){
+        return "sitemap";
+    }
 
 
 }
