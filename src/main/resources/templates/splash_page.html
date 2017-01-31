@@ -21,21 +21,59 @@
 <div id="additionalFeatures" class="col s12 m12 l12 container">
     <div class="row center-align">
         <div class="col s4 m4 l4">
-            <i id="medicationFeatureIcon" class="material-icons medium featureIcon">local_pharmacy</i>
+            <a href="#medicationModal"><i id="medicationFeatureIcon" class="material-icons medium featureIcon">local_pharmacy</i></a>
             <h5 class="flow-text">Manage your medications</h5>
         </div>
         <div class="col s4 m4 l4">
-            <i id="reminderFeatureIcon" class="material-icons medium featureIcon">event_available</i>
+            <a href="#reminderModal"><i id="reminderFeatureIcon" class="material-icons medium featureIcon">event_available</i></a>
             <h5 class="flow-text">Set Reminders</h5>
         </div>
         <div class="col s4 m4 l4">
-            <i id="alertFeatureIcon" class="material-icons medium">add_alert</i>
+            <a href="#alertModal"><i id="alertFeatureIcon" class="material-icons medium">add_alert</i></a>
             <h5 class="flow-text">Get alerts</h5>
         </div>
     </div>
 </div>
 
-<!--Show off features-->
+<!-- Modals for features -->
+<div id="alertModal" class="modal">
+    <div class="modal-content center-align">
+        <h4>Get Alerts</h4>
+        <img class="responsive-img" th:src="@{../img/alertModalPic.png}" />
+        <p>View upcoming appointments, and get alerts on medications that are running low.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="reminderModal" class="modal">
+    <div class="modal-content center-align">
+        <h4>Set Reminders</h4>
+        <img class="responsive-img" th:src="@{../img/reminderModalPic.png}" />
+        <p>Create reminders for upcoming events such as doctors appointments.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="medicationModal" class="modal">
+    <div class="modal-content center-align">
+        <h4>Manage Medications</h4>
+        <img class="responsive-img" th:src="@{../img/medicationModalPic.png}" />
+        <p>Manage your current medications. Track medications so we can let you know when it's time to contact your pharmacy/doctor for more refills.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+
+
+
+
+<!--Picture at bottom-->
 <div class="parallax-container" id="splashBottomImage">
     <div class="parallax"><img class="responsive-img" th:src="@{../img/coupleUsingComputer.jpg}" /></div>
 </div>
