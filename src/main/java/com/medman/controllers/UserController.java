@@ -210,7 +210,7 @@ public class UserController extends BaseController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
-        twillioService.sendSMS("Welcome to twillio", (user.getPhoneNumber()));
+        twillioService.sendSMS("Welcome to Medly. Manage your profile at https://gomedly.com", (user.getPhoneNumber()));
 
         return "redirect:/login";
 
